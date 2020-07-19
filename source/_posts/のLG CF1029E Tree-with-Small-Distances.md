@@ -1,0 +1,102 @@
+---
+author: zc
+avatar: null
+categories:
+- - "\u5237\u9898\u8BB0\u5F55"
+commnet: 1
+date: 2019-12-21 19:47
+html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
+  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/CF1029E&quot;\
+  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
+  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
+  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/CF1029E\"\
+  \ target='_blank'>\u70B9\u51FB\u8DF3\u8F6C</a><p></details>"
+permalink: LG CF1029E Tree-with-Small-Distances
+tags:
+- "\u8D2A\u5FC3"
+- "\u6811\u5F62dp"
+- "\u52A8\u6001\u89C4\u5212"
+thumbnail: null
+title: LG CF1029E Tree-with-Small-Distances
+top: 0
+---
+## 解法1:
+
+贪心
+
+把深度大于2的都加到堆中
+
+每次取出深度最大的点
+
+从根结点往它父亲连边
+
+然后把周围的节点标记为已经覆盖
+
+## 解法2:
+
+树形dp
+```cpp
+#include<bits/stdc++.h>
+namespace ZDY{
+    #pragma GCC optimize(3)
+    #define il __inline__ __attribute__ ((always_inline))
+    #define rg register
+    #define ll long long
+    #define ull unsigned long long
+    #define db double
+    #define sht short
+    #define MB template <class T>il
+    #define Fur(i,x,y) for(int i(x);i<=y;++i)
+    #define Fdr(i,x,y) for(int i(x);i>=y;--i)
+    #define fl(i,x) for(int i(head[x]),to;to=e[i].to,i;i=e[i].nxt)
+    #define clr(x,y) memset(x,y,sizeof(x))
+    #define cpy(x,y) memcpy(x,y,sizeof(x))
+    #define fin(s) freopen(s".in","r",stdin)
+    #define fout(s) freopen(s".out","w",stdout)
+    #define fcin ios::sync_with_stdio(false)
+    #define l2(n) ((int)(log2(n)))
+    #define inf 2122219134
+    MB T ABS(T x){return x>0?x:-x;}
+    MB T MAX(T x,T y){return x>y?x:y;}
+    MB T MIN(T x,T y){return x<y?x:y;}
+    MB T GCD(T x,T y){return y?GCD(y,x%y):x;}
+    MB void SWAP(T &x,T &y){T t=x;x=y;y=t;}
+}using namespace ZDY;using namespace std;
+namespace IO{const int str=1<<20;static char in_buf[str],*in_s,*in_t;bool __=0;il char gc(){return (in_s==in_t)&&(in_t=(in_s=in_buf)+fread(in_buf,1,str,stdin)),in_s==in_t?EOF:*in_s++;}il void in(string &ch){ch.clear();if(__)return;rg char c;while((c=gc())!=EOF&&isspace(c));if(c==EOF){__=1;return;}ch+=c;while((c=gc())!=EOF&&!isspace(c))ch+=c;if(c==EOF)__=1;}il void in(char &ch){if(__)return;rg char c;while((c=gc())!=EOF&&isspace(c));if(c==EOF)__=1;else ch=c;}il void in(char *ch){*ch='\0';if(__)return;rg char c;while((c=gc())!=EOF&&isspace(c));if(c==EOF){__=1;return;}*ch=c;ch++;while((c=gc())!=EOF&&!isspace(c))*ch=c,ch++;if(c==EOF)__=1;*ch='\0';}template<typename T>il void in(T &x){if(__)return;rg char c=gc();bool f=0;while(c!=EOF&&(c<'0'||c>'9'))f^=(c=='-'),c=gc();if(c==EOF){__=1;return;}x=0;while(c!=EOF&&'0'<=c&&c<='9')x=x*10+c-48,c=gc();if(c==EOF)__=1;if(f)x=-x;}template<typename T,typename ... arr>il void in(T &x,arr & ... y){in(x),in(y...);}const char ln='\n';static char out_buf[str],*out_s=out_buf,*out_t=out_buf+str;il void flush(){fwrite(out_buf,1,out_s-out_buf,stdout);out_s=out_buf;}il void pt(char c){(out_s==out_t)?(fwrite(out_s=out_buf,1,str,stdout),*out_s++=c):(*out_s++=c);}il void out(const char* s){while(*s)pt(*s++);}il void out(char* s){while(*s)pt(*s++);}il void out(char c){pt(c);}il void out(string s){for(int i=0;s[i];i++)pt(s[i]);}template<typename T>il void out(T x){if(!x){pt('0');return;}if(x<0)pt('-'),x=-x;char a[50],t=0;while(x)a[t++]=x%10,x/= 10;while(t--)pt(a[t]+'0');}template<typename T,typename ... arr>il void out(T x,arr & ... y){out(x),out(y...);}}using namespace IO;
+#define N 200011
+int n,d[N],head[N],cnt=0;
+struct edge{
+    int to,nxt;
+}e[N*2];
+void add(int x,int y){
+    e[++cnt].to=y;e[cnt].nxt=head[x];head[x]=cnt;
+}
+int f[N];
+void dfs(int x){
+    fl(i,x)if(to!=f[x]){
+        d[to]=d[x]+1;f[to]=x;
+        dfs(to);
+    }
+}
+struct cmp{
+    bool operator()(int x,int y){return d[x]<d[y];}
+};
+priority_queue<int,vector<int>,cmp>q;
+bool v[N];
+int main(){
+    in(n);
+    int x,y,ans=0;
+    Fur(i,1,n-1)in(x,y),add(x,y),add(y,x);
+    dfs(1);
+    Fur(i,1,n)if(d[i]>2)q.push(i);
+    while(!q.empty()){
+        x=q.top();q.pop();
+        if(v[x])continue;
+        x=f[x];v[x]=1;
+
+        ++ans;
+        fl(i,x)v[to]=1;
+    }
+    cout<<ans<<endl;
+}
+```

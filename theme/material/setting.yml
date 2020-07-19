@@ -1,0 +1,27 @@
+markdown: True
+
+layout:
+  post: post.html
+  page: page.html
+  index: index.html
+  links: links.html
+  tag_index: tag_index.html
+  tag_cloud: tag_cloud.html
+  categories: categories.html
+
+defaut_front:
+  top: 0
+  comment: True
+
+default_render:
+  posts: True
+  pages: True
+  index: True
+  tags: True
+  categories: True
+
+extra_render:
+- 
+  layout: tag_cloud
+  path: /tags
+  title: tagcloud

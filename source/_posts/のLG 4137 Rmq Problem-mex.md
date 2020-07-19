@@ -1,0 +1,75 @@
+---
+author: zc
+avatar: null
+categories:
+- - 刷题记录
+commnet: 1
+date: 2020-07-14 21:33
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P4137&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P4137"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 4137 Rmq Problem-mex
+tags:
+- 莫队
+- 回滚莫队
+- 离线
+thumbnail: null
+title: LG 4137 Rmq Problem-mex
+top: 0
+
+---
+
+```cpp
+#include<bits/stdc++.h>
+const int N=100011;
+int n,m,blk,nn,a[N],c[N],cnt[N],CNT[N];
+typedef long long ll;
+ll ans[N],mx;
+struct node{
+    int v,id;
+    bool operator<(node t){return v<t.v;}
+}b[N];
+struct que{
+    int l,r,id,pl,pr;
+    bool operator<(que t){return pl!=t.pl?l<t.l:r<t.r;}
+}q[N];
+void cmax(ll&x,ll y){if(y>x)x=y;}
+int main(){
+    scanf("%d%d",&n,&m);blk=sqrt(n);
+    for(int i=1;i<=n;++i)
+        scanf("%d",c+i),
+        b[i]=(node){c[i],i};
+    std::sort(b+1,b+n+1);
+    for(int i=1;i<=n;++i)
+        a[b[i].id]=nn+=b[i].v!=b[i-1].v;
+    int l,r;
+    for(int i=1;i<=m;++i)
+        scanf("%d%d",&l,&r),
+        q[i]=(que){l,r,i,(l-1)/blk+1,(r-1)/blk+1};
+    std::sort(q+1,q+m+1);
+    int tot=(n-1)/blk+1;
+    for(int now=1,i=1,R=blk;now<=tot;R+=blk,++now){
+        if(R>n)R=n;
+        l=R+1,r=R,mx=0;
+        for(;q[i].pl==now;++i){
+            if(q[i].pl==q[i].pr){
+                for(int j=q[i].l;j<=q[i].r;++j)++CNT[a[j]];
+                for(int j=q[i].l;j<=q[i].r;++j)
+                    cmax(ans[q[i].id],1ll*CNT[a[j]]*c[j]);
+                for(int j=q[i].l;j<=q[i].r;++j)--CNT[a[j]];
+                continue;
+            }
+            while(r<q[i].r)
+                cmax(mx,1ll*++cnt[a[++r]]*c[r]);
+            ans[q[i].id]=mx;
+            while(l>q[i].l)
+                cmax(ans[q[i].id],1ll*++cnt[a[--l]]*c[l]);
+            for(;l<=R;++l)--cnt[a[l]];
+        }
+        for(;r>=R;--r)--cnt[a[r]];
+    }
+    for(int i=1;i<=m;++i)printf("%lld\n",ans[i]);
+}
+```

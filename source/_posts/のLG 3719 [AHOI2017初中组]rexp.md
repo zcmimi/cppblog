@@ -1,0 +1,43 @@
+---
+author: zc
+avatar: null
+categories:
+- - "\u5237\u9898\u8BB0\u5F55"
+commnet: 1
+date: 2019-12-21 19:47
+html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
+  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P3719&quot;\
+  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
+  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
+  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P3719\" target='_blank'>\u70B9\
+  \u51FB\u8DF3\u8F6C</a><p></details>"
+permalink: "LG 3719 [AHOI2017\u521D\u4E2D\u7EC4]rexp"
+tags:
+- "\u6808"
+thumbnail: null
+title: "LG 3719 [AHOI2017\u521D\u4E2D\u7EC4]rexp"
+top: 0
+---
+解释见代码
+```cpp
+#include<bits/stdc++.h>
+#define il inline
+using namespace std;
+il int max(int x,int y){return x>y?x:y;}
+namespace IO{const int str=1<<20;static char in_buf[str],*in_s,*in_t;bool __=0;il char gc(){return (in_s==in_t)&&(in_t=(in_s=in_buf)+fread(in_buf,1,str,stdin)),in_s==in_t?EOF:*in_s++;}il void in(string &ch){ch.clear();if(__)return;rg char c;while((c=gc())!=EOF&&isspace(c));if(c==EOF){__=1;return;}ch+=c;while((c=gc())!=EOF&&!isspace(c))ch+=c;if(c==EOF)__=1;}il void in(char &ch){if(__)return;rg char c;while((c=gc())!=EOF&&isspace(c));if(c==EOF)__=1;else ch=c;}il void in(char *ch){*ch='\0';if(__)return;rg char c;while((c=gc())!=EOF&&isspace(c));if(c==EOF){__=1;return;}*ch=c;ch++;while((c=gc())!=EOF&&!isspace(c))*ch=c,ch++;if(c==EOF)__=1;*ch='\0';}template<typename T>il void in(T &x){if(__)return;rg char c=gc();bool f=0;while(c!=EOF&&(c<'0'||c>'9'))f^=(c=='-'),c=gc();if(c==EOF){__=1;return;}x=0;while(c!=EOF&&'0'<=c&&c<='9')x=x*10+c-48,c=gc();if(c==EOF)__=1;if(f)x=-x;}template<typename T,typename ... arr>il void in(T &x,arr & ... y){in(x),in(y...);}const char ln='\n';static char out_buf[str],*out_s=out_buf,*out_t=out_buf+str;il void flush(){fwrite(out_buf,1,out_s-out_buf,stdout);out_s=out_buf;}il void pt(char c){(out_s==out_t)?(fwrite(out_s=out_buf,1,str,stdout),*out_s++=c):(*out_s++=c);}il void out(const char* s){while(*s)pt(*s++);}il void out(char* s){while(*s)pt(*s++);}il void out(char c){pt(c);}il void out(string s){for(int i=0;s[i];i++)pt(s[i]);}template<typename T>il void out(T x){if(!x){pt('0');return;}if(x<0)pt('-'),x=-x;char a[50],t=0;while(x)a[t++]=x%10,x/= 10;while(t--)pt(a[t]+'0');}template<typename T,typename ... arr>il void out(T x,arr & ... y){out(x),out(y...);}}using namespace IO;
+#define N 100011
+int n,q[N],tp=0,a[N],mx[N];
+char s[N];
+int main(){
+    in(s+1);
+    int len=strlen(s+1);
+    for(int i=1;i<=len;++i){
+        if(s[i]=='(')a[++tp]=0,mx[tp]=0; // 如果是'('则进入下一层
+        else if(s[i]==')')--tp,a[tp]+=mx[tp+1];// 如果是')'返回上一层,上一层加上当前答案
+        else if(s[i]=='|')a[tp]=0;
+        else ++a[tp];
+        mx[tp]=max(mx[tp],a[tp]);//去当前合并后的长度
+    }
+    printf("%d\n",mx[0]);
+}
+```

@@ -1,0 +1,27 @@
+markdown: True
+
+layout:
+  post: post.swig
+  page: page.swig
+  index: index.swig
+  links: links.swig
+  tag_index: tag_index.swig
+  tag_cloud: tag_cloud.swig
+  categories: categories.swig
+
+defaut_front:
+  top: 0
+  comment: True
+
+default_render:
+  posts: True
+  pages: True
+  index: True
+  tags: True
+  categories: True
+
+extra_render:
+- 
+  layout: tag_cloud
+  path: /tags
+  title: tagcloud
