@@ -15,7 +15,8 @@ args=[
     "-lmd4c",
     "-lmd4c-html",
     "-o blog",
-    "-std=c++20",
+    # "-std=c++20",
+    "-std=c++17",
     # "-O3",
     "-g"
 ]

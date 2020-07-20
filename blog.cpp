@@ -48,14 +48,11 @@ void get_md(Nlist&T,string pathstr){
 	fs::directory_iterator filelist(path);
 	for(auto it:filelist)
     if(!it.is_directory()){
-		string filename=it.path().filename();
-        if(!filename.ends_with(".md"))continue;
+		string file=it.path().filename(),filename=it.path().stem();
+        if(!(filename+".md"==file))continue;
 
-        vector body=splitstr(read("source/_posts/"+filename),"---\n");
+        vector body=splitstr(read("source/_posts/"+file),"---\n");
         YAML::Node x=del_none(YAML::Load(body[1]));
-        
-
-        filename.pop_back(),filename.pop_back(),filename.pop_back(); //xxx.md -> xxx
 
         x["addr"]="/"+filename;
         x["origin_addr"]=filename;
@@ -92,31 +89,6 @@ bool cmp_date_top(YAML::Node x,YAML::Node y){
 }
 void gen_index(Nlist T){
 
-}
-
-bool YamlToJson(const YAML::Node&ynode,Json::Value&jnode){
-    try{
-        if(ynode.IsScalar()){
-            Json::Value v(ynode.Scalar());
-            jnode.swapPayload(v);
-            return true;
-        }
-        if(ynode.IsSequence()){
-            for(size_t i = 0,len=ynode.size();i<len;++i){
-                Json::Value v;
-                if(convert_yaml_to_json(ynode[i],v))jnode.append(v);
-                else return false;
-            }
-        }else if(ynode.IsMap()){
-            for(auto it=ynode.begin();it!=ynode.end();++it){
-                Json::Value v;
-                if(convert_yaml_to_json(it->second,v))
-                    jnode[it->first.Scalar()] = v;
-                else return false;
-            }
-        }
-    }catch(...)return false;
-    return true;
 }
 
 int main(){
@@ -170,8 +142,7 @@ int main(){
     env.set_line_statement("##");
 
     Template tpl=env.parse_template(theme_path+"/layout/"+t_setting["layout"]["post"].as<string>());
-    for(auto x:posts)
-        cout<<env.render(tpl,YamlToJson(x))<<endl;
+    for(auto x:posts);
 
     printf("%.5fms\n",(clock()-st)/1000.0);
 }
