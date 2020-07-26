@@ -9,7 +9,7 @@
 #include"inja.hpp"
 #include"YamlParser.hpp"
 namespace fs=std::filesystem;
-using std::vector,std::string,std::cout,std::endl,std::list,std::map,std::any,std::any_cast;
+using std::vector,std::string,std::cout,std::endl,std::list,std::map,std::any,std::any_cast,std::to_string;
 using namespace inja;
 using json=nlohmann::json;
 vector<string>splitstr(const string&s,const string&c){
@@ -28,6 +28,7 @@ vector<string>splitstr(const string&s,const string&c){
 
 json config,t_config,t_setting;
 int preview_len;
+string rt;
 
 string read(string file){
 	std::ifstream t(file);
@@ -78,9 +79,31 @@ bool cmp_date_top(json x,json y){
     else if(y.contains("top"))return 0;
     else return cmp_date(x,y);
 }
-// void gen_index(Nlist T){
+json gen_index(string path,Nlist T){
+    int num=atoi(config["page_articles"].get<string>().c_str()),tot=T.size(),TOT=tot/num;
+    json res;
+    for(int i=1;i<=TOT;++i){
+        json nodes;
+        for(int j=0;j<num;++j)
+            if(T.empty())break;
+            else nodes.push_back(T.front()),T.pop_front();
+        string addr=(i==1)?path:path+"/page/"+to_string(i);
 
-// }
+        json x={
+            {"id",i},
+            {"addr",addr},
+            {"link",rt+addr},
+            {"title",path},
+            {"nodes",nodes}
+        };
+        res.push_back(x);
+    }
+    for(int i=0;i<TOT;++i){
+        if(i)res[i]["pre"]=res[i-1];
+        if(i+1<TOT)res[i]["nxt"]=res[i+1];
+    }
+    return res;
+}
 
 int main(){
     std::ios::sync_with_stdio(false);
@@ -95,10 +118,11 @@ int main(){
     t_config=YamlToJson(read(theme_path+"/config.yml").c_str());
     t_setting=YamlToJson(read(theme_path+"/setting.yml").c_str());
 
+    rt=config["site_rt"];
     preview_len=atoi(config["preview_len"].get<string>().c_str());
+
     get_md(posts,"source/_posts");
     // get_md(pages,"source/_pages");
-
 
     posts.sort(cmp_date);
     int id=1;
@@ -106,7 +130,7 @@ int main(){
         ++id;
         x["id"]=id;
         if(config["article_address"]=="number")
-            x["addr"]="/posts/"+std::to_string(id);
+            x["addr"]="/posts/"+to_string(id);
         else x["addr"]="/posts/"+x["origin_addr"].get<string>();
 
         if(x.contains("password")){
@@ -117,10 +141,9 @@ int main(){
     posts.sort(cmp_date_top);
     for(auto&x:posts){
         for(auto&tag:x["tags"])tags[tag.get<string>()].push_back(x);
-
-        for(auto&node:x["categories"]){
+        for(auto node:x["categories"]){
             auto&now=categories;
-            for(auto&j:node){
+            for(auto j:node){
                 if(!now.contains("sub"))now["sub"]=json::object();
                 now=now["sub"][j.get<string>()];
             }
@@ -137,9 +160,40 @@ int main(){
     env.set_statement("{%","%}");
     env.set_line_statement("##");
 
-    Template tpl=env.parse_template("./"+t_setting["layout"]["post"].get<string>());
+    env.set_trim_blocks(true);
+    env.set_lstrip_blocks(true);
 
-    // for(auto x:posts);
+    json global={
+        {"config",config},
+        {"t_config",t_config},
+        {"t_setting",t_setting},
+        {"data",{
+            {"posts",posts},
+            {"pages",pages},
+            {"tags",tags},
+            {"categories",categories}
+        }}
+    };
+
+    gen_index("",posts);
+    // Template tpl=env.parse_template(t_setting["layout"]["post"].get<string>());
+    // for(auto x:posts){
+    //     x.merge_patch(global);
+    //     if(x.contains("layout"))env.render(
+    //         env.parse_template(x["layout"].get<string>()),
+    //         x
+    //     );
+    //     else env.render(tpl,x);
+    // }
+
+    // for(auto x:pages){
+    //     x.merge_patch(global);
+    //     if(x.contains("layout"))env.render(
+    //         env.parse_template(x["layout"].get<string>()),
+    //         x
+    //     );
+    //     else env.render(tpl,x);
+    // }
 
     printf("%.5fms\n",(clock()-st)/1000.0);
 }
