@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include <bits/stdc++.h>
 #include "md4c-html.h"
 
 /* Global options. */
@@ -44,6 +41,7 @@ static char* markdown(const char*in){
     md_html(buf_in.data,buf_in.size,process_output,(void*) &buf_out,parser_flags,renderer_flags);
     return buf_out.data;
 }
+std::string str_markdown(const char*in){return std::string(markdown(in));}
 void set_ext(){
     // parser_flags=MD_DIALECT_COMMONMARK;
     // parser_flags=MD_DIALECT_GITHUB;

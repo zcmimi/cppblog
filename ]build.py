@@ -3,21 +3,20 @@
 
 import os
 
+name="blog"
+
 args=[
     # "clang++",
     "g++",
-    "-I./thirdlib/yaml-cpp/include",
     "-I./thirdlib/md4c/include",
     "-I./thirdlib/ryml/include",
-    "blog.cpp",
-    "-L./thirdlib/yaml-cpp/lib",
-    "-lyaml-cpp",
+    name+".cpp",
     "-L./thirdlib/md4c/lib",
     "-lmd4c",
     "-lmd4c-html",
     "-L./thirdlib/ryml/lib",
     "-lryml",
-    "-o blog",
+    "-o "+name,
     # "-std=c++20",
     "-std=c++17",
     # "-O3",
