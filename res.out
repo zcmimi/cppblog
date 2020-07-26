@@ -1,1 +1,23 @@
-809.99100ms
+material
+article_address: origin # (number|pinyin|origin)
+math: True
+
+# index
+page_articles: 10
+preview_len: 100
+
+rss: True
+sitemap: True
+
+baidu_push: 
+  enable: True
+  url: http://data.zz.baidu.com/urls?site=https://blog.zcmimi.top&token=J2u2ssVNNx9cw2V6 #百度推送接口调用地址
+
+
+repo: 
+  - git@e.coding.net:zcmimi/blog.git
+  - git@github.com:zcmimi/zcmimi.github.io.git
+  # - https://e.coding.net/zcmimi/blog.git
+  # - https://github.com/zcmimi/zcmimi.github.io.git
+
+multithreading: false
