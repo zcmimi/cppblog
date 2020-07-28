@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 import os,json
 
-data=json.loads(open("data.json",encoding='utf-8').read())
+str=open("data.json",encoding='utf-8').read()
+
+data=json.loads(str)
 
 print(data)
