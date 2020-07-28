@@ -2,21 +2,20 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-06-04 19:43
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/CF938G&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/CF938G\"\
-  \ target='_blank'>\u70B9\u51FB\u8DF3\u8F6C</a><p></details>"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/CF938G&quot; width=100% height=800px
+  style=&quot;border: none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/CF938G"
+  target=''_blank''>点击跳转</a><p></details>'
 permalink: LG CF938G Shortest Path Queries
 tags:
-- "\u79BB\u7EBF"
-- "\u7EBF\u6027\u57FA"
-- "\u5E76\u67E5\u96C6"
-- "\u7EBF\u6BB5\u6811\u5206\u6CBB"
+- 离线
+- 线性基
+- 并查集
+- 线段树分治
 thumbnail: null
 title: LG CF938G Shortest Path Queries
 top: 0

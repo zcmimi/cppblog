@@ -31,17 +31,20 @@ static void membuf_append(struct membuffer* buf,const char* data,MD_SIZE size){
 static void process_output(const MD_CHAR* text,MD_SIZE size,void*userdata){
     membuf_append((struct membuffer*)userdata,text,size);
 }
-membuffer buf_out={0};
-static char* markdown(const char*in){
+const membuffer markdown(const char*in){
     MD_SIZE n;
     membuffer buf_in;
+    membuffer buf_out;
     buf_in.data=(char *)in;
     buf_in.size=strlen(in);
     membuf_init(&buf_out,buf_in.size+buf_in.size/8+64);    
     md_html(buf_in.data,buf_in.size,process_output,(void*) &buf_out,parser_flags,renderer_flags);
-    return buf_out.data;
+    return buf_out;
 }
-std::string str_markdown(const char*in){return std::string(markdown(in));}
+std::string str_markdown(const char*in){
+    membuffer res=markdown(in);
+    return std::string(res.data,res.data+res.size);
+}
 void set_ext(){
     // parser_flags=MD_DIALECT_COMMONMARK;
     // parser_flags=MD_DIALECT_GITHUB;

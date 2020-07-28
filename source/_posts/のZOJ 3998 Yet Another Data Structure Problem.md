@@ -4,7 +4,7 @@ avatar: null
 categories:
 - - 刷题记录
 commnet: 1
-date: 2020-07-10 18:50
+date: 2020-07-22 19:27
 html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
   src=&quot;&quot; width=100% height=800px style=&quot;border: none;&quot;><iframe>''"
   class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a class=''mdui-btn
@@ -17,13 +17,12 @@ tags:
 thumbnail: null
 title: ZOJ 3998 Yet Another Data Structure Problem
 top: 0
-
 ---
 https://zoj.pintia.cn/problem-sets/91827364500/problems/91827370149
 
 题意:
 
-给一个序列A，要求支持以下操作:
+给一个序列A,要求支持以下操作:
 
 1. 区间乘
    
@@ -31,9 +30,9 @@ https://zoj.pintia.cn/problem-sets/91827364500/problems/91827370149
    
 3. 求区间乘积(mod 10000000007)
 
-由于模数是质数，所以可以将每个数都变成原根的次幂
+由于模数是质数,所以可以将每个数都变成原根的次幂
 
-这样区间乘转化为区间加，区间次幂转化为区间乘，求区间乘积转化为求区间和
+这样区间乘转化为区间加,区间次幂转化为区间乘,求区间乘积转化为求区间和
 ```cpp
 #include<bits/stdc++.h>
 const int N=100011,p=1000000007,P=p-1,G=5;

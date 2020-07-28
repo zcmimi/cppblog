@@ -2,22 +2,21 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2019-12-21 19:47
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P2167&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P2167\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 2167 [SDOI2009]Bill\u7684\u6311\u6218"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P2167&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P2167"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 2167 [SDOI2009]Bill的挑战
 tags:
-- "\u52A8\u6001\u89C4\u5212"
-- "\u72B6\u6001\u538B\u7F29"
-- "\u5BB9\u65A5"
+- 动态规划
+- 状态压缩
+- 容斥
 thumbnail: null
-title: "LG 2167 [SDOI2009]Bill\u7684\u6311\u6218"
+title: LG 2167 [SDOI2009]Bill的挑战
 top: 0
 ---
 可以看到$n\le 15$,我们很容易想到状压

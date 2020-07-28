@@ -2,19 +2,18 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-03-02 02:05
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P3521&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P3521\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P3521&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P3521"
+  target=''_blank''>点击跳转</a><p></details>'
 permalink: LG 3521 [POI2011]ROT-Tree Rotations
 tags:
-- "\u7EBF\u6BB5\u6811\u5408\u5E76"
-- "\u9006\u5E8F\u5BF9"
+- 线段树合并
+- 逆序对
 - dfs
 thumbnail: null
 title: LG 3521 [POI2011]ROT-Tree Rotations

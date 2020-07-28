@@ -4,7 +4,7 @@ avatar: null
 categories:
 - - 刷题记录
 commnet: 1
-date: 2020-07-14 21:33
+date: 2020-07-18 17:46
 html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
   src=&quot;https://www.luogu.com.cn/problem/P4137&quot; width=100% height=800px style=&quot;border:
   none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
@@ -18,9 +18,7 @@ tags:
 thumbnail: null
 title: LG 4137 Rmq Problem-mex
 top: 0
-
 ---
-
 ```cpp
 #include<bits/stdc++.h>
 const int N=100011;

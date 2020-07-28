@@ -2,20 +2,19 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2019-12-21 19:47
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P3018&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P3018\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 3018 [USACO11MAR]\u6811\u88C5\u9970Tree Decoration"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P3018&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P3018"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 3018 [USACO11MAR]树装饰Tree Decoration
 tags:
-- "\u62D3\u6251\u5E8F"
+- 拓扑序
 thumbnail: null
-title: "LG 3018 [USACO11MAR]\u6811\u88C5\u9970Tree Decoration"
+title: LG 3018 [USACO11MAR]树装饰Tree Decoration
 top: 0
 ---
 ```cpp

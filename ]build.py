@@ -3,6 +3,7 @@
 
 import os
 
+# name="YamlParser"
 name="blog"
 
 args=[
@@ -19,7 +20,7 @@ args=[
     "-o "+name,
     # "-std=c++20",
     "-std=c++17",
-    "-O3",
+    "-Ofast",
     # "-g",
     "-w"
 ]

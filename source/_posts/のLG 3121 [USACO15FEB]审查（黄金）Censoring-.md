@@ -2,23 +2,22 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2019-12-21 19:47
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P3121&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P3121\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 3121 [USACO15FEB]\u5BA1\u67E5\uFF08\u9EC4\u91D1\uFF09Censoring-"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P3121&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P3121"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 3121 [USACO15FEB]审查（黄金）Censoring-
 tags:
-- "AC\u81EA\u52A8\u673A"
-- "\u6808"
+- AC自动机
+- 栈
 - kmp
 - hash
 thumbnail: null
-title: "LG 3121 [USACO15FEB]\u5BA1\u67E5\uFF08\u9EC4\u91D1\uFF09Censoring-"
+title: LG 3121 [USACO15FEB]审查（黄金）Censoring-
 top: 0
 ---
 用`LG 4824 [USACO15FEB]Censoring"`的做法hash,kmp什么的因为数据水所以跑不满可以水过去

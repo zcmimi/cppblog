@@ -2,22 +2,21 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-05-29 17:09
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P6569&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P6569\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 6569 [NOI Online 3 \u63D0\u9AD8\u7EC4]\u9B54\u6CD5\u503C"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P6569&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P6569"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 6569 [NOI Online 3 提高组]魔法值
 tags:
-- "\u77E9\u9635"
-- "\u500D\u589E"
-- "\u4E8C\u8FDB\u5236"
+- 矩阵
+- 倍增
+- 二进制
 thumbnail: null
-title: "LG 6569 [NOI Online 3 \u63D0\u9AD8\u7EC4]\u9B54\u6CD5\u503C"
+title: LG 6569 [NOI Online 3 提高组]魔法值
 top: 0
 ---
 矩阵乘法

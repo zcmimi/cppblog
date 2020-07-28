@@ -4,7 +4,7 @@ avatar: null
 categories:
 - - 刷题记录
 commnet: 1
-date: 2020-07-10 18:50
+date: 2020-07-18 17:46
 html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
   src=&quot;&quot; width=100% height=800px style=&quot;border: none;&quot;><iframe>''"
   class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a class=''mdui-btn
@@ -18,7 +18,6 @@ tags:
 thumbnail: null
 title: POJ 1430 Binary Stirling Numbers
 top: 0
-
 ---
 此题要求的是$S(n,m) \mod 2$(第二类斯特林数)
 

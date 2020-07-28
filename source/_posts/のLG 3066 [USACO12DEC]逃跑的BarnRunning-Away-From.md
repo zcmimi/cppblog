@@ -2,24 +2,23 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2019-12-31 11:31
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P3066&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P3066\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 3066 [USACO12DEC]\u9003\u8DD1\u7684BarnRunning-Away-From"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P3066&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P3066"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 3066 [USACO12DEC]逃跑的BarnRunning-Away-From
 tags:
-- "\u4E3B\u5E2D\u6811"
-- "dfs\u5E8F"
-- "\u79BB\u6563\u5316"
-- "\u5DEE\u5206"
-- "\u500D\u589E"
+- 主席树
+- dfs序
+- 离散化
+- 差分
+- 倍增
 thumbnail: null
-title: "LG 3066 [USACO12DEC]\u9003\u8DD1\u7684BarnRunning-Away-From"
+title: LG 3066 [USACO12DEC]逃跑的BarnRunning-Away-From
 top: 0
 ---
 ## 解法1

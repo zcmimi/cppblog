@@ -2,21 +2,20 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2019-12-21 19:47
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P5585&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P5585\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 5585 \u3010SWTR-01\u3011Doing-Homework"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P5585&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P5585"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 5585 【SWTR-01】Doing-Homework
 tags:
-- "\u52A8\u6001\u89C4\u5212"
-- "\u80CC\u5305"
+- 动态规划
+- 背包
 thumbnail: null
-title: "LG 5585 \u3010SWTR-01\u3011Doing-Homework"
+title: LG 5585 【SWTR-01】Doing-Homework
 top: 0
 ---
 如果没有时间限制那就是一个裸的完全背包

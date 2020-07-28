@@ -2,22 +2,21 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-03-01 14:52
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P4556&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P4556\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 4556 [Vani\u6709\u7EA6\u4F1A]\u96E8\u5929\u7684\u5C3E\u5DF4"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P4556&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P4556"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 4556 [Vani有约会]雨天的尾巴
 tags:
-- "\u7EBF\u6BB5\u6811\u5408\u5E76"
+- 线段树合并
 - lca
-- "\u5DEE\u5206"
+- 差分
 thumbnail: null
-title: "LG 4556 [Vani\u6709\u7EA6\u4F1A]\u96E8\u5929\u7684\u5C3E\u5DF4"
+title: LG 4556 [Vani有约会]雨天的尾巴
 top: 0
 ---
 树上差分,统计的时候每个节点都合并自身子节点的结果

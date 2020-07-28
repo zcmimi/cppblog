@@ -2,21 +2,20 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-01-04 10:21
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/UVA1608&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/UVA1608\"\
-  \ target='_blank'>\u70B9\u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG UVA1608 \u4E0D\u65E0\u804A\u7684\u5E8F\u5217 Non-boring sequences"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/UVA1608&quot; width=100% height=800px
+  style=&quot;border: none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/UVA1608"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG UVA1608 不无聊的序列 Non-boring sequences
 tags:
-- "\u5206\u6CBB"
-- "\u601D\u7EF4"
+- 分治
+- 思维
 thumbnail: null
-title: "LG UVA1608 \u4E0D\u65E0\u804A\u7684\u5E8F\u5217 Non-boring sequences"
+title: LG UVA1608 不无聊的序列 Non-boring sequences
 top: 0
 ---
 我们先预处理出$L_i,R_i$分别表示与$a_i$相同的数出现在$i$左边和右边的位置

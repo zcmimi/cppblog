@@ -2,19 +2,18 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2019-12-21 19:47
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/CF868F&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/CF868F\"\
-  \ target='_blank'>\u70B9\u51FB\u8DF3\u8F6C</a><p></details>"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/CF868F&quot; width=100% height=800px
+  style=&quot;border: none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/CF868F"
+  target=''_blank''>点击跳转</a><p></details>'
 permalink: LG CF868F Yet-Another-Minimization-Problem
 tags:
-- "\u51B3\u7B56\u5355\u8C03\u6027"
-- "\u52A8\u6001\u89C4\u5212"
+- 决策单调性
+- 动态规划
 thumbnail: null
 title: LG CF868F Yet-Another-Minimization-Problem
 top: 0

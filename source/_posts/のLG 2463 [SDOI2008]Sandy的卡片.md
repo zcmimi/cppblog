@@ -2,23 +2,22 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-05-16 21:36
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P2463&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P2463\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 2463 [SDOI2008]Sandy\u7684\u5361\u7247"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P2463&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P2463"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 2463 [SDOI2008]Sandy的卡片
 tags:
-- "\u540E\u7F00\u6570\u7EC4"
-- "\u4E8C\u5206"
-- "\u5DEE\u5206"
-- "\u5355\u8C03\u961F\u5217"
+- 后缀数组
+- 二分
+- 差分
+- 单调队列
 thumbnail: null
-title: "LG 2463 [SDOI2008]Sandy\u7684\u5361\u7247"
+title: LG 2463 [SDOI2008]Sandy的卡片
 top: 0
 ---
 > 相同的定义为：两个子串长度相同且一个串的全部元素加上一个数就会变成另一个串

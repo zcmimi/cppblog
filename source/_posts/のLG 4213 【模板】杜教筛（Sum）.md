@@ -2,23 +2,22 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-03-17 17:16
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P4213&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P4213\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 4213 \u3010\u6A21\u677F\u3011\u675C\u6559\u7B5B\uFF08Sum\uFF09"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P4213&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P4213"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 4213 【模板】杜教筛（Sum）
 tags:
-- "\u675C\u6559\u7B5B"
-- "\u83AB\u6BD4\u4E4C\u65AF"
-- "\u6B27\u62C9\u51FD\u6570"
-- "\u6570\u8BBA"
+- 杜教筛
+- 莫比乌斯
+- 欧拉函数
+- 数论
 thumbnail: null
-title: "LG 4213 \u3010\u6A21\u677F\u3011\u675C\u6559\u7B5B\uFF08Sum\uFF09"
+title: LG 4213 【模板】杜教筛（Sum）
 top: 0
 ---
 ```cpp

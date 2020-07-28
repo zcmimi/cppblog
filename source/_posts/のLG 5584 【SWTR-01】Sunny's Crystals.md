@@ -2,21 +2,20 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-02-28 17:31
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P5584&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P5584\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
-permalink: "LG 5584 \u3010SWTR-01\u3011Sunny's Crystals"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P5584&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P5584"
+  target=''_blank''>点击跳转</a><p></details>'
+permalink: LG 5584 【SWTR-01】Sunny's Crystals
 tags:
-- "\u8D2A\u5FC3"
-- "\u7EBF\u6BB5\u6811"
+- 贪心
+- 线段树
 thumbnail: null
-title: "LG 5584 \u3010SWTR-01\u3011Sunny's Crystals"
+title: LG 5584 【SWTR-01】Sunny's Crystals
 top: 0
 ---
 可以想到贪心: 

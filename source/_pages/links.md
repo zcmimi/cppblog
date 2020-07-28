@@ -68,6 +68,11 @@ links:
       url: https://voidge.github.io
       content: voidge is Magician
       bg-color: "#FCFAF2"
+    - name: ex-jason
+      url: https://ex-jason.com
+      avatar: https://ex-jason.com/wp-content/uploads/2019/06/QQ图片20181207202700.jpg
+      content: 最美好的事情就是和OI一起成长呢。
+      bg-color: "#FE9600"
           
     Websites: # 此栏目标题
     - name: Luogu

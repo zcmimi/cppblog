@@ -2,21 +2,20 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-01-27 18:12
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/CF487E&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/CF487E\"\
-  \ target='_blank'>\u70B9\u51FB\u8DF3\u8F6C</a><p></details>"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/CF487E&quot; width=100% height=800px
+  style=&quot;border: none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/CF487E"
+  target=''_blank''>点击跳转</a><p></details>'
 permalink: LG CF487E Tourists
 tags:
-- "\u4ED9\u4EBA\u638C"
+- 仙人掌
 - tarjan
-- "\u6811\u94FE\u5256\u5206"
-- "\u7EBF\u6BB5\u6811"
+- 树链剖分
+- 线段树
 thumbnail: null
 title: LG CF487E Tourists
 top: 0

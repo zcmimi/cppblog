@@ -2,22 +2,21 @@
 author: zc
 avatar: null
 categories:
-- - "\u5237\u9898\u8BB0\u5F55"
+- - 刷题记录
 commnet: 1
 date: 2020-03-01 19:36
-html: "<details><summary>\u67E5\u770B\u539F\u9898</summary><div id='from'></div><p><button\
-  \ onclick=\"document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P3605&quot;\
-  \ width=100% height=800px style=&quot;border: none;&quot;><iframe>'\" class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple'>\u70B9\u51FB\u52A0\u8F7D</button><a class='mdui-btn\
-  \ mdui-btn-raised mdui-ripple' href=\"https://www.luogu.com.cn/problem/P3605\" target='_blank'>\u70B9\
-  \u51FB\u8DF3\u8F6C</a><p></details>"
+html: '<details><summary>查看原题</summary><div id=''from''></div><p><button onclick="document.getElementById(''from'').innerHTML=''<iframe
+  src=&quot;https://www.luogu.com.cn/problem/P3605&quot; width=100% height=800px style=&quot;border:
+  none;&quot;><iframe>''" class=''mdui-btn mdui-btn-raised mdui-ripple''>点击加载</button><a
+  class=''mdui-btn mdui-btn-raised mdui-ripple'' href="https://www.luogu.com.cn/problem/P3605"
+  target=''_blank''>点击跳转</a><p></details>'
 permalink: LG 3605 [USACO17JAN]Promotion Counting P
 tags:
-- "\u79BB\u6563\u5316"
-- "\u6811\u72B6\u6570\u7EC4"
-- "\u7EBF\u6BB5\u6811\u5408\u5E76"
-- "\u9759\u6001\u94FE\u5206\u6CBB"
-- "\u5DEE\u5206"
+- 离散化
+- 树状数组
+- 线段树合并
+- 静态链分治
+- 差分
 thumbnail: null
 title: LG 3605 [USACO17JAN]Promotion Counting P
 top: 0
