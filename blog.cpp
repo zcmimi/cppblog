@@ -6,7 +6,7 @@
 #include"md.hpp"
 #include"encrypt.hpp"
 #include"YamlParser.hpp"
-#include"str.h"
+#include"str.hpp"
 
 namespace fs=std::filesystem;
 using std::vector,std::cout,std::endl,std::list,std::map,std::string;
