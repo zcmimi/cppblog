@@ -1,8 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    freopen("test.in","r",stdin);
-    string res;
-    cin>>res;
-    cout<<int(res[1]);
+    freopen("test.out","w",stdout);
+    fputs("233",stdout);
 }

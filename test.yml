@@ -1,1 +1,39 @@
-top: "\u53CC\u6307\u9488"
+dest: web # 生成文件目录
+
+site_url: https://blog.zcmimi.top
+site_real_rt: https://blog.zcmimi.top
+site_rt: "" # 网站根目录位置
+  # 没有特殊情况请填 ""
+  # 比如你因为某些特殊原因,没法直接在域名根目录部署网站,位置变成了 https://example.com/web
+  #   那么:
+  #   site_url: https://example.com/web
+  #   site_real_rt: https://example.com
+  #   site_rt: "/web"
+  #   本地调试时请 site_rt: ""
+site_name: zcmimi's blog
+site_icon: https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp
+lang: zh-CN
+author: zcmimi
+theme: material
+article_address: origin # (number|pinyin|origin)
+math: True
+
+# index
+page_articles: 10
+preview_len: 100
+
+rss: True
+sitemap: True
+
+baidu_push: 
+  enable: True
+  url: http://data.zz.baidu.com/urls?site=https://blog.zcmimi.top&token=J2u2ssVNNx9cw2V6 #百度推送接口调用地址
+
+
+repo: 
+  - git@e.coding.net:zcmimi/blog.git
+  - git@github.com:zcmimi/zcmimi.github.io.git
+  # - https://e.coding.net/zcmimi/blog.git
+  # - https://github.com/zcmimi/zcmimi.github.io.git
+
+multithreading: false

@@ -8,5 +8,6 @@ string read(string file){
 }
 int main(){
     mpd data=YamlToMpd(read("test.yml").c_str());
-    cout<<data.dump_json();
+    const char *res=data.dump_json().c_str();
+	std::cout<<res;
 }

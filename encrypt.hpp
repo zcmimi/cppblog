@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-using std::string;
-string encrypt(string data,string passwd){
+#include "str.h"
+STR encrypt(STR&data,STR&passwd){
     return data;
 }
