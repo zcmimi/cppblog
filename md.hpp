@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 #include "md4c-html.h"
-#include "str.hpp"
 /* Global options. */
 static unsigned parser_flags=0;
 #ifndef MD4C_USE_ASCII
@@ -40,10 +39,6 @@ const membuffer markdown(const char*in){
     membuf_init(&buf_out,buf_in.size+buf_in.size/8+64);    
     md_html(buf_in.data,buf_in.size,process_output,(void*) &buf_out,parser_flags,renderer_flags);
     return buf_out;
-}
-STR STR_markdown(const char*in){
-    membuffer res=markdown(in);
-    return STR(res.data,res.size);
 }
 std::string str_markdown(const char*in){
     membuffer res=markdown(in);

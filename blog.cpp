@@ -57,6 +57,12 @@ void get_md(mpd&T,string pathstr){
         x.ins("author",config["author"]);
         x.ins("top",0);
 
+        if(x.has("password")){
+            x["content"]=encrypt(x["content"].str,x["password"].str);
+            x["pure_content"]="encrypted";
+            x["preview"]="encrypted";
+        }
+
         T.push_back(x);
 	}
 }
@@ -73,6 +79,41 @@ inline bool cmp_date_top(mpd&x,mpd&y){
     else if(y.has("top"))return 0;
     else return cmp_date(x,y);
 }
+void gen_index(string path,mpd T,mpd&res){
+    int num=config["page_articles"].val,tot=T.vc.size(),TOT=tot/num;
+    for(int i=1;i<=TOT;++i){
+        mpd nodes;
+        for(int j=0;j<num;++j)
+            if(T.vc.empty())break;
+            else nodes.push_back(T.vc.front());
+        string addr=(i==1)?path:path+"/page/"+to_string(i);
+
+        mpd x=MpdMap;
+        x["id"]=i;
+        x["addr"]=addr;
+        x["link"]=rt+addr;
+        x["title"]=path;
+        x["nodes"]=nodes;
+
+        res.push_back(x);
+    }
+    for(int i=0;i<TOT;++i){
+        if(i)res[i].ins("pre",res[i-1]);
+        if(i+1<TOT)res[i].ins("nxt",res[i+1]);
+    }
+}
+void gen_tags_index(){
+    for(auto&tag:tags.mp)
+        gen_index("/tags/"+tag.first,tag.second,tags_index[(string)tag.first]);  
+}
+void gen_categories_index(string path,mpd&cates){
+    if(cates.has("sub"))
+        for(auto&cate:cates["sub"].mp)
+            gen_categories_index(path+'/'+cate.first,cate.second);
+    if(cates.has("nodes"))
+        gen_index(path,cates["nodes"],cates["index"]);
+}
+
 void gen_sitemap(){
 
 }
@@ -92,6 +133,9 @@ void expt(){
     data["pages"]=pages;
     data["tags"]=tags;
     data["categories"]=categories;
+
+    // data["posts_index"]=posts_index;
+    // data["tags_index"]=tags_index;
 
     FILE *fp;fp=fopen("data.json","w");
     data.dump_json(fp);
@@ -130,23 +174,33 @@ int main(){
     get_md(posts,"source/_posts");
     get_md(pages,"source/_pages");
 
+    printf("generate in %.5fms\n",(clock()-st)/1000.0);st=clock();
+
+    expt();
+    expt_pure();
+
+    printf("export in %.5fms\n",(clock()-st)/1000.0);st=clock();
+    return 0;
+
     sort(posts.vc.begin(),posts.vc.end(),cmp_date);
-    int id=1;
+    int id=0,tot=posts.vc.size();
     for(auto&x:posts.vc){
         ++id;
         x["id"]=id;
         if(config["article_address"]=="number")
             x["addr"]="/posts/"+to_string(id);
         else x["addr"]="/posts/"+x["origin_addr"].str;
-
-        if(x.has("password")){
-            x["content"]=encrypt(x["content"].str,x["password"].str);
-            x["pure_content"]="encrypted";
-            x["preview"]="encrypted";
-        }
+        
+        if(x.has("permalink"))
+            x["addr"]="/posts/"+x["permalink"].str;
+        x["link"]=rt+x["addr"].str;
     }
-    sort(posts.vc.begin(),posts.vc.end(),cmp_date_top);
+
+    id=0;
     for(auto&x:posts.vc){
+        ++id;
+        x["pre"]=posts[(id-1+tot)%tot];
+        x["nxt"]=posts[(id+1)%tot];
         for(auto&tag:x["tags"].vc){
             if(!tags.has(tag.str))tags.ins(tag.str,MpdSeq);
             tags[tag.str].push_back(x);
@@ -167,15 +221,9 @@ int main(){
         // if os.path.exists("source/_posts/"+x["origin_addr"]):
         //     cp("source/_posts/"+x["origin_addr"],dest+x["addr"])
     }
+    sort(posts.vc.begin(),posts.vc.end(),cmp_date_top);
 
     // gen_index("",posts,posts_index);
     // gen_tags_index();
-    // gen_categories_index("/categories",categories);
-
-    printf("generate in %.5fms\n",(clock()-st)/1000.0);st=clock();
-
-    expt();
-    expt_pure();
-
-    printf("export in %.5fms\n",(clock()-st)/1000.0);st=clock();
+    // gen_categories_index("/categories",categories);    
 }

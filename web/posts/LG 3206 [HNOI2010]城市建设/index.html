@@ -1,0 +1,651 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>LG 3206 [HNOI2010]城市建设 - zcmimi's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' itemprop="description" content="">
+    <meta name="keywords" content="zcmimi">
+    <meta property="og:url" content="https://blog.zcmimi.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="zcmimi's blog">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="https://blog.zcmimi.top">
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "publisher":{
+            "@type":"Organization",
+            "name":"zcmimi's blog",
+            "logo":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "url":"https://blog.zcmimi.top",
+        "image":{
+            "@type":"ImageObject",
+            "url":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://blog.zcmimi.top"
+        },
+        "description":""
+    }</script>
+<script>
+wonld=Object.create({
+    list:[],
+    append:function(e){this.list.push(e);},
+    excute:function(){
+        for(var i=0;i<this.list.length;++i)
+            this.list[i]();
+    }
+});
+window.onload=function(){wonld.excute();};
+</script>
+    <link rel="dns-prefetch" href="https://blog.zcmimi.top">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/css/mdui.min.css" type="text/css">
+    <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="/assets/theme/origin.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/icon/mqii/mqii.css" type="text/css">
+    <!--custom--><link rel="stylesheet" href="/custom.css" type="text/css">
+    <!--highlight-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+    <!--highlight end-->
+    <!-- markdown katex-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/markdown.min.css" type="text/css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css" type="text/css">
+    <script async src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <!-- markdown katex end-->
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <script async src="//cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script defer src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/bundle.min.js'></script>
+</head>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-blue">
+    <div class="mdui-progress" id='loading-progress' style="position: fixed;top:0;z-index: 999999;"><div class="mdui-progress-indeterminate"></div></div>
+    <div id="theme_css"></div>
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset mdui-color-white mdui-shadow-1">
+        <div class="mdui-toolbar mdui-color-theme">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="drawer.toggle();" mdui-tooltip="{content: '菜单'}">
+                <i class="mdui-icon material-icons">menu</i>
+            </button>
+            <a href="/" class="mdui-typo-title">zcmimi's blog</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-row" id='toolbar-menu'>
+                <a href="https://travellings.now.sh/" target="_blank" class="mdui-col mdui-text-color-black">Traveling</a>
+                <a href="/about" target="_blank" class="mdui-col mdui-text-color-black">关于我</a>
+                <a href="/categories" target="_blank" class="mdui-col mdui-text-color-black">分类</a>
+                <a href="/links" target="_blank" class="mdui-col mdui-text-color-black">友链</a>
+                <a href="/tools" target="_blank" class="mdui-col mdui-text-color-black">工具集</a>
+                <a href="/tags" target="_blank" class="mdui-col mdui-text-color-black">标签云</a>
+            </div><script>if(document.body.clientWidth<1078)document.getElementById('toolbar-menu').hidden=1;</script>
+            <button onclick="music_on();document.getElementById('music_button').hidden=1" id='music_button' class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '是否来点音乐?'}">
+                <i class="mdui-icon material-icons">queue_music</i>
+            </button>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '切换主题'}" mdui-menu="{target: '#theme_menu',align: 'right',covered: false}">
+                <i class="mdui-icon material-icons">view_quilt</i>
+            </button>
+            <ul class="mdui-menu" id="theme_menu" style="width: fit-content;">
+                <li class="mdui-menu-item" mdui-tooltip="{content: '开启/关闭 pjax'}"><a onclick="pjax_on()" id='pjax_button'>pjax_on</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '回归原本'}"><a onclick="theme('day')">日间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '晚上要保护眼睛哦'}"><a onclick="theme('night')">夜间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '满足你的少女心吧'}"><a onclick="theme('pink')">粉红</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '没什么,就是淡蓝色'}"><a onclick="theme('blue')">粉蓝</a></li>
+            </ul>
+            <button onclick="search_dialog.open();document.getElementById('search_input').focus();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}">
+                <i class="mdui-icon material-icons">search</i>
+            </button>
+            <button id='toc_button' class="mdui-btn mdui-btn-icon mdui-ripple" onclick="toc_drawer.toggle();" mdui-tooltip="{content: '目录'}" hidden>
+                <i class="mdui-icon material-icons">format_list_numbered</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-drawer-right mdui-shadow-2" id="toc_drawer" hidden>
+        <ul class="mdui-list" id="toc"></ul>
+    </div>
+
+    <div class="mdui-container">
+        <div id='page_typ' hidden>article</div>
+<div class="mdui-card article">
+    <div class="mdui-card-primary">
+        <a href="#" class="mdui-card-primary-title">LG 3206 [HNOI2010]城市建设</a>
+        <div class="mdui-card-primary-subtitle">        <a href="/tags/lct" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">lct</span>
+        </a>
+        <a href="/tags/线段树分治" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">线段树分治</span>
+        </a>
+</div>
+    </div>
+    <div class="mdui-card-header">
+        <img class="mdui-card-header-avatar" src="    https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp
+" alt='avatar'>
+        <div class="mdui-card-header-title">zc</div>
+        <div class="mdui-card-header-subtitle">2020-04-23 14:02</div>
+        <div class="mdui-card-menu">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '文章分类'}" mdui-menu="{target:'#categories',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">bookmark</i>
+            </button>
+            <ul class="mdui-menu" id="categories">
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/刷题记录" class="mdui-ripple">
+                            刷题记录
+                        </a>
+                    </li>
+            </ul>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '本文阅读量'}" mdui-menu="{target:'#visit_counter',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">remove_red_eye</i>
+            </button>
+            <ul class="mdui-menu" id="visit_counter">
+                <li class="mdui-menu-item mdui-ripple">
+                    <div id="busuanzi_container_page_pv">
+                        <center>本文总阅读量<span id="busuanzi_value_page_pv"></span>次</center>
+                    </div>
+                </li>
+            </ul>
+<button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '分享'}" mdui-menu="{target:'#share_menu',align:'right',covered: false}">
+    <i class="mdui-icon material-icons">share</i>
+</button>
+<ul class="mdui-menu" id="share_menu" style="width: fit-content;">
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_weibo" href="https://service.weibo.com/share/share.php?appkey=&title=LG 3206 [HNOI2010]城市建设 - zcmimi's blog&url=https://blog.zcmimi.top/posts/LG 3206 [HNOI2010]城市建设&pic=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&searchPic=false&style=simple" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-weibo"></i>分享到微博
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_qq" href="https://connect.qq.com/widget/shareqq/index.html?site=zcmimi's blog&title=LG 3206 [HNOI2010]城市建设 - zcmimi's blog&summary=&pics=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&url=https://blog.zcmimi.top/posts/LG 3206 [HNOI2010]城市建设" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-qq_filled"></i>分享到QQ
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_twitter" href="https://twitter.com/intent/tweet?text=LG 3206 [HNOI2010]城市建设 - zcmimi's blog&url=https://blog.zcmimi.top/posts/LG 3206 [HNOI2010]城市建设" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-twitter"></i>分享到Twitter
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_copy" onclick="copylink()" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">link</i>复制链接
+        </a>
+    </li>
+</ul>        </div>
+    </div>
+    <div class="mdui-card-content">
+        <details><summary>查看原题</summary><div id='from'></div><p><button onclick="document.getElementById('from').innerHTML='<iframe src=&quot;https://www.luogu.com.cn/problem/P3206&quot; width=100% height=800px style=&quot;border: none;&quot;><iframe>'" class='mdui-btn mdui-btn-raised mdui-ripple'>点击加载</button><a class='mdui-btn mdui-btn-raised mdui-ripple' href="https://www.luogu.com.cn/problem/P3206" target='_blank'>点击跳转</a><p></details>
+        <div id="md-body" class="md-body"><h2>线段树分治+<code>LCT</code></h2>
+<p>一个非常暴力的思路</p>
+<p>FBI WARNING: 极有可能因为常数巨大而超时</p>
+<p>把询问(修改)时间看成序列,每条边在这个序列上的一段区间出现</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define il __inline__ __attribute__ ((always_inline))
+#define fur(i,x,y) for(int i(x);i&lt;=y;++i)
+namespace IO{const int str=1&lt;&lt;20;static char in_buf[str],*in_s,*in_t;bool __=0;char gc(){return (in_s==in_t)&amp;&amp;(in_t=(in_s=in_buf)+fread(in_buf,1,str,stdin)),in_s==in_t?EOF:*in_s++;}void in(char &amp;ch){if(__)return;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)__=1;else ch=c;}void in(char *ch){*ch='\0';if(__)return;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF){__=1;return;}*ch=c;ch++;while((c=gc())!=EOF&amp;&amp;!isspace(c))*ch=c,ch++;if(c==EOF)__=1;*ch='\0';}template&lt;typename T&gt;void in(T &amp;x){if(__)return;char c=gc();bool f=0;while(c!=EOF&amp;&amp;(c&lt;'0'||c&gt;'9'))f^=(c=='-'),c=gc();if(c==EOF){__=1;return;}x=0;while(c!=EOF&amp;&amp;'0'&lt;=c&amp;&amp;c&lt;='9')x=x*10+c-48,c=gc();if(c==EOF)__=1;if(f)x=-x;}template&lt;typename T,typename ... arr&gt;void in(T &amp;x,arr &amp; ... y){in(x),in(y...);}const char ln='\n';static char out_buf[str],*out_s=out_buf,*out_t=out_buf+str;void flush(){fwrite(out_buf,1,out_s-out_buf,stdout);out_s=out_buf;}void pt(char c){(out_s==out_t)?(fwrite(out_s=out_buf,1,str,stdout),*out_s++=c):(*out_s++=c);}void out(const char* s){while(*s)pt(*s++);}void out(char* s){while(*s)pt(*s++);}void out(char c){pt(c);}template&lt;typename T&gt;void out(T x){if(!x){pt('0');return;}if(x&lt;0)pt('-'),x=-x;char a[50],t=0;while(x)a[t++]=x%10,x/= 10;while(t--)pt(a[t]+'0');}template&lt;typename T,typename ... arr&gt;void out(T x,arr &amp; ... y){out(x),out(y...);}}using namespace IO;
+const int M=50011;
+int n,m,q,tot,cnt,lst[M],pos[M],head[M&lt;&lt;2];
+struct node{int x,y,w;}a[M&lt;&lt;2];
+struct edge{int to,nxt;}e[M&lt;&lt;4];
+il void add(int x,int y){e[++cnt].to=y;e[cnt].nxt=head[x];head[x]=cnt;}
+/* LCT START*/
+int f[M&lt;&lt;2],c[2][M&lt;&lt;2],v[M&lt;&lt;2],mx[M&lt;&lt;2];
+bool rev[M&lt;&lt;2];
+#define ls c[0][x]
+#define rs c[1][x]
+il void pu(int x){
+    mx[x]=x;
+    if(ls&amp;&amp;v[mx[ls]]&gt;v[mx[x]])mx[x]=mx[ls];
+    if(rs&amp;&amp;v[mx[rs]]&gt;v[mx[x]])mx[x]=mx[rs];
+}
+il void pd(int x){
+    if(rev[x])
+        rev[ls]^=1,rev[rs]^=1,
+        ls^=rs,rs^=ls,ls^=rs,
+        rev[x]=0;
+}
+il int g(int x){return c[1][f[x]]==x;}
+il int nrt(int x){return c[0][f[x]]==x||c[1][f[x]]==x;}
+il void rotate(int x){
+    int y=f[x],z=f[y],l=g(x),r=!l,w=c[r][x];
+    if(nrt(y))c[g(y)][z]=x;
+    c[r][x]=y,c[l][y]=w;
+    if(w)f[w]=y;
+    f[x]=z,f[y]=x;
+    pu(y);
+}
+void pda(int x){if(nrt(x))pda(f[x]);pd(x);}
+il void splay(int x){
+    // for(pda(x);nrt(x);rotate(x))if(nrt(f[x]))
+        // rotate(g(x)^g(f[x])?x:f[x]);
+    for(pda(x);nrt(x);rotate(x));//这题单旋更快
+    pu(x);
+}
+il void access(int x){
+    for(int y=0;x;x=f[y=x])
+        splay(x),rs=y,pu(x);
+}
+il void mrt(int x){access(x),splay(x),rev[x]^=1;}
+il int frt(int x){
+    for(access(x),splay(x);ls;pd(x),x=ls);
+    splay(x);return x;
+}
+/* LCT END */
+void upd(int L,int R,int v,int l,int r,int rt){
+    if(L&lt;=l&amp;&amp;r&lt;=R){add(rt,v);return;}
+    int m=l+r&gt;&gt;1;
+    if(L&lt;=m)upd(L,R,v,l,m,rt&lt;&lt;1);
+    if(R&gt;m)upd(L,R,v,m+1,r,rt&lt;&lt;1|1);
+}
+il void link(int x,int y){mrt(x),f[x]=y;}
+il void spl(int x,int y){mrt(x),access(y),splay(y);}
+il void cut(int x,int y){spl(x,y),f[x]=c[0][y]=0,pu(y);}
+int st[M&lt;&lt;2],tp=0;
+long long ans;
+bool typ[M&lt;&lt;2];
+void div(int l,int r,int rt){
+    int x,y,w,bg=tp,to,m=l+r&gt;&gt;1;
+    for(int i=head[rt];i;i=e[i].nxt){
+        to=e[i].to,x=a[to].x,y=a[to].y,w=a[to].w;
+        if(frt(x)==frt(y)){
+            spl(x,y);
+            int p=mx[y];
+            if(v[p]&gt;w){
+                cut(a[p-n].x,p),cut(a[p-n].y,p),ans-=a[p-n].w;
+                st[++tp]=p-n,typ[tp]=0;
+            }
+            else continue;
+        }
+        link(x,to+n),link(y,to+n),ans+=w;
+        st[++tp]=to,typ[tp]=1;
+    }
+    if(l==r)out(ans,ln);
+    else div(l,m,rt&lt;&lt;1),div(m+1,r,rt&lt;&lt;1|1);
+    for(;tp^bg;--tp){
+        x=st[tp];
+        if(typ[tp])
+            ans-=a[x].w,
+            cut(a[x].x,x+n),cut(a[x].y,x+n);
+        else
+            ans+=a[x].w,
+            link(a[x].x,x+n),link(a[x].y,x+n);
+    }
+}
+int main(){
+    in(n,m,q);tot=m;
+    fur(i,1,m)in(a[i].x,a[i].y,a[i].w),lst[i]=1,pos[i]=i;
+    fur(i,1,q){
+        int k,d;in(k,d);
+        if(lst[k]&lt;i)upd(lst[k],i-1,pos[k],1,q,1);
+        lst[k]=i;a[++tot]=a[pos[k]];a[tot].w=d;pos[k]=tot;
+    }
+    fur(i,1,m)upd(lst[i],q,pos[i],1,q,1);
+    fur(i,1,tot)v[n+i]=a[i].w;
+    div(1,q,1);
+    flush();
+}
+</code></pre>
+<h2>cdq分治</h2>
+<p>一个非常巧妙的思路</p>
+<p>和线段树分治一样,我们对修改时间进行分治</p>
+<p>暴力: 当$l=r$的时候,就直接让修改生效,然后求一边<code>MST</code>(最小生成树)</p>
+<p>图的规模是$m$,$\mathcal{O}(nm)$显然不行</p>
+<p>要靠分治来缩小图的规模</p>
+<ol>
+<li><p>必选边</p>
+<p>假设当前处理的区间为$[l,r]$,把区间中要求改的边全部改为$-\infty$,跑一遍<code>MST</code></p>
+<p>那么跑完后不是$-\infty$且还在<code>MST</code>中的边,之后也一定会留在<code>MST</code>中</p>
+<p>那么可以把这些边形成的连通块缩点,把剩下的边存下来继续分治</p>
+</li>
+<li><p>无用边</p>
+<p>假设当前处理的区间为$[l,r]$,把区间中要求改的边全部改为$\infty$,跑一遍<code>MST</code></p>
+<p>那么跑完后不是$\infty$且不在<code>MST</code>中的边,之后也一定不在<code>MST</code>中</p>
+</li>
+</ol>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define il __inline__ __attribute__ ((always_inline))
+#define fur(i,x,y) for(int i(x);i&lt;=y;++i)
+typedef long long ll;
+namespace IO{const int str=1&lt;&lt;20;static char in_buf[str],*in_s,*in_t;bool __=0;char gc(){return (in_s==in_t)&amp;&amp;(in_t=(in_s=in_buf)+fread(in_buf,1,str,stdin)),in_s==in_t?EOF:*in_s++;}void in(char &amp;ch){if(__)return;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)__=1;else ch=c;}void in(char *ch){*ch='\0';if(__)return;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF){__=1;return;}*ch=c;ch++;while((c=gc())!=EOF&amp;&amp;!isspace(c))*ch=c,ch++;if(c==EOF)__=1;*ch='\0';}template&lt;typename T&gt;void in(T &amp;x){if(__)return;char c=gc();bool f=0;while(c!=EOF&amp;&amp;(c&lt;'0'||c&gt;'9'))f^=(c=='-'),c=gc();if(c==EOF){__=1;return;}x=0;while(c!=EOF&amp;&amp;'0'&lt;=c&amp;&amp;c&lt;='9')x=x*10+c-48,c=gc();if(c==EOF)__=1;if(f)x=-x;}template&lt;typename T,typename ... arr&gt;void in(T &amp;x,arr &amp; ... y){in(x),in(y...);}const char ln='\n';static char out_buf[str],*out_s=out_buf,*out_t=out_buf+str;void flush(){fwrite(out_buf,1,out_s-out_buf,stdout);out_s=out_buf;}void pt(char c){(out_s==out_t)?(fwrite(out_s=out_buf,1,str,stdout),*out_s++=c):(*out_s++=c);}void out(const char* s){while(*s)pt(*s++);}void out(char* s){while(*s)pt(*s++);}void out(char c){pt(c);}template&lt;typename T&gt;void out(T x){if(!x){pt('0');return;}if(x&lt;0)pt('-'),x=-x;char a[50],t=0;while(x)a[t++]=x%10,x/= 10;while(t--)pt(a[t]+'0');}template&lt;typename T,typename ... arr&gt;void out(T x,arr &amp; ... y){out(x),out(y...);}}using namespace IO;
+using std::sort;
+const int N=50011,inf=1&lt;&lt;30;
+int n,m,q,f[N],sz[N],a[N],c[N],tot[20];
+struct node{
+    int x,y,w,id;
+    bool operator&lt;(node t){return w&lt;t.w;}
+}e[20][N],b[N],t[N];
+struct mdy{int x,y;}p[N];
+int gf(int x){return x==f[x]?x:(f[x]=gf(f[x]));}
+void link(int x,int y){
+    x=gf(x),y=gf(y);
+    if(sz[x]&gt;sz[y])x^=y,y^=x,x^=y;
+    f[x]=y,sz[y]+=sz[x];
+}
+void set(int T,node*a){
+    fur(i,1,T)
+        f[a[i].x]=a[i].x,f[a[i].y]=a[i].y,
+        sz[a[i].x]=sz[a[i].y]=1;
+}
+void useful(int&amp;T,ll&amp;val){
+    int tt=0;
+    set(T,b);sort(b+1,b+T+1);
+    fur(i,1,T)if(gf(b[i].x)^gf(b[i].y))
+        link(b[i].x,b[i].y),t[++tt]=b[i];
+    set(tt,t);
+    fur(i,1,tt)if(t[i].w!=-inf&amp;&amp;gf(t[i].x)^gf(t[i].y))
+        val+=t[i].w,link(t[i].x,t[i].y);
+    tt=0;
+    fur(i,1,T)if(gf(b[i].x)^gf(b[i].y))
+        t[++tt]={f[b[i].x],f[b[i].y],b[i].w,b[i].id};
+    fur(i,1,tt)c[b[i].id]=i,b[i]=t[i];
+    T=tt;
+}
+void useless(int&amp;T){
+    int tt=0;
+    set(T,b);sort(b+1,b+T+1);
+    fur(i,1,T)
+        if(gf(b[i].x)^gf(b[i].y))
+            link(b[i].x,b[i].y),t[++tt]=b[i];
+        else if(b[i].w==inf)t[++tt]=b[i];
+    fur(i,1,tt)c[b[i].id]=i,b[i]=t[i];
+    T=tt;
+}
+void div(int l,int r,int d,ll val){
+    int T=tot[d],m=l+r&gt;&gt;1;
+    if(l==r)a[p[l].x]=p[l].y;
+    fur(i,1,T){
+        e[d][i].w=a[e[d][i].id];
+        b[i]=e[d][i],c[b[i].id]=i;
+    }
+    if(l==r){
+        set(T,b);
+        sort(b+1,b+T+1);
+        fur(i,1,T)if(gf(b[i].x)^gf(b[i].y))
+            link(b[i].x,b[i].y),val+=b[i].w;
+        out(val,ln);return;
+    }
+    fur(i,l,r)b[c[p[i].x]].w=-inf;
+    useful(T,val);
+    fur(i,l,r)b[c[p[i].x]].w=inf;
+    useless(T);
+    fur(i,1,T)e[d+1][i]=b[i];
+    tot[d+1]=T;
+    div(l,m,d+1,val);
+    div(m+1,r,d+1,val);
+}
+int main(){
+    in(n,m,q);
+    int x,y;
+    fur(i,1,m)in(x,y,a[i]),e[0][i]={x,y,a[i],i};
+    fur(i,1,q)in(p[i].x,p[i].y);
+    tot[0]=m;div(1,q,0,0);
+    flush();
+}
+</code></pre>
+</div>
+    </div>
+</div>
+<div class="mdui-row-xs-3 article">
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black" id='pre_button'>
+            <i class="mdui-icon material-icons">arrow_back</i>
+            LG 5227 [AHOI2013]连通图
+        </a>
+    </div>
+    <div class="mdui-col mdui-text-center">LG 3206 [HNOI2010]城市建设</div>
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black mdui-float-right" id='nxt_button'>
+            线段树分治
+            <i class="mdui-icon material-icons">arrow_forward</i>
+        </a>
+    </div>
+</div>
+<div class="mdui-card" style="margin-top: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">
+            <i class="mdui-icon material-icons">comment</i>
+            评论
+        </div>
+    </div>
+<div class="mdui-card-content" id='comments'>
+    <center>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="nvl()">
+            valine
+        </button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="ngt()">
+            gitalk
+        </button>
+    </center>
+</div>
+<script>
+function nvl(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var valinejs=document.createElement('script');
+    valinejs.src="//cdn.jsdelivr.net/gh/xCss/Valine/dist/Valine.min.js";
+    valinejs.async=true;
+    valinejs.onload=function(){
+        new Valine({
+            el: '#comments',
+            placeholder: "说几句嘛qwq",
+            appId: "NLh0fhLRvD8gOWEC3vtOIRx5-gzGzoHsz",
+            appKey: "DSwqdjPFKAnO4CFMQypfkcB9",
+            path: window.location.pathname,
+        });
+    }
+    document.getElementsByTagName("head")[0].appendChild(valinejs);
+}
+</script>
+<script>
+function ngt(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var gtalkjs=document.createElement('script');
+    gtalkjs.src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js";
+    gtalkjs.async=true;
+    gtalkjs.onload=function(){
+        const gitalk=new Gitalk({
+            clientID:'054902ee1548e6fe427e',
+            clientSecret:'b31fac2b407311ca7e6673ab84727ae9562c69ba',
+            repo:'zcmimi.github.io',
+            owner:'zcmimi',
+            admin: "zcmimi",
+            id:location.pathname,
+            distractionFreeMode:False
+        });
+        gitalk.render('comments');
+    }
+    var gtalkcss=document.createElement('link');
+    gtalkcss.href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css";
+    gtalkcss.type='text/css';
+    gtalkcss.rel='stylesheet';
+    document.getElementsByTagName("head")[0].appendChild(gtalkjs);
+    document.getElementsByTagName("head")[0].appendChild(gtalkcss);
+}
+</script>
+</div>
+    </div>
+</body>
+<!--top-->
+<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-fab-fixed mdui-fab-hide" id="totop" onclick="totop()" style="z-index: 99999;">
+    <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+</button>
+<!--top end-->
+<footer class="mdui-m-t-5">
+    <div class="mdui-card">
+        <div class="mdui-card-content mdui-p-a-5">
+            <div class="mdui-container">
+                <div class="mdui-row-sm-3">
+                    <div class="mdui-col">
+                        <div class="mdui-row">
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://space.bilibili.com/110897068">
+                                        <i class="mdui-icon mqii mqii-bilibili mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://github.com/zcmimi">
+                                        <i class="mdui-icon mqii mqii-github mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://twitter.com/zc_mimi">
+                                        <i class="mdui-icon mqii mqii-twitter mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://www.zhihu.com/people/zcmimi">
+                                        <i class="mdui-icon mqii mqii-zhihu mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mdui-col mdui-text-center">
+                        <div>Copyright ©&nbsp;2019-2020&nbsp;zcmimi's blog</div>
+                        <div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+                        <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/busuanzi.js" onload="
+                            wonld.append(busuanzi);
+                            document.addEventListener('pjax:complete',busuanzi);
+                        "></script>
+
+                        <div>last build: 2020-07-30T15:42:15Z</div>
+                    </div>
+                    <div class="mdui-col mdui-text-center mdui-typo">
+                        <div>Powered by <a href="https://github.com/zcmimi/py-blog">py-blog</a></div>
+                        <div>Theme material</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mdui-dialog" id="search_dialog">
+    <div class="mdui-dialog-title">Search</div>
+    <div class="mdui-dialog-content">
+        <div class="mdui-textfield">
+            <i class="mdui-icon material-icons">search</i>
+            <input id="search_input" class="mdui-textfield-input" placeholder="搜索">
+        </div>
+        <div id="search_result" class="mdui-list"></div>
+    </div>
+</div>
+<script async src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/worker_search.js'></script>
+<script>
+document.getElementById('search_input').onchange=function(){
+    search("https://blog_search.zcmimi.workers.dev");
+}
+</script>
+<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-shadow-2" id="drawer">
+    <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons mdui-text mdui-text-color-black">home</i>
+            <a href="/" class="mdui-list-item-content">zcmimi's blog</a>
+        </li>
+        <li><center><img src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp" width="95%" height="95%" alt='avatar'></img></center></li>
+            <li class='mdui-subheader'>Catch me</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:dodgerblue'">email</i>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fwUcIBIWEhY-Dg5RHBAS" target="_blank" class="mdui-list-item-content">给我写信</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#66ccff'"></i>
+                    <a href="https://t.me/zcmimi" target="_blank" class="mdui-list-item-content">电报</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-twitter" style='color:rgba(29,161,242,1.00)'"></i>
+                    <a href="https://twitter.com/zc_mimi" target="_blank" class="mdui-list-item-content">推特</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-bilibili" style='color:#F06292'"></i>
+                    <a href="https://space.bilibili.com/110897068" target="_blank" class="mdui-list-item-content">哔哩哔哩</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-netease-cloud-music" style='color:red'"></i>
+                    <a href="https://music.163.com/#/user/home?id=507163653" target="_blank" class="mdui-list-item-content">网易云音乐</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-zhihu" style='color:#0084ff'"></i>
+                    <a href="https://www.zhihu.com/people/zcmimi" target="_blank" class="mdui-list-item-content">知乎</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <img class="mdui-list-item-icon" src="https://www.luogu.com.cn/favicon.ico" alt>
+                    <a href="https://luogu.com.cn/user/36532" target="_blank" class="mdui-list-item-content">洛谷</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-github" style='color:black'"></i>
+                    <a href="https://github.com/zcmimi" target="_blank" class="mdui-list-item-content">Github</a>
+                </li>
+            <li class='mdui-subheader'>Links</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#bbb'"></i>
+                    <a href="https://travellings.now.sh/" target="_blank" class="mdui-list-item-content">Traveling</a>
+                </li>
+            <li class='mdui-subheader'>Pages</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">bookmark_border</i>
+                    <a href="/tags" target="_blank" class="mdui-list-item-content">标签云</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">book</i>
+                    <a href="/categories" target="_blank" class="mdui-list-item-content">分类</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">link</i>
+                    <a href="/links" target="_blank" class="mdui-list-item-content">友链</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">build</i>
+                    <a href="/tools" target="_blank" class="mdui-list-item-content">工具集</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">person</i>
+                    <a href="/about" target="_blank" class="mdui-list-item-content">关于我</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">rss_feed</i>
+                    <a href="/atom.xml" target="_blank" class="mdui-list-item-content">订阅</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">list</i>
+                    <a href="/sitemap.xml" target="_blank" class="mdui-list-item-content">站点地图</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">comment</i>
+                    <a href="https://nlh0fhlrsgij.leanapp.cn" target="_blank" class="mdui-list-item-content">评论管理</a>
+                </li>
+    </ul>
+</div>
+
+
+<div id='musiclist'></div>
+<style>.aplayer,.aplayer-body,.aplayer-pic,.aplayer-button{z-index: 9999999 !important;}</style>
+<script>
+function music_on(){
+    pjax_on(1);
+    var x=document.getElementById('musiclist');
+    x.innerHTML="";
+    mdui.snackbar({message:'歌单加载中,请稍等2-10s'});
+    var hl=document.createElement('link');
+    hl.href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css";
+    hl.type='text/css';
+    hl.rel='stylesheet';
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js";
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js";
+    x.appendChild(hl);
+
+    hl=document.createElement('meting-js');
+    hl.setAttribute('id','765727960');
+    hl.setAttribute('fixed','true');
+    hl.setAttribute('server','netease');
+    hl.setAttribute('type','playlist');
+    hl.setAttribute('order','random');
+    hl.setAttribute('theme','#f7a4b9');
+    x.appendChild(hl);
+}
+</script>
+</html>

@@ -1,0 +1,2364 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>tagcloud - zcmimi's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' itemprop="description" content="">
+    <meta name="keywords" content="zcmimi">
+    <meta property="og:url" content="https://blog.zcmimi.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="zcmimi's blog">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="https://blog.zcmimi.top">
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "publisher":{
+            "@type":"Organization",
+            "name":"zcmimi's blog",
+            "logo":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "url":"https://blog.zcmimi.top",
+        "image":{
+            "@type":"ImageObject",
+            "url":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://blog.zcmimi.top"
+        },
+        "description":""
+    }</script>
+<script>
+wonld=Object.create({
+    list:[],
+    append:function(e){this.list.push(e);},
+    excute:function(){
+        for(var i=0;i<this.list.length;++i)
+            this.list[i]();
+    }
+});
+window.onload=function(){wonld.excute();};
+</script>
+    <link rel="dns-prefetch" href="https://blog.zcmimi.top">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/css/mdui.min.css" type="text/css">
+    <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="/assets/theme/origin.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/icon/mqii/mqii.css" type="text/css">
+    <!--custom--><link rel="stylesheet" href="/custom.css" type="text/css">
+    <!--highlight-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+    <!--highlight end-->
+    <!-- markdown katex-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/markdown.min.css" type="text/css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css" type="text/css">
+    <script async src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <!-- markdown katex end-->
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <script async src="//cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script defer src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/bundle.min.js'></script>
+</head>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-blue">
+    <div class="mdui-progress" id='loading-progress' style="position: fixed;top:0;z-index: 999999;"><div class="mdui-progress-indeterminate"></div></div>
+    <div id="theme_css"></div>
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset mdui-color-white mdui-shadow-1">
+        <div class="mdui-toolbar mdui-color-theme">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="drawer.toggle();" mdui-tooltip="{content: '菜单'}">
+                <i class="mdui-icon material-icons">menu</i>
+            </button>
+            <a href="/" class="mdui-typo-title">zcmimi's blog</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-row" id='toolbar-menu'>
+                <a href="https://travellings.now.sh/" target="_blank" class="mdui-col mdui-text-color-black">Traveling</a>
+                <a href="/about" target="_blank" class="mdui-col mdui-text-color-black">关于我</a>
+                <a href="/categories" target="_blank" class="mdui-col mdui-text-color-black">分类</a>
+                <a href="/links" target="_blank" class="mdui-col mdui-text-color-black">友链</a>
+                <a href="/tools" target="_blank" class="mdui-col mdui-text-color-black">工具集</a>
+                <a href="/tags" target="_blank" class="mdui-col mdui-text-color-black">标签云</a>
+            </div><script>if(document.body.clientWidth<1078)document.getElementById('toolbar-menu').hidden=1;</script>
+            <button onclick="music_on();document.getElementById('music_button').hidden=1" id='music_button' class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '是否来点音乐?'}">
+                <i class="mdui-icon material-icons">queue_music</i>
+            </button>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '切换主题'}" mdui-menu="{target: '#theme_menu',align: 'right',covered: false}">
+                <i class="mdui-icon material-icons">view_quilt</i>
+            </button>
+            <ul class="mdui-menu" id="theme_menu" style="width: fit-content;">
+                <li class="mdui-menu-item" mdui-tooltip="{content: '开启/关闭 pjax'}"><a onclick="pjax_on()" id='pjax_button'>pjax_on</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '回归原本'}"><a onclick="theme('day')">日间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '晚上要保护眼睛哦'}"><a onclick="theme('night')">夜间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '满足你的少女心吧'}"><a onclick="theme('pink')">粉红</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '没什么,就是淡蓝色'}"><a onclick="theme('blue')">粉蓝</a></li>
+            </ul>
+            <button onclick="search_dialog.open();document.getElementById('search_input').focus();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}">
+                <i class="mdui-icon material-icons">search</i>
+            </button>
+            <button id='toc_button' class="mdui-btn mdui-btn-icon mdui-ripple" onclick="toc_drawer.toggle();" mdui-tooltip="{content: '目录'}" hidden>
+                <i class="mdui-icon material-icons">format_list_numbered</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-drawer-right mdui-shadow-2" id="toc_drawer" hidden>
+        <ul class="mdui-list" id="toc"></ul>
+    </div>
+
+    <div class="mdui-container">
+        <div id='page_typ' hidden>index</div>
+<div class="mdui-textfield" style="padding-top: 50px;padding-bottom: 50px;">
+    <i class="mdui-icon material-icons" style="padding-bottom: 50px;">filter_list</i>
+    <input id="tag_filter" class="mdui-textfield-input" placeholder="筛选" onchange="filter()">
+</div>
+<script>
+function filter(){
+    var list=document.getElementById('tag_list').children,
+        text=document.getElementById('tag_filter').value.toLowerCase();
+    for(i in list){
+        var x=list[i];
+        if(x.children[0].children[0].children[0].children[0].innerHTML.toLowerCase().indexOf(text)!=-1)x.hidden=0;
+        else x.hidden=1;
+    }
+}
+</script>
+<div id='tag_list' class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-4 mdui-row-lg-5" style="word-wrap:break-word;word-break:break-all;">
+    <div class="mdui-col">
+        <a href="/tags/01分数规划">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">01分数规划</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/\uFEFF期望">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">\uFEFF期望</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/AC自动机">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">AC自动机</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/bfs">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">bfs</div>
+                    <div class="mdui-card-primary-subtitle">共8篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/bsgs">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">bsgs</div>
+                    <div class="mdui-card-primary-subtitle">共7篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/cdq分治">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">cdq分治</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/crt">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">crt</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/dag">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">dag</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/dfs">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">dfs</div>
+                    <div class="mdui-card-primary-subtitle">共19篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/dfs序">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">dfs序</div>
+                    <div class="mdui-card-primary-subtitle">共5篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/excrt">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">excrt</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/exgcd">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">exgcd</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/exlucas">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">exlucas</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/fft">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">fft</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/fhqtreap">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">fhqtreap</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/floyed">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">floyed</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/gcd">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">gcd</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/hash">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">hash</div>
+                    <div class="mdui-card-primary-subtitle">共14篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/kdt">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">kdt</div>
+                    <div class="mdui-card-primary-subtitle">共8篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/kmp">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">kmp</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/kruskal">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">kruskal</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/kruskal重构树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">kruskal重构树</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/lca">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">lca</div>
+                    <div class="mdui-card-primary-subtitle">共19篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/lct">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">lct</div>
+                    <div class="mdui-card-primary-subtitle">共22篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/lucas">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">lucas</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/manacher">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">manacher</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/ntt">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">ntt</div>
+                    <div class="mdui-card-primary-subtitle">共7篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/rmq">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">rmq</div>
+                    <div class="mdui-card-primary-subtitle">共7篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/set">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">set</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/spfa">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">spfa</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/splay">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">splay</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/stl">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">stl</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/tarjan">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">tarjan</div>
+                    <div class="mdui-card-primary-subtitle">共18篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/test">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">test</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/trie">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">trie</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/中位数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">中位数</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/主席树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">主席树</div>
+                    <div class="mdui-card-primary-subtitle">共13篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二分">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二分</div>
+                    <div class="mdui-card-primary-subtitle">共22篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二分图">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二分图</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二分查找">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二分查找</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二次剩余">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二次剩余</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二维前缀和">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二维前缀和</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二维树状数组">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二维树状数组</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二维线段树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二维线段树</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二进制">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二进制</div>
+                    <div class="mdui-card-primary-subtitle">共5篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二进制优化">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二进制优化</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/二项式反演">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">二项式反演</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/交互">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">交互</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/仙人掌">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">仙人掌</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/位运算">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">位运算</div>
+                    <div class="mdui-card-primary-subtitle">共9篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/倍增">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">倍增</div>
+                    <div class="mdui-card-primary-subtitle">共14篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/决策单调性">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">决策单调性</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/凸包">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">凸包</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/分块">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">分块</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/分层图">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">分层图</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/分数规划">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">分数规划</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/分治">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">分治</div>
+                    <div class="mdui-card-primary-subtitle">共7篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/前端">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">前端</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/前缀和">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">前缀和</div>
+                    <div class="mdui-card-primary-subtitle">共23篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/剪枝">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">剪枝</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/割点">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">割点</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/动态开点">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">动态开点</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/动态规划">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">动态规划</div>
+                    <div class="mdui-card-primary-subtitle">共87篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/区间dp">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">区间dp</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/单调栈">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">单调栈</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/单调队列">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">单调队列</div>
+                    <div class="mdui-card-primary-subtitle">共14篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/博弈论">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">博弈论</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/卡特兰数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">卡特兰数</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/卷积">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">卷积</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/原根">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">原根</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/双指针">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">双指针</div>
+                    <div class="mdui-card-primary-subtitle">共10篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/双连通分量">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">双连通分量</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/反演">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">反演</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/可并堆">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">可并堆</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/后缀和">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">后缀和</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/后缀数组">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">后缀数组</div>
+                    <div class="mdui-card-primary-subtitle">共12篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/启发式合并">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">启发式合并</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/哈希">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">哈希</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/四边形不等式">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">四边形不等式</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/回文串">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">回文串</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/回滚莫队">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">回滚莫队</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/图论">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">图论</div>
+                    <div class="mdui-card-primary-subtitle">共10篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/圆方树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">圆方树</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/基环树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">基环树</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/堆">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">堆</div>
+                    <div class="mdui-card-primary-subtitle">共13篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/多重背包">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">多重背包</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/多项式">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">多项式</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/子树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">子树</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/字典序">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">字典序</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/字符串">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">字符串</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/容斥">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">容斥</div>
+                    <div class="mdui-card-primary-subtitle">共16篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/差分">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">差分</div>
+                    <div class="mdui-card-primary-subtitle">共9篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/差分约束">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">差分约束</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/带修莫队">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">带修莫队</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/平衡树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">平衡树</div>
+                    <div class="mdui-card-primary-subtitle">共9篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/并查集">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">并查集</div>
+                    <div class="mdui-card-primary-subtitle">共18篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/序列">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">序列</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/建图">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">建图</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/异或">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">异或</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/强连通分量">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">强连通分量</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/快速幂">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">快速幂</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/思维">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">思维</div>
+                    <div class="mdui-card-primary-subtitle">共12篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/打标记">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">打标记</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/扩展欧几里德">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">扩展欧几里德</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/扫描线">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">扫描线</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/找度最大的点">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">找度最大的点</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/技巧">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">技巧</div>
+                    <div class="mdui-card-primary-subtitle">共17篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/技术">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">技术</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/折半搜索">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">折半搜索</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/拉格朗日插值">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">拉格朗日插值</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/拓扑">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">拓扑</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/拓扑序">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">拓扑序</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/拓扑排序">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">拓扑排序</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/排序">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">排序</div>
+                    <div class="mdui-card-primary-subtitle">共12篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/搜索">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">搜索</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/数位dp">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">数位dp</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/数据结构">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">数据结构</div>
+                    <div class="mdui-card-primary-subtitle">共18篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/数论">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">数论</div>
+                    <div class="mdui-card-primary-subtitle">共103篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/数论分块">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">数论分块</div>
+                    <div class="mdui-card-primary-subtitle">共10篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/整体二分">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">整体二分</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/整除分块">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">整除分块</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/斐波那契">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">斐波那契</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/斜率优化">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">斜率优化</div>
+                    <div class="mdui-card-primary-subtitle">共7篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/斯特林数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">斯特林数</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/暴力">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">暴力</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/最小割">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">最小割</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/最小环">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">最小环</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/最小生成树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">最小生成树</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/最短路">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">最短路</div>
+                    <div class="mdui-card-primary-subtitle">共12篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/期望">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">期望</div>
+                    <div class="mdui-card-primary-subtitle">共13篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/权值线段树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">权值线段树</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/杜教筛">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">杜教筛</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/构造">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">构造</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/枚举">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">枚举</div>
+                    <div class="mdui-card-primary-subtitle">共8篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/标记永久化">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">标记永久化</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/栈">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">栈</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树</div>
+                    <div class="mdui-card-primary-subtitle">共13篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树上差分">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树上差分</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树上莫队">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树上莫队</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树剖">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树剖</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树型dp">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树型dp</div>
+                    <div class="mdui-card-primary-subtitle">共5篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树套树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树套树</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树形dp">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树形dp</div>
+                    <div class="mdui-card-primary-subtitle">共10篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树状数组">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树状数组</div>
+                    <div class="mdui-card-primary-subtitle">共27篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树的直径">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树的直径</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树的重心">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树的重心</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树论">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树论</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/树链剖分">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">树链剖分</div>
+                    <div class="mdui-card-primary-subtitle">共19篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/桶">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">桶</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/概率">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">概率</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/模拟">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">模拟</div>
+                    <div class="mdui-card-primary-subtitle">共7篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/模板">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">模板</div>
+                    <div class="mdui-card-primary-subtitle">共8篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/欧拉函数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">欧拉函数</div>
+                    <div class="mdui-card-primary-subtitle">共9篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/欧拉图">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">欧拉图</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/欧拉定理">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">欧拉定理</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/游记">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">游记</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/点分治">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">点分治</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/状压dp">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">状压dp</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/状态dp">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">状态dp</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/状态压缩">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">状态压缩</div>
+                    <div class="mdui-card-primary-subtitle">共12篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/环">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">环</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/生成函数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">生成函数</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/生成树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">生成树</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/矩阵">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">矩阵</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/矩阵乘法">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">矩阵乘法</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/离散化">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">离散化</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/离线">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">离线</div>
+                    <div class="mdui-card-primary-subtitle">共14篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/第二类斯特林数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">第二类斯特林数</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/筛法">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">筛法</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/算法">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">算法</div>
+                    <div class="mdui-card-primary-subtitle">共22篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/约数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">约数</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/线性">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">线性</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/线性基">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">线性基</div>
+                    <div class="mdui-card-primary-subtitle">共7篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/线段树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">线段树</div>
+                    <div class="mdui-card-primary-subtitle">共38篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/线段树分治">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">线段树分治</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/线段树合并">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">线段树合并</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/组合数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">组合数</div>
+                    <div class="mdui-card-primary-subtitle">共11篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/组合数学">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">组合数学</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/统计">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">统计</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/网络流">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">网络流</div>
+                    <div class="mdui-card-primary-subtitle">共8篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/背包">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">背包</div>
+                    <div class="mdui-card-primary-subtitle">共8篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/莫比乌斯">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">莫比乌斯</div>
+                    <div class="mdui-card-primary-subtitle">共19篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/莫队">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">莫队</div>
+                    <div class="mdui-card-primary-subtitle">共11篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/虚树">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">虚树</div>
+                    <div class="mdui-card-primary-subtitle">共5篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/计数">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">计数</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/计数dp">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">计数dp</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/计算几何">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">计算几何</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/记忆化搜索">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">记忆化搜索</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/贪心">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">贪心</div>
+                    <div class="mdui-card-primary-subtitle">共21篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/逆元">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">逆元</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/逆向思维">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">逆向思维</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/逆序对">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">逆序对</div>
+                    <div class="mdui-card-primary-subtitle">共4篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/递推">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">递推</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/邻接矩阵">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">邻接矩阵</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/链表">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">链表</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/错排问题">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">错排问题</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/长链剖分">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">长链剖分</div>
+                    <div class="mdui-card-primary-subtitle">共2篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/队列">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">队列</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/随机">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">随机</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/静态链分治">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">静态链分治</div>
+                    <div class="mdui-card-primary-subtitle">共6篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/预处理">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">预处理</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/马拉车">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">马拉车</div>
+                    <div class="mdui-card-primary-subtitle">共3篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/高斯消元">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">高斯消元</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/高精">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">高精</div>
+                    <div class="mdui-card-primary-subtitle">共1篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+    <div class="mdui-col">
+        <a href="/tags/高精度">
+            <div class="mdui-card">
+                <div class="mdui-card-primary">
+                    <div class="mdui-card-primary-title">高精度</div>
+                    <div class="mdui-card-primary-subtitle">共5篇文章</div>
+                </div>
+            </div>
+        </a><br>
+    </div>
+</div>
+    </div>
+</body>
+<!--top-->
+<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-fab-fixed mdui-fab-hide" id="totop" onclick="totop()" style="z-index: 99999;">
+    <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+</button>
+<!--top end-->
+<footer class="mdui-m-t-5">
+    <div class="mdui-card">
+        <div class="mdui-card-content mdui-p-a-5">
+            <div class="mdui-container">
+                <div class="mdui-row-sm-3">
+                    <div class="mdui-col">
+                        <div class="mdui-row">
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://space.bilibili.com/110897068">
+                                        <i class="mdui-icon mqii mqii-bilibili mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://github.com/zcmimi">
+                                        <i class="mdui-icon mqii mqii-github mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://twitter.com/zc_mimi">
+                                        <i class="mdui-icon mqii mqii-twitter mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://www.zhihu.com/people/zcmimi">
+                                        <i class="mdui-icon mqii mqii-zhihu mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mdui-col mdui-text-center">
+                        <div>Copyright ©&nbsp;2019-2020&nbsp;zcmimi's blog</div>
+                        <div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+                        <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/busuanzi.js" onload="
+                            wonld.append(busuanzi);
+                            document.addEventListener('pjax:complete',busuanzi);
+                        "></script>
+
+                        <div>last build: 2020-07-30T15:42:15Z</div>
+                    </div>
+                    <div class="mdui-col mdui-text-center mdui-typo">
+                        <div>Powered by <a href="https://github.com/zcmimi/py-blog">py-blog</a></div>
+                        <div>Theme material</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mdui-dialog" id="search_dialog">
+    <div class="mdui-dialog-title">Search</div>
+    <div class="mdui-dialog-content">
+        <div class="mdui-textfield">
+            <i class="mdui-icon material-icons">search</i>
+            <input id="search_input" class="mdui-textfield-input" placeholder="搜索">
+        </div>
+        <div id="search_result" class="mdui-list"></div>
+    </div>
+</div>
+<script async src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/worker_search.js'></script>
+<script>
+document.getElementById('search_input').onchange=function(){
+    search("https://blog_search.zcmimi.workers.dev");
+}
+</script>
+<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-shadow-2" id="drawer">
+    <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons mdui-text mdui-text-color-black">home</i>
+            <a href="/" class="mdui-list-item-content">zcmimi's blog</a>
+        </li>
+        <li><center><img src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp" width="95%" height="95%" alt='avatar'></img></center></li>
+            <li class='mdui-subheader'>Catch me</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:dodgerblue'">email</i>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fwUcIBIWEhY-Dg5RHBAS" target="_blank" class="mdui-list-item-content">给我写信</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#66ccff'"></i>
+                    <a href="https://t.me/zcmimi" target="_blank" class="mdui-list-item-content">电报</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-twitter" style='color:rgba(29,161,242,1.00)'"></i>
+                    <a href="https://twitter.com/zc_mimi" target="_blank" class="mdui-list-item-content">推特</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-bilibili" style='color:#F06292'"></i>
+                    <a href="https://space.bilibili.com/110897068" target="_blank" class="mdui-list-item-content">哔哩哔哩</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-netease-cloud-music" style='color:red'"></i>
+                    <a href="https://music.163.com/#/user/home?id=507163653" target="_blank" class="mdui-list-item-content">网易云音乐</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-zhihu" style='color:#0084ff'"></i>
+                    <a href="https://www.zhihu.com/people/zcmimi" target="_blank" class="mdui-list-item-content">知乎</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <img class="mdui-list-item-icon" src="https://www.luogu.com.cn/favicon.ico" alt>
+                    <a href="https://luogu.com.cn/user/36532" target="_blank" class="mdui-list-item-content">洛谷</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-github" style='color:black'"></i>
+                    <a href="https://github.com/zcmimi" target="_blank" class="mdui-list-item-content">Github</a>
+                </li>
+            <li class='mdui-subheader'>Links</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#bbb'"></i>
+                    <a href="https://travellings.now.sh/" target="_blank" class="mdui-list-item-content">Traveling</a>
+                </li>
+            <li class='mdui-subheader'>Pages</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">bookmark_border</i>
+                    <a href="/tags" target="_blank" class="mdui-list-item-content">标签云</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">book</i>
+                    <a href="/categories" target="_blank" class="mdui-list-item-content">分类</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">link</i>
+                    <a href="/links" target="_blank" class="mdui-list-item-content">友链</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">build</i>
+                    <a href="/tools" target="_blank" class="mdui-list-item-content">工具集</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">person</i>
+                    <a href="/about" target="_blank" class="mdui-list-item-content">关于我</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">rss_feed</i>
+                    <a href="/atom.xml" target="_blank" class="mdui-list-item-content">订阅</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">list</i>
+                    <a href="/sitemap.xml" target="_blank" class="mdui-list-item-content">站点地图</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">comment</i>
+                    <a href="https://nlh0fhlrsgij.leanapp.cn" target="_blank" class="mdui-list-item-content">评论管理</a>
+                </li>
+    </ul>
+</div>
+
+
+<div id='musiclist'></div>
+<style>.aplayer,.aplayer-body,.aplayer-pic,.aplayer-button{z-index: 9999999 !important;}</style>
+<script>
+function music_on(){
+    pjax_on(1);
+    var x=document.getElementById('musiclist');
+    x.innerHTML="";
+    mdui.snackbar({message:'歌单加载中,请稍等2-10s'});
+    var hl=document.createElement('link');
+    hl.href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css";
+    hl.type='text/css';
+    hl.rel='stylesheet';
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js";
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js";
+    x.appendChild(hl);
+
+    hl=document.createElement('meting-js');
+    hl.setAttribute('id','765727960');
+    hl.setAttribute('fixed','true');
+    hl.setAttribute('server','netease');
+    hl.setAttribute('type','playlist');
+    hl.setAttribute('order','random');
+    hl.setAttribute('theme','#f7a4b9');
+    x.appendChild(hl);
+}
+</script>
+</html>

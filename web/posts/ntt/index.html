@@ -1,0 +1,739 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>ntt - zcmimi's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' itemprop="description" content="">
+    <meta name="keywords" content="zcmimi">
+    <meta property="og:url" content="https://blog.zcmimi.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="zcmimi's blog">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="https://blog.zcmimi.top">
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "publisher":{
+            "@type":"Organization",
+            "name":"zcmimi's blog",
+            "logo":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "url":"https://blog.zcmimi.top",
+        "image":{
+            "@type":"ImageObject",
+            "url":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://blog.zcmimi.top"
+        },
+        "description":""
+    }</script>
+<script>
+wonld=Object.create({
+    list:[],
+    append:function(e){this.list.push(e);},
+    excute:function(){
+        for(var i=0;i<this.list.length;++i)
+            this.list[i]();
+    }
+});
+window.onload=function(){wonld.excute();};
+</script>
+    <link rel="dns-prefetch" href="https://blog.zcmimi.top">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/css/mdui.min.css" type="text/css">
+    <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="/assets/theme/origin.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/icon/mqii/mqii.css" type="text/css">
+    <!--custom--><link rel="stylesheet" href="/custom.css" type="text/css">
+    <!--highlight-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+    <!--highlight end-->
+    <!-- markdown katex-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/markdown.min.css" type="text/css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css" type="text/css">
+    <script async src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <!-- markdown katex end-->
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <script async src="//cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script defer src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/bundle.min.js'></script>
+</head>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-blue">
+    <div class="mdui-progress" id='loading-progress' style="position: fixed;top:0;z-index: 999999;"><div class="mdui-progress-indeterminate"></div></div>
+    <div id="theme_css"></div>
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset mdui-color-white mdui-shadow-1">
+        <div class="mdui-toolbar mdui-color-theme">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="drawer.toggle();" mdui-tooltip="{content: '菜单'}">
+                <i class="mdui-icon material-icons">menu</i>
+            </button>
+            <a href="/" class="mdui-typo-title">zcmimi's blog</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-row" id='toolbar-menu'>
+                <a href="https://travellings.now.sh/" target="_blank" class="mdui-col mdui-text-color-black">Traveling</a>
+                <a href="/about" target="_blank" class="mdui-col mdui-text-color-black">关于我</a>
+                <a href="/categories" target="_blank" class="mdui-col mdui-text-color-black">分类</a>
+                <a href="/links" target="_blank" class="mdui-col mdui-text-color-black">友链</a>
+                <a href="/tools" target="_blank" class="mdui-col mdui-text-color-black">工具集</a>
+                <a href="/tags" target="_blank" class="mdui-col mdui-text-color-black">标签云</a>
+            </div><script>if(document.body.clientWidth<1078)document.getElementById('toolbar-menu').hidden=1;</script>
+            <button onclick="music_on();document.getElementById('music_button').hidden=1" id='music_button' class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '是否来点音乐?'}">
+                <i class="mdui-icon material-icons">queue_music</i>
+            </button>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '切换主题'}" mdui-menu="{target: '#theme_menu',align: 'right',covered: false}">
+                <i class="mdui-icon material-icons">view_quilt</i>
+            </button>
+            <ul class="mdui-menu" id="theme_menu" style="width: fit-content;">
+                <li class="mdui-menu-item" mdui-tooltip="{content: '开启/关闭 pjax'}"><a onclick="pjax_on()" id='pjax_button'>pjax_on</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '回归原本'}"><a onclick="theme('day')">日间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '晚上要保护眼睛哦'}"><a onclick="theme('night')">夜间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '满足你的少女心吧'}"><a onclick="theme('pink')">粉红</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '没什么,就是淡蓝色'}"><a onclick="theme('blue')">粉蓝</a></li>
+            </ul>
+            <button onclick="search_dialog.open();document.getElementById('search_input').focus();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}">
+                <i class="mdui-icon material-icons">search</i>
+            </button>
+            <button id='toc_button' class="mdui-btn mdui-btn-icon mdui-ripple" onclick="toc_drawer.toggle();" mdui-tooltip="{content: '目录'}" hidden>
+                <i class="mdui-icon material-icons">format_list_numbered</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-drawer-right mdui-shadow-2" id="toc_drawer" hidden>
+        <ul class="mdui-list" id="toc"></ul>
+    </div>
+
+    <div class="mdui-container">
+        <div id='page_typ' hidden>article</div>
+<div class="mdui-card article">
+    <div class="mdui-card-primary">
+        <a href="#" class="mdui-card-primary-title">ntt</a>
+        <div class="mdui-card-primary-subtitle">        <a href="/tags/数论" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">数论</span>
+        </a>
+        <a href="/tags/高精度" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">高精度</span>
+        </a>
+        <a href="/tags/算法" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">算法</span>
+        </a>
+        <a href="/tags/ntt" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">ntt</span>
+        </a>
+</div>
+    </div>
+    <div class="mdui-card-header">
+        <img class="mdui-card-header-avatar" src="    https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp
+" alt='avatar'>
+        <div class="mdui-card-header-title">zcmimi</div>
+        <div class="mdui-card-header-subtitle">2020-02-27</div>
+        <div class="mdui-card-menu">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '文章分类'}" mdui-menu="{target:'#categories',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">bookmark</i>
+            </button>
+            <ul class="mdui-menu" id="categories">
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/算法/数论" class="mdui-ripple">
+                            算法/数论
+                        </a>
+                    </li>
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/note" class="mdui-ripple">
+                            note
+                        </a>
+                    </li>
+            </ul>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '本文阅读量'}" mdui-menu="{target:'#visit_counter',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">remove_red_eye</i>
+            </button>
+            <ul class="mdui-menu" id="visit_counter">
+                <li class="mdui-menu-item mdui-ripple">
+                    <div id="busuanzi_container_page_pv">
+                        <center>本文总阅读量<span id="busuanzi_value_page_pv"></span>次</center>
+                    </div>
+                </li>
+            </ul>
+<button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '分享'}" mdui-menu="{target:'#share_menu',align:'right',covered: false}">
+    <i class="mdui-icon material-icons">share</i>
+</button>
+<ul class="mdui-menu" id="share_menu" style="width: fit-content;">
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_weibo" href="https://service.weibo.com/share/share.php?appkey=&title=ntt - zcmimi's blog&url=https://blog.zcmimi.top/posts/ntt&pic=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&searchPic=false&style=simple" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-weibo"></i>分享到微博
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_qq" href="https://connect.qq.com/widget/shareqq/index.html?site=zcmimi's blog&title=ntt - zcmimi's blog&summary=&pics=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&url=https://blog.zcmimi.top/posts/ntt" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-qq_filled"></i>分享到QQ
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_twitter" href="https://twitter.com/intent/tweet?text=ntt - zcmimi's blog&url=https://blog.zcmimi.top/posts/ntt" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-twitter"></i>分享到Twitter
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_copy" onclick="copylink()" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">link</i>复制链接
+        </a>
+    </li>
+</ul>        </div>
+    </div>
+    <div class="mdui-card-content">
+        
+        <div id="md-body" class="md-body"><p>NTT基本上跟FFT一样,就是把单位根换成了原根(原根和单位根一样具有FFT需要的特殊性质)</p>
+<p>前置知识:</p>
+<ol>
+<li><p><a href="/posts/fft">FFT</a></p>
+</li>
+<li><p><a href="/posts/%E5%8E%9F%E6%A0%B9">原根</a></p>
+</li>
+</ol>
+<h2>原根的性质</h2>
+<p>设$p$是质数,$g$为模$p$的原根,$n|(p-1)$,$g_n=g^{(p-1)/n}$</p>
+<blockquote>
+<p>单位根:</p>
+<p>$\omega_n^n=1,\omega_n^{n/2}=-1$</p>
+</blockquote>
+<p>原根:</p>
+<p>$g_n^n=g^{p-1}\equiv 1\mod p$</p>
+<p>$g_n^{n/2}=g^{(p-1)/2}$</p>
+<p>其中$\left(g^{(p-1)/2}\right)^2=1,g_n^{n/2}=\pm1$</p>
+<p>由于$g$是原根,所以$g^{p-1}\neq g^{(p-1)/2}$,所以$g_n^{n/2}=-1$</p>
+<blockquote>
+<p>单位根：$w_{dn}^{dk}=w_n^k$</p>
+</blockquote>
+<p>原根:</p>
+<p>$g_{dn}^{dk}=g^{dk(p-1)/(dn)}=g^{k(p-1)/n}=g_n^k$</p>
+<blockquote>
+<p>单位根: $({w_n^k})^2=w_{n/2}^k$</p>
+</blockquote>
+<p>原根:</p>
+<p>$(g_n^k)^2=g_n^{2k}=g_{n/2}^k$</p>
+<p>$(g_n^{k+n/2})^2=g_n^{2k+n}\equiv g_n^{2k}=g_{n/2}^k$</p>
+<p>FFT需要单位复数根该有的性质原根都有</p>
+<h2>实现</h2>
+<p>和FFT基本上一样</p>
+<pre><code class="language-cpp">#pragma GCC optimize(3)
+#include&lt;bits/stdc++.h&gt;
+#define For(i,x,y) for(int i=x;i&lt;=y;++i)
+#define il __inline__ __attribute__ ((always_inline))
+il int gi(){char c;int x=0,f=0;while((c=getchar())&lt;'0'||'9'&lt;c)f^=(c=='-');while('0'&lt;=c&amp;&amp;c&lt;='9')x*=10,x+=c-48,c=getchar();return f?-x:x;}
+const int N=3000011,P=998244353,G=3,Gi=332748118;
+int n,m,limit=1,l=0,r[N],a[N],b[N];
+il int pw(int x,int p){
+    int ans=1;
+    while(p){
+        if(p&amp;1)ans=1ll*ans*x%P;
+        x=1ll*x*x%P;p&gt;&gt;=1;
+    }
+    return ans;
+}
+il void ntt(int *A,int typ){
+    For(i,0,limit-1)
+        if(i&lt;r[i])std::swap(A[i],A[r[i]]);
+    for(int len=1;len&lt;limit;len&lt;&lt;=1){
+        int Wn=pw(~typ?G:Gi,(P-1)/(len&lt;&lt;1));
+        //Gi指1/G在模P下的逆元,相当于pw(G,P-2)
+        for(int i=0;i&lt;limit;i+=(len&lt;&lt;1)){
+            int w=1;
+            For(k,0,len-1){//蝴蝶操作
+                int t=1ll*w*A[i+k+len]%P;
+                A[i+k+len]=(A[i+k]-t+P)%P;
+                A[i+k]=(A[i+k]+t)%P;
+                w=1ll*w*Wn%P;
+            }
+        }
+    }
+}
+int main(){
+    n=gi(),m=gi();
+    For(i,0,n)a[i]=(gi()+P)%P;
+    For(i,0,m)b[i]=(gi()+P)%P;
+    while(limit&lt;=n+m)limit&lt;&lt;=1,++l;
+    For(i,0,limit-1)
+        r[i]=(r[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)&lt;&lt;(l-1));
+    ntt(a,1);ntt(b,1);
+    For(i,0,limit)a[i]=1ll*a[i]*b[i]%P;
+    ntt(a,-1);
+    int inv=pw(limit,P-2);//limit在模P下的逆元
+    For(i,0,n+m)printf(&quot;%d &quot;,1ll*a[i]*inv%P);
+}
+</code></pre>
+<p>原根表:</p>
+<p>| p         | r  | k  | g  |
+| -- | - | - | - |
+| 81788929    | 21   | 39   | 7    |
+| 104857601   | 21   | 50   | 3    |
+| 104857601   | 22   | 25   | 3    |
+| 113246209   | 21   | 54   | 7    |
+| 113246209   | 22   | 27   | 7    |
+| 132120577   | 21   | 63   | 5    |
+| 136314881   | 21   | 65   | 3    |
+| 138412033   | 21   | 66   | 5    |
+| 155189249   | 21   | 74   | 6    |
+| 167772161   | 23   | 20   | 3    |
+| 249561089   | 21   | 119  | 3    |
+| 377487361   | 21   | 180  | 7    |
+| 377487361   | 22   | 90   | 7    |
+| 383778817   | 21   | 183  | 5    |
+| 415236097   | 22   | 99   | 5    |
+| 415236097   | 21   | 198  | 5    |
+| 469762049   | 24   | 28   | 3    |
+| 469762049   | 21   | 224  | 3    |
+| 469762049   | 23   | 56   | 3    |
+| 469762049   | 22   | 112  | 3    |
+| 576716801   | 21   | 275  | 6    |
+| 645922817   | 22   | 154  | 3    |
+| 645922817   | 21   | 308  | 3    |
+| 666894337   | 21   | 318  | 5    |
+| 683671553   | 22   | 163  | 3    |
+| 740294657   | 21   | 353  | 3    |
+| 897581057   | 22   | 214  | 3    |
+| 897581057   | 21   | 428  | 3    |
+| 918552577   | 22   | 219  | 5    |
+| 935329793   | 22   | 223  | 3    |
+| 935329793   | 21   | 446  | 3    |
+| 950009857   | 21   | 453  | 7    |
+| 962592769   | 21   | 459  | 7    |
+| 998244353   | 23   | 119  | 3    |
+| 1004535809  | 21   | 479  | 3    |
+| 1107296257  | 23   | 132  | 10   |
+| 1107296257  | 24   | 66   | 10   |
+| 1107296257  | 21   | 528  | 10   |
+| 1138753537  | 21   | 543  | 5    |
+| 1161822209  | 22   | 277  | 3    |
+| 1161822209  | 21   | 554  | 3    |
+| 1205862401  | 21   | 575  | 3    |
+| 1212153857  | 22   | 289  | 3    |
+| 1212153857  | 21   | 578  | 3    |
+| 1214251009  | 21   | 579  | 7    |
+| 1218445313  | 21   | 581  | 3    |
+| 1224736769  | 22   | 292  | 3    |
+| 1224736769  | 21   | 584  | 3    |
+| 1281359873  | 21   | 611  | 3    |
+| 1300234241  | 23   | 155  | 3    |
+| 1300234241  | 21   | 620  | 3    |
+| 1306525697  | 21   | 623  | 3    |
+| 1327497217  | 21   | 633  | 5    |
+| 1438646273  | 21   | 686  | 3    |
+| 1484783617  | 21   | 708  | 5    |
+| 1570766849  | 21   | 749  | 3    |
+| 1709178881  | 21   | 815  | 3    |
+| 1835008001  | 21   | 875  | 6    |
+| 1866465281  | 22   | 445  | 3    |
+| 1866465281  | 21   | 890  | 3    |
+| 1893728257  | 21   | 903  | 5    |
+| 1931476993  | 21   | 921  | 5    |
+| 2088763393  | 22   | 498  | 5    |
+| 2113929217  | 22   | 504  | 5    |
+| 2113929217  | 25   | 63   | 5    |
+| 2113929217  | 23   | 252  | 5    |
+| 2130706433  | 22   | 508  | 3    |
+| 2130706433  | 23   | 254  | 3    |
+| 2281701377  | 27   | 17   | 3    |
+| 2483027969  | 23   | 296  | 3    |
+| 2483027969  | 25   | 74   | 3    |
+| 2533359617  | 24   | 151  | 3    |
+| 2533359617  | 23   | 302  | 3    |
+| 2558525441  | 23   | 305  | 3    |
+| 2671771649  | 22   | 637  | 3    |
+| 2680160257  | 22   | 639  | 7    |
+| 2717908993  | 22   | 648  | 5    |
+| 2717908993  | 24   | 162  | 5    |
+| 2722103297  | 22   | 649  | 3    |
+| 2780823553  | 22   | 663  | 10   |
+| 2885681153  | 24   | 172  | 3    |
+| 2885681153  | 26   | 43   | 3    |
+| 2910846977  | 22   | 694  | 3    |
+| 2998927361  | 22   | 715  | 3    |
+| 3112173569  | 22   | 742  | 2    |
+| 3221225473  | 24   | 192  | 3    |
+| 3221225473  | 25   | 96   | 3    |
+| 3221225473  | 26   | 48   | 3    |
+| 3238002689  | 22   | 772  | 2    |
+| 3238002689  | 23   | 386  | 2    |
+| 3313500161  | 22   | 790  | 2    |
+| 3414163457  | 23   | 407  | 3    |
+| 3435134977  | 22   | 819  | 2    |
+| 3451912193  | 22   | 823  | 2    |
+| 3489660929  | 23   | 416  | 2    |
+| 3489660929  | 25   | 104  | 2    |
+| 3489660929  | 22   | 832  | 2    |
+| 3510632449  | 22   | 837  | 2    |
+| 3577741313  | 22   | 853  | 2    |
+| 3615490049  | 23   | 431  | 2    |
+| 3615490049  | 22   | 862  | 2    |
+| 3628072961  | 22   | 865  | 2    |
+| 3665821697  | 23   | 437  | 2    |
+| 3686793217  | 22   | 879  | 2    |
+| 3749707777  | 23   | 447  | 2    |
+| 3892314113  | 23   | 464  | 2    |
+| 3892314113  | 25   | 116  | 2    |
+| 3892314113  | 24   | 232  | 2    |
+| 3892314113  | 22   | 928  | 2    |
+| 3938451457  | 22   | 939  | 2    |
+| 3942645761  | 23   | 470  | 2    |
+| 3942645761  | 24   | 235  | 2    |
+| 3942645761  | 22   | 940  | 2    |
+| 4013948929  | 22   | 957  | 2    |
+| 4194304001  | 24   | 250  | 2    |
+| 4253024257  | 23   | 507  | 2    |
+| 4630511617  | 26   | 69   | 2    |
+| 4630511617  | 25   | 138  | 2    |
+| 4882169857  | 24   | 291  | 2    |
+| 4882169857  | 23   | 582  | 2    |
+| 5158993921  | 23   | 615  | 2    |
+| 5175771137  | 23   | 617  | 2    |
+| 5251268609  | 23   | 626  | 2    |
+| 5528092673  | 23   | 659  | 2    |
+| 5536481281  | 24   | 330  | 2    |
+| 5578424321  | 23   | 665  | 2    |
+| 5788139521  | 24   | 345  | 2    |
+| 5788139521  | 23   | 690  | 2    |
+| 5838471169  | 25   | 174  | 2    |
+| 5838471169  | 26   | 87   | 2    |
+| 6014631937  | 23   | 717  | 2    |
+| 6165626881  | 23   | 735  | 2    |
+| 6333399041  | 23   | 755  | 2    |
+| 6434062337  | 23   | 767  | 2    |
+| 6534725633  | 23   | 779  | 2    |
+| 6593445889  | 24   | 393  | 2    |
+| 6660554753  | 23   | 794  | 2    |
+| 6719275009  | 23   | 801  | 2    |
+| 6811549697  | 25   | 203  | 2    |
+| 6811549697  | 23   | 812  | 2    |
+| 6996099073  | 23   | 834  | 2    |
+| 6996099073  | 24   | 417  | 2    |
+| 7096762369  | 24   | 423  | 2    |
+| 7348420609  | 24   | 438  | 2    |
+| 7348420609  | 25   | 219  | 2    |
+| 7474249729  | 23   | 891  | 2    |
+| 7566524417  | 23   | 902  | 2    |
+| 7717519361  | 26   | 115  | 2    |
+| 7717519361  | 25   | 230  | 2    |
+| 7717519361  | 23   | 920  | 2    |
+| 7818182657  | 23   | 932  | 2    |
+| 7843348481  | 23   | 935  | 2    |
+| 7918845953  | 27   | 59   | 2    |
+| 8170504193  | 24   | 487  | 2    |
+| 8220835841  | 25   | 245  | 2    |
+| 8220835841  | 23   | 980  | 2    |
+| 8279556097  | 23   | 987  | 2    |
+| 8858370049  | 26   | 132  | 2    |
+| 8858370049  | 27   | 66   | 2    |
+| 9177137153  | 24   | 547  | 2    |
+| 9227468801  | 25   | 275  | 2    |
+| 9865003009  | 24   | 588  | 2    |
+| 10267656193 | 24   | 612  | 2    |
+| 10267656193 | 26   | 153  | 2    |
+| 10267656193 | 25   | 306  | 2    |
+| 10619977729 | 24   | 633  | 2    |
+| 10871635969 | 26   | 162  | 2    |
+| 10871635969 | 24   | 648  | 2    |
+| 10871635969 | 25   | 324  | 2    |
+| 11123294209 | 24   | 663  | 2    |
+| 11173625857 | 25   | 333  | 2    |
+| 11173625857 | 24   | 666  | 2    |
+| 11341398017 | 26   | 169  | 2    |
+| 11341398017 | 25   | 338  | 2    |
+| 11693719553 | 24   | 697  | 2    |
+| 12297699329 | 24   | 733  | 2    |
+| 12348030977 | 27   | 92   | 2    |
+| 12348030977 | 25   | 368  | 2    |
+| 12348030977 | 26   | 184  | 2    |
+| 13186891777 | 25   | 393  | 2    |
+| 13757317121 | 26   | 205  | 2    |
+| 13857980417 | 25   | 413  | 2    |
+| 13857980417 | 24   | 826  | 2    |
+| 14042529793 | 24   | 837  | 2    |
+| 14092861441 | 26   | 210  | 2    |
+| 14092861441 | 27   | 105  | 2    |
+| 14092861441 | 24   | 840  | 2    |
+| 15065939969 | 24   | 898  | 2    |
+| 15065939969 | 25   | 449  | 2    |
+| 15619588097 | 24   | 931  | 2    |
+| 15653142529 | 24   | 933  | 2    |
+| 15854469121 | 24   | 945  | 2    |
+| 16475226113 | 24   | 982  | 2    |
+| 16575889409 | 24   | 988  | 2    |
+| 16626221057 | 24   | 991  | 2    |
+| 17314086913 | 26   | 258  | 2    |
+| 17314086913 | 25   | 516  | 2    |
+| 17314086913 | 27   | 129  | 2    |
+| 18387828737 | 26   | 274  | 2    |
+| 19998441473 | 26   | 298  | 2    |
+| 19998441473 | 25   | 596  | 2    |
+| 20501757953 | 25   | 611  | 2    |</p>
+</div>
+    </div>
+</div>
+<div class="mdui-row-xs-3 article">
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black" id='pre_button'>
+            <i class="mdui-icon material-icons">arrow_back</i>
+            LG 3846 [TJOI2007]可爱的质数
+        </a>
+    </div>
+    <div class="mdui-col mdui-text-center">ntt</div>
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black mdui-float-right" id='nxt_button'>
+            LG 3306 [SDOI2013]随机数生成器
+            <i class="mdui-icon material-icons">arrow_forward</i>
+        </a>
+    </div>
+</div>
+<div class="mdui-card" style="margin-top: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">
+            <i class="mdui-icon material-icons">comment</i>
+            评论
+        </div>
+    </div>
+<div class="mdui-card-content" id='comments'>
+    <center>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="nvl()">
+            valine
+        </button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="ngt()">
+            gitalk
+        </button>
+    </center>
+</div>
+<script>
+function nvl(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var valinejs=document.createElement('script');
+    valinejs.src="//cdn.jsdelivr.net/gh/xCss/Valine/dist/Valine.min.js";
+    valinejs.async=true;
+    valinejs.onload=function(){
+        new Valine({
+            el: '#comments',
+            placeholder: "说几句嘛qwq",
+            appId: "NLh0fhLRvD8gOWEC3vtOIRx5-gzGzoHsz",
+            appKey: "DSwqdjPFKAnO4CFMQypfkcB9",
+            path: window.location.pathname,
+        });
+    }
+    document.getElementsByTagName("head")[0].appendChild(valinejs);
+}
+</script>
+<script>
+function ngt(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var gtalkjs=document.createElement('script');
+    gtalkjs.src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js";
+    gtalkjs.async=true;
+    gtalkjs.onload=function(){
+        const gitalk=new Gitalk({
+            clientID:'054902ee1548e6fe427e',
+            clientSecret:'b31fac2b407311ca7e6673ab84727ae9562c69ba',
+            repo:'zcmimi.github.io',
+            owner:'zcmimi',
+            admin: "zcmimi",
+            id:location.pathname,
+            distractionFreeMode:False
+        });
+        gitalk.render('comments');
+    }
+    var gtalkcss=document.createElement('link');
+    gtalkcss.href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css";
+    gtalkcss.type='text/css';
+    gtalkcss.rel='stylesheet';
+    document.getElementsByTagName("head")[0].appendChild(gtalkjs);
+    document.getElementsByTagName("head")[0].appendChild(gtalkcss);
+}
+</script>
+</div>
+    </div>
+</body>
+<!--top-->
+<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-fab-fixed mdui-fab-hide" id="totop" onclick="totop()" style="z-index: 99999;">
+    <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+</button>
+<!--top end-->
+<footer class="mdui-m-t-5">
+    <div class="mdui-card">
+        <div class="mdui-card-content mdui-p-a-5">
+            <div class="mdui-container">
+                <div class="mdui-row-sm-3">
+                    <div class="mdui-col">
+                        <div class="mdui-row">
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://space.bilibili.com/110897068">
+                                        <i class="mdui-icon mqii mqii-bilibili mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://github.com/zcmimi">
+                                        <i class="mdui-icon mqii mqii-github mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://twitter.com/zc_mimi">
+                                        <i class="mdui-icon mqii mqii-twitter mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://www.zhihu.com/people/zcmimi">
+                                        <i class="mdui-icon mqii mqii-zhihu mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mdui-col mdui-text-center">
+                        <div>Copyright ©&nbsp;2019-2020&nbsp;zcmimi's blog</div>
+                        <div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+                        <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/busuanzi.js" onload="
+                            wonld.append(busuanzi);
+                            document.addEventListener('pjax:complete',busuanzi);
+                        "></script>
+
+                        <div>last build: 2020-07-30T15:42:15Z</div>
+                    </div>
+                    <div class="mdui-col mdui-text-center mdui-typo">
+                        <div>Powered by <a href="https://github.com/zcmimi/py-blog">py-blog</a></div>
+                        <div>Theme material</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mdui-dialog" id="search_dialog">
+    <div class="mdui-dialog-title">Search</div>
+    <div class="mdui-dialog-content">
+        <div class="mdui-textfield">
+            <i class="mdui-icon material-icons">search</i>
+            <input id="search_input" class="mdui-textfield-input" placeholder="搜索">
+        </div>
+        <div id="search_result" class="mdui-list"></div>
+    </div>
+</div>
+<script async src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/worker_search.js'></script>
+<script>
+document.getElementById('search_input').onchange=function(){
+    search("https://blog_search.zcmimi.workers.dev");
+}
+</script>
+<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-shadow-2" id="drawer">
+    <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons mdui-text mdui-text-color-black">home</i>
+            <a href="/" class="mdui-list-item-content">zcmimi's blog</a>
+        </li>
+        <li><center><img src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp" width="95%" height="95%" alt='avatar'></img></center></li>
+            <li class='mdui-subheader'>Catch me</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:dodgerblue'">email</i>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fwUcIBIWEhY-Dg5RHBAS" target="_blank" class="mdui-list-item-content">给我写信</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#66ccff'"></i>
+                    <a href="https://t.me/zcmimi" target="_blank" class="mdui-list-item-content">电报</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-twitter" style='color:rgba(29,161,242,1.00)'"></i>
+                    <a href="https://twitter.com/zc_mimi" target="_blank" class="mdui-list-item-content">推特</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-bilibili" style='color:#F06292'"></i>
+                    <a href="https://space.bilibili.com/110897068" target="_blank" class="mdui-list-item-content">哔哩哔哩</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-netease-cloud-music" style='color:red'"></i>
+                    <a href="https://music.163.com/#/user/home?id=507163653" target="_blank" class="mdui-list-item-content">网易云音乐</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-zhihu" style='color:#0084ff'"></i>
+                    <a href="https://www.zhihu.com/people/zcmimi" target="_blank" class="mdui-list-item-content">知乎</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <img class="mdui-list-item-icon" src="https://www.luogu.com.cn/favicon.ico" alt>
+                    <a href="https://luogu.com.cn/user/36532" target="_blank" class="mdui-list-item-content">洛谷</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-github" style='color:black'"></i>
+                    <a href="https://github.com/zcmimi" target="_blank" class="mdui-list-item-content">Github</a>
+                </li>
+            <li class='mdui-subheader'>Links</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#bbb'"></i>
+                    <a href="https://travellings.now.sh/" target="_blank" class="mdui-list-item-content">Traveling</a>
+                </li>
+            <li class='mdui-subheader'>Pages</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">bookmark_border</i>
+                    <a href="/tags" target="_blank" class="mdui-list-item-content">标签云</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">book</i>
+                    <a href="/categories" target="_blank" class="mdui-list-item-content">分类</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">link</i>
+                    <a href="/links" target="_blank" class="mdui-list-item-content">友链</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">build</i>
+                    <a href="/tools" target="_blank" class="mdui-list-item-content">工具集</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">person</i>
+                    <a href="/about" target="_blank" class="mdui-list-item-content">关于我</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">rss_feed</i>
+                    <a href="/atom.xml" target="_blank" class="mdui-list-item-content">订阅</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">list</i>
+                    <a href="/sitemap.xml" target="_blank" class="mdui-list-item-content">站点地图</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">comment</i>
+                    <a href="https://nlh0fhlrsgij.leanapp.cn" target="_blank" class="mdui-list-item-content">评论管理</a>
+                </li>
+    </ul>
+</div>
+
+
+<div id='musiclist'></div>
+<style>.aplayer,.aplayer-body,.aplayer-pic,.aplayer-button{z-index: 9999999 !important;}</style>
+<script>
+function music_on(){
+    pjax_on(1);
+    var x=document.getElementById('musiclist');
+    x.innerHTML="";
+    mdui.snackbar({message:'歌单加载中,请稍等2-10s'});
+    var hl=document.createElement('link');
+    hl.href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css";
+    hl.type='text/css';
+    hl.rel='stylesheet';
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js";
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js";
+    x.appendChild(hl);
+
+    hl=document.createElement('meting-js');
+    hl.setAttribute('id','765727960');
+    hl.setAttribute('fixed','true');
+    hl.setAttribute('server','netease');
+    hl.setAttribute('type','playlist');
+    hl.setAttribute('order','random');
+    hl.setAttribute('theme','#f7a4b9');
+    x.appendChild(hl);
+}
+</script>
+</html>

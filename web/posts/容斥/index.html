@@ -1,0 +1,1177 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>容斥与二项式反演 - zcmimi's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' itemprop="description" content="">
+    <meta name="keywords" content="zcmimi">
+    <meta property="og:url" content="https://blog.zcmimi.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="zcmimi's blog">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="https://blog.zcmimi.top">
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "publisher":{
+            "@type":"Organization",
+            "name":"zcmimi's blog",
+            "logo":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "url":"https://blog.zcmimi.top",
+        "image":{
+            "@type":"ImageObject",
+            "url":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://blog.zcmimi.top"
+        },
+        "description":""
+    }</script>
+<script>
+wonld=Object.create({
+    list:[],
+    append:function(e){this.list.push(e);},
+    excute:function(){
+        for(var i=0;i<this.list.length;++i)
+            this.list[i]();
+    }
+});
+window.onload=function(){wonld.excute();};
+</script>
+    <link rel="dns-prefetch" href="https://blog.zcmimi.top">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/css/mdui.min.css" type="text/css">
+    <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="/assets/theme/origin.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/icon/mqii/mqii.css" type="text/css">
+    <!--custom--><link rel="stylesheet" href="/custom.css" type="text/css">
+    <!--highlight-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+    <!--highlight end-->
+    <!-- markdown katex-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/markdown.min.css" type="text/css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css" type="text/css">
+    <script async src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <!-- markdown katex end-->
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <script async src="//cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script defer src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/bundle.min.js'></script>
+</head>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-blue">
+    <div class="mdui-progress" id='loading-progress' style="position: fixed;top:0;z-index: 999999;"><div class="mdui-progress-indeterminate"></div></div>
+    <div id="theme_css"></div>
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset mdui-color-white mdui-shadow-1">
+        <div class="mdui-toolbar mdui-color-theme">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="drawer.toggle();" mdui-tooltip="{content: '菜单'}">
+                <i class="mdui-icon material-icons">menu</i>
+            </button>
+            <a href="/" class="mdui-typo-title">zcmimi's blog</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-row" id='toolbar-menu'>
+                <a href="https://travellings.now.sh/" target="_blank" class="mdui-col mdui-text-color-black">Traveling</a>
+                <a href="/about" target="_blank" class="mdui-col mdui-text-color-black">关于我</a>
+                <a href="/categories" target="_blank" class="mdui-col mdui-text-color-black">分类</a>
+                <a href="/links" target="_blank" class="mdui-col mdui-text-color-black">友链</a>
+                <a href="/tools" target="_blank" class="mdui-col mdui-text-color-black">工具集</a>
+                <a href="/tags" target="_blank" class="mdui-col mdui-text-color-black">标签云</a>
+            </div><script>if(document.body.clientWidth<1078)document.getElementById('toolbar-menu').hidden=1;</script>
+            <button onclick="music_on();document.getElementById('music_button').hidden=1" id='music_button' class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '是否来点音乐?'}">
+                <i class="mdui-icon material-icons">queue_music</i>
+            </button>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '切换主题'}" mdui-menu="{target: '#theme_menu',align: 'right',covered: false}">
+                <i class="mdui-icon material-icons">view_quilt</i>
+            </button>
+            <ul class="mdui-menu" id="theme_menu" style="width: fit-content;">
+                <li class="mdui-menu-item" mdui-tooltip="{content: '开启/关闭 pjax'}"><a onclick="pjax_on()" id='pjax_button'>pjax_on</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '回归原本'}"><a onclick="theme('day')">日间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '晚上要保护眼睛哦'}"><a onclick="theme('night')">夜间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '满足你的少女心吧'}"><a onclick="theme('pink')">粉红</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '没什么,就是淡蓝色'}"><a onclick="theme('blue')">粉蓝</a></li>
+            </ul>
+            <button onclick="search_dialog.open();document.getElementById('search_input').focus();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}">
+                <i class="mdui-icon material-icons">search</i>
+            </button>
+            <button id='toc_button' class="mdui-btn mdui-btn-icon mdui-ripple" onclick="toc_drawer.toggle();" mdui-tooltip="{content: '目录'}" hidden>
+                <i class="mdui-icon material-icons">format_list_numbered</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-drawer-right mdui-shadow-2" id="toc_drawer" hidden>
+        <ul class="mdui-list" id="toc"></ul>
+    </div>
+
+    <div class="mdui-container">
+        <div id='page_typ' hidden>article</div>
+<div class="mdui-card article">
+    <div class="mdui-card-primary">
+        <a href="#" class="mdui-card-primary-title">容斥与二项式反演</a>
+        <div class="mdui-card-primary-subtitle">        <a href="/tags/数论" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">数论</span>
+        </a>
+        <a href="/tags/容斥" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">容斥</span>
+        </a>
+        <a href="/tags/反演" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">反演</span>
+        </a>
+        <a href="/tags/组合数" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">组合数</span>
+        </a>
+        <a href="/tags/二项式反演" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">二项式反演</span>
+        </a>
+</div>
+    </div>
+    <div class="mdui-card-header">
+        <img class="mdui-card-header-avatar" src="    https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp
+" alt='avatar'>
+        <div class="mdui-card-header-title">zcmimi</div>
+        <div class="mdui-card-header-subtitle">2019-12-01</div>
+        <div class="mdui-card-menu">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '文章分类'}" mdui-menu="{target:'#categories',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">bookmark</i>
+            </button>
+            <ul class="mdui-menu" id="categories">
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/算法/数论" class="mdui-ripple">
+                            算法/数论
+                        </a>
+                    </li>
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/note" class="mdui-ripple">
+                            note
+                        </a>
+                    </li>
+            </ul>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '本文阅读量'}" mdui-menu="{target:'#visit_counter',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">remove_red_eye</i>
+            </button>
+            <ul class="mdui-menu" id="visit_counter">
+                <li class="mdui-menu-item mdui-ripple">
+                    <div id="busuanzi_container_page_pv">
+                        <center>本文总阅读量<span id="busuanzi_value_page_pv"></span>次</center>
+                    </div>
+                </li>
+            </ul>
+<button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '分享'}" mdui-menu="{target:'#share_menu',align:'right',covered: false}">
+    <i class="mdui-icon material-icons">share</i>
+</button>
+<ul class="mdui-menu" id="share_menu" style="width: fit-content;">
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_weibo" href="https://service.weibo.com/share/share.php?appkey=&title=容斥与二项式反演 - zcmimi's blog&url=https://blog.zcmimi.top/posts/容斥&pic=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&searchPic=false&style=simple" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-weibo"></i>分享到微博
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_qq" href="https://connect.qq.com/widget/shareqq/index.html?site=zcmimi's blog&title=容斥与二项式反演 - zcmimi's blog&summary=&pics=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&url=https://blog.zcmimi.top/posts/容斥" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-qq_filled"></i>分享到QQ
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_twitter" href="https://twitter.com/intent/tweet?text=容斥与二项式反演 - zcmimi's blog&url=https://blog.zcmimi.top/posts/容斥" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-twitter"></i>分享到Twitter
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_copy" onclick="copylink()" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">link</i>复制链接
+        </a>
+    </li>
+</ul>        </div>
+    </div>
+    <div class="mdui-card-content">
+        
+        <div id="md-body" class="md-body"><h1>容斥</h1>
+<h2>容斥原理</h2>
+<ul>
+<li><p>求具有n个属性之一（并集）的元素的个数</p>
+</li>
+<li><p>求不具有n个属性中任何一个（交集）的元素的个数</p>
+</li>
+</ul>
+<h3>两个集合的并集</h3>
+<p>$|A \bigcup B| = |A|+|B|-|A \bigcap B|$</p>
+<h3>三个集合的并集</h3>
+<p>$
+\begin{aligned}
+|A \bigcup B \bigcup C|
+&amp;=\quad|A|+|B|+|C|\
+&amp;\quad-|A \bigcap B|-|A \bigcap C|-|B \bigcap C|\
+&amp;\quad+|A\bigcap B \bigcap C|
+\end{aligned}
+$</p>
+<h3>多个集合的并集</h3>
+<p>又称多步容斥</p>
+<p>$$
+\begin{aligned}
+&amp;\quad|A_1 \bigcup A_2 \bigcup ... \bigcup A_n|\
+&amp;=\sum_{i=1}^n|A_i|\
+&amp;- \sum_{i=1}^{n-1} \sum_{j=i+1}^n|A_i \bigcap A_j|\
+&amp;+ \sum_{i=1}^{n-2} \sum_{j=i+1}^{n-1}\sum_{k=j+1}^{n}|A_i \bigcap A_j \bigcap A_k|\
+&amp;- ...\
+&amp;+(-1)^{n-1}|A_1 \bigcap A_2 \bigcap ... \bigcap A_n|
+\end{aligned}
+$$</p>
+<h3>De Morgan定理</h3>
+<p>若$A,B$是$U$的子集,则</p>
+<p>($\overline A$表示$A$的补集)</p>
+<p>$\overline{A\bigcup B} = \overline A\bigcap \overline B$</p>
+<p>$\overline{A\bigcap B}=\overline A \bigcup \overline B$</p>
+<p>若$A_1,A_2,…A_n$是$U$的子集,则</p>
+<p>$\overline{A_1\bigcup A_2 \bigcup ... \bigcup A_n} = \overline{A_1} \bigcap \overline{A_2} \bigcap ... \bigcap \overline A_n$</p>
+<p>$\overline{A_1\bigcap A_2 \bigcap ... \bigcap A_n} = \overline{A_1} \bigcup \overline{A_2} \bigcup ... \bigcup \overline A_n$</p>
+<h3>Example 1:</h3>
+<p>给定集合$N$和具有性质$i$的集合$A_1,A_2,...,A_n$</p>
+<p>多步容斥变形:</p>
+<p>$$
+\begin{aligned}
+&amp;\quad|\overline{A_1}\bigcap \overline{A_2}\bigcap...\bigcap \overline{A_n}|\
+&amp;=N\
+&amp;-\sum|A_i|\
+&amp;+\sum|A_i\bigcap A_j|\
+&amp;-\sum|A_i\bigcap A_j \bigcap A_k|\
+&amp;+...\
+&amp;+(-1)^n |A_1\bigcap A_2 \bigcap ... \bigcap A_n|
+\end{aligned}
+$$</p>
+<p>补集的补集就是原集:</p>
+<p>$$
+\begin{aligned}
+&amp;\quad|A_1\bigcap A_2\bigcap...\bigcap A_n|\
+&amp;=N\
+&amp;-\sum|\overline{A_i}|\
+&amp;+\sum|\overline{A_i} \bigcap \overline{A_j}|\
+&amp;-\sum|\overline{A_i} \bigcap \overline{A_j} \bigcap \overline{A_k}|\
+&amp;+...\
+&amp;+(-1)^n |\overline{A_1}\bigcap \overline{A_2} \bigcap ... \bigcap \overline{A_n}|
+\end{aligned}
+$$</p>
+<h3>Example 2:</h3>
+<blockquote>
+<p>求$a,b,c,d,e,f$六个字母的全排列中不允许出现$ace$和$df$图象的排列数</p>
+</blockquote>
+<p>设$N$为总排列数,$A$为$ace$出现的排列数,$B$为$df$出现的排列数</p>
+<p>$$
+\begin{aligned}
+ans
+&amp;=|\overline A \bigcap \overline B|\
+&amp;=|N|-|A|-|B|+|A\bigcap B|\
+&amp;=6!-4!-5!+3!=582
+\end{aligned}
+$$</p>
+<h3>Example 3:</h3>
+<blockquote>
+<p>$4$个$x,3$个$y,2$个$z$的全排列中,求不出现$xxxx,yyy,zz$图象的排列数.</p>
+</blockquote>
+<p>设$N$为总排列集合,出现$xxxx$的排列集合为$A$,出现$yyy$为$B$,出现$zz$为$C$</p>
+<p>$$
+\begin{aligned}
+ans
+&amp;=\quad|N|\
+&amp;\quad-(|A|+|B|+|C|)\
+&amp;\quad+(|A\bigcap B|+|A\bigcap C|+|B\bigcap C|)\
+&amp;\quad-|A\bigcap B\bigcap C|\
+&amp;=1260-(60+105+280)+(12+20+30)-6=871
+\end{aligned}
+$$</p>
+<h3>错排问题</h3>
+<blockquote>
+<p>求整数$1,2,…,n$的全排列中所有$i$都不在第$i$个位置上的排列的个数,$i=1,2,…,n$</p>
+</blockquote>
+<p>设$A_i$为$i$在位置$i$上的所有排列</p>
+<p>$$
+\begin{aligned}
+ans
+&amp;=|\overline A_1\bigcap \overline A_2 \bigcap ...\bigcap \overline A_n|\
+&amp;=\quad|N|\
+&amp;\quad-(|A_1|+|A_2|+...+|A_n|)\
+&amp;\quad+(|A_1\bigcap A_2|+...+|A_{n-1}\bigcap A_n|)\
+&amp;\quad-\ ...\
+&amp;\quad+ (-1)^n |A_1\bigcap A_2\bigcap ... \bigcap A_n|\
+&amp;=n!- {n\choose 1}\cdot (n-1)! + {n\choose 2}\cdot (n-2)! - ...\ + (-1)^n {n\choose n}\
+&amp;=n!(1-\frac{1}{1!}+\frac{1}{2!}-\frac{1}{3!}+...+(-1)^n\frac{1}{n!}) = D_n\
+\end{aligned}
+$$</p>
+<p>$$D_n=n!\sum_{i=0}^n \frac{(-1)^i}{i!}$$</p>
+<p>递推法:</p>
+<p>设$f_x$表示错了$x$个</p>
+<ol>
+<li><p>把第$n$个数放在$[1,n-1]$中的某个位置,有$n-1$种可能</p>
+</li>
+<li><p>放第$k(k\not=n)$个元素</p>
+<ul>
+<li><p>放在位置$n$,剩余的$n-2$个元素有$f_{n-2}$种方法</p>
+</li>
+<li><p>不放位置$n$,那么相当于剩下$n-1$个元素有$f_{n-1}$种方法</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>初始:$f_1=0,f_2=1$</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1465">HDU 1465 不容易系列之一</a></p>
+<h2>第二类斯特林数</h2>
+<blockquote>
+<p>将$n$个不同的球放进$m$个相同的盒子,保证盒子非空,求方案数.</p>
+</blockquote>
+<h3>容斥法:</h3>
+<p>$$S(n,m)=\frac 1{m!}\sum_{i=0}^m {m\choose i}(m-i)^n(-1)^i$$</p>
+<blockquote>
+<p>枚举空盒个数,剩下随便放,到这里开始也有了二项式反演的形式</p>
+<p>由于盒子相同,所以除以$m!$</p>
+</blockquote>
+<h3>递推法</h3>
+<p>$$S(n,m)=S(n-1,m-1)+mS(n-1,m)$$</p>
+<blockquote>
+<p>相当于考虑现在要放的求是否单独在一个盒子里:</p>
+<ol>
+<li><p>不占一盒:</p>
+<p>其余$n-1$个球放到$m-1$个盒子里</p>
+</li>
+<li><p>放到某个有球的盒子里:</p>
+<p>有$m$个盒子可放($m$种可能),其余$n-1$个球放到$m$个盒子里</p>
+</li>
+</ol>
+</blockquote>
+<h2>广义容斥原理</h2>
+<ul>
+<li>求恰好具有m个属性的元素的个数</li>
+</ul>
+<h3>$\alpha(m)$</h3>
+<p>给定集合$N$和性质$A_1,A_2,...,A_n$,令$\alpha(0)=|N|$</p>
+<p>$\displaystyle
+\alpha(1) = \sum|A_i|\
+\alpha(2) = \sum|A_i\bigcap A_j|\
+\alpha(3) = \sum|A_i\bigcap A_j\bigcap A_k|\
+...\
+\alpha(n) = |A_1\bigcap A_2\bigcap ...\bigcap A_n|\
+$</p>
+<p>则$\alpha(m)$计数了具有$m+k$个性质的元素${m+k}\choose m$次</p>
+<h3>$\beta(m)$</h3>
+<p>给定集合$N$和性质$A_1,A_2,...,A_n$,令$\beta(m)$表示$N$中恰好有$m$个性质的元素个数,则</p>
+<p>$\Beta(m)=\alpha(m)-{m+1 \choose m}a(m+1)+{m+2\choose m}\alpha(m+2)-...+(-1)^{n-m}{n\choose m}\alpha(n)$</p>
+<p>证明:请看下面的二项式反演</p>
+<p>推论:$\beta(0)=\alpha(0)-\alpha(1)+\alpha(2)-...+(-1)^n\alpha(n)$</p>
+<p>我们可以发现这个和接下来的二项式反演非常像,如果无法理解可以强行记一下,因为这个非常对称,很好记</p>
+<h2>二项式反演</h2>
+<ol>
+<li><p>回顾Example 1</p>
+<p>考虑一种特殊情况：多个集合的交集大小只和集合的数目有关</p>
+<p>设$f_n$表示$n$个补集的交集大小,$g_n$表示$n$个原集的大小</p>
+<p>$$
+f_n = \sum_{i=0}^n (-1)^i {n\choose i} g_i
+\\Updownarrow\
+g_n = \sum_{i=0}^n (-1)^i {n\choose i}f_i
+$$</p>
+</li>
+<li><p>设$f_i$为至多具有$i$个属性的方案数,$g_i$表示恰好具有$i$个属性的方案数:</p>
+<p>$$
+f_n=\sum_{i=0}^n{n\choose i} g_i
+\ \Updownarrow \
+g_n=\sum_{i=0}^n (-1)^{n-i} {n\choose i}f_i
+$$</p>
+<p>$f_n$表示先钦定$n$个属性,再统计至多具有这$n$个属性的方案数(也就是不能有这$n$个之外的,这$n$个任意),</p>
+<p>其中会包含重复的方案,因为一个方案可以有多种钦定情况.具体地,对于恰好选择$i$个,钦定情况数位${n\choose i}$ ,故$g_i$在$f_n$中被计算了${n\choose i}$次</p>
+</li>
+<li><p>设$f_i$为至少具有$i$个属性,$g_i$表示恰好具有$i$个属性的方案数的方案数:</p>
+<p>$$
+f_n = \sum_{i=n}^m g_i {i\choose n}
+\ \Updownarrow \
+g_n=\sum_{i=n}^m(-1)^{i-n}{i\choose n}f_i
+$$</p>
+<p>注意:</p>
+<p>$f_n$表示先钦定$n$个属性,再统计至少具有这$n$个属性的方案数(也就是包含这$n$个属性,其余属性任意),</p>
+<p>其中会包含重复的方案,因为一个方案可以有多种钦定情况.具体地,对于恰好选择$i$个,钦定情况数位${i\choose n}$ ,故$g_i$在$f_i$中被计算了${i\choose n}$次</p>
+</li>
+<li><p><strong>tips:</strong></p>
+<p><strong>二项式反演</strong>(或<strong>广义容斥原理</strong>)可以用来解决一些<strong>恰好</strong>,<strong>至多</strong>,<strong>至少</strong>的计数问题</p>
+<p>可以通过容斥来完成<strong>恰好</strong>,<strong>至多</strong>,<strong>至少</strong>之间的互相转换</p>
+<p>是一个很好用的工具</p>
+</li>
+<li><p>证明</p>
+<p>至多:</p>
+<p>$$
+\begin{aligned}
+g_n
+&amp;=\sum_{i=0}^n (-1)^{n-i}{n\choose i}f_i\
+&amp;=\sum_{i=0}^n (-1)^{n-i} {n\choose i}\sum_{j=0}^i{i\choose j}g_j\
+&amp;=\sum_{j=0}^n g_j\sum_{i=j}^n {n\choose i}{i \choose j}(-1)^{n-i}\
+&amp;=\sum_{j=0}^n g_j\sum_{i=j}^n {n\choose j}{n-j \choose i-j}(-1)^{n-i}\
+&amp;=\sum_{j=0}^n g_j\left[{n\choose j}\sum_{i=j}^n{n-j \choose i-j}(-1)^{n-i}\right]\
+&amp;=\sum_{j=0}^n g_j\left[{n\choose j}\sum_{i=0}^{n-j}{n-j \choose i}(-1)^{n-j-i}\right]\
+&amp;=\sum_{j=0}^n g_j\left[{n \choose j}(1-1)^{n-j}\right]\
+&amp;=g_n
+\end{aligned}
+$$</p>
+</li>
+</ol>
+<h1>例题</h1>
+<h2>BZOJ 2839 集合计数</h2>
+<p><a href="https://ruanx.pw/bzojch/p/2839.html">地址</a></p>
+<h3>题意:</h3>
+<p>一个有$N$个元素的集合有$2^N$个不同子集（包含空集）,现在要在这$2^N$个集合中取出若干集合（至少一个）,使得
+它们的交集的元素个数为$K$,求取法的方案数,答案模$1000000007$</p>
+<h3>解法:</h3>
+<p>设$g_i$表示交集个数至少为$i$的方案数</p>
+<p>那么$\displaystyle g_i = {n\choose i}(2^{2^{n-i}}-1)$</p>
+<blockquote>
+<p>先从$n$中选$i$个,然后其他可以随便取</p>
+<p>那就是有$2^{n-i}$个集合可以取</p>
+<p>然后又可以取至少1个集合</p>
+<p>那么答案就是${n\choose i}(2^{2^{n-i}}-1)$</p>
+</blockquote>
+<p>设$f_i$表示恰好为$i$的</p>
+<p>那么$\displaystyle g_k=\sum_{i=k}^n f_i\cdot {i\choose k}$</p>
+<p>反演$\displaystyle f_k=\sum_{i=k}^n g_i\cdot{i\choose k} (-1)^{i-k}$</p>
+<p>不能直接快速幂,因为指数不能$\mod p$,要用$2^{2^i}=(2^{2^{i-1}})^2$倒着枚举算</p>
+<pre><code class="language-cpp">#define N 1000011
+const int mod=1000000007;
+int n,k,g[N],fac[N],inv[N];
+int C(int a,int b){
+    return 1ll*fac[a]*inv[b]%mod*inv[a-b]%mod;
+}
+int pw(int x,int p){
+    int ans=1;
+    while(p){
+        if(p&amp;1)ans=1ll*ans*x%mod;
+        p&gt;&gt;=1;x=1ll*x*x%mod;
+    }
+    return ans;
+}
+int main(){
+    in(n,k);
+    fac[0]=inv[0]=1;
+    for(int i=1;i&lt;=n;++i)
+        fac[i]=1ll*fac[i-1]*i%mod;
+    inv[n]=pw(fac[n],mod-2);
+    for(int i=n-1;i&gt;=1;--i)
+        inv[i]=1ll*inv[i+1]*(i+1)%mod;
+
+    for(int i=0;i&lt;=n;++i)
+        g[i]=1ll*C(n,i)*(pw(2,(pw(2,n-i))-1+mod)%mod)%mod;
+
+    int ans=0,b=2;
+    for(int i=n;i&gt;=k;--i){
+        int t=1ll*C(n,i)%mod*C(i,k)%mod*(b-1)%mod;
+        if((i-k)&amp;1)ans=(ans-t+mod)%mod;
+        else ans=(ans+t)%mod;
+        b=1ll*b*b%mod;
+    }
+    printf(&quot;%d\n&quot;,ans);
+}
+</code></pre>
+<h2>[JSOI2011]分特产</h2>
+<p><a href="https://www.luogu.com.cn/problem/P5505">地址</a></p>
+<h3>题意</h3>
+<p>有$n$个人和$m$种物品,第$i$种物品有$a_i$个,同种物品之间没有区别。现在要将这些物品分给这些人,使得每个人至少分到一个物品</p>
+<h3>题解</h3>
+<p>每个同学都必须<strong>至少</strong>分得一个</p>
+<p>可以通过 <strong>恰好</strong>没有同学没有分得 来反演</p>
+<p>设$f_i$为钦定$i$个人没有分到,</p>
+<p>钦定的方案数为${n\choose i}$,这时第$j$种物品分给$n-i$个人,使用隔板法,方案数为${n-i+a_j-1\choose n-i-1}$</p>
+<p>$$
+f_i={n\choose i}\prod_{j=1}^m{n-i+a_j-1\choose n-i-1}
+$$</p>
+<p>设$g_i$为恰好$i$个人没有分到,反演:</p>
+<p>$$
+g_k=\sum_{i=k}^n(-1)^{i-k}{i \choose k}f_i
+$$</p>
+<p>那么:</p>
+<p>$$
+\begin{aligned}
+ans
+&amp;=g_0\
+&amp;=\sum_{i=0}^n(-1)^if_i\
+&amp;=\sum_{i=0}^n(-1)^i{n\choose i}\prod_{j=1}^m{n-i+a_j-1\choose n-i-1}
+\end{aligned}
+$$</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+const int N=1001,P=1000000007;
+int n,m,a[N],ans,c[N*2][N*2];
+void mod(int&amp;x){if(x&gt;=P)x-=P;}
+int main(){
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=0;i&lt;=2000;++i){
+        c[i][0]=c[i][i]=1;
+        for(int j=1;j&lt;i;++j)
+            mod(c[i][j]=c[i-1][j-1]+c[i-1][j]);
+    }
+    for(int i=1;i&lt;=m;++i)scanf(&quot;%d&quot;,a+i);
+    for(int i=0;i&lt;=n;++i){
+        long long res=c[n][i];
+        for(int j=1;j&lt;=m;++j)
+            (res*=c[n-i+a[j]-1][n-i-1])%=P;
+        if(i&amp;1)mod(ans+=P-res);
+        else mod(ans+=res);
+    }
+    printf(&quot;%d\n&quot;,ans);
+}
+</code></pre>
+<h2>已经没有什么好害怕的了</h2>
+<p><a href="https://www.luogu.com.cn/problem/P4859">地址</a></p>
+<h3>题意:</h3>
+<p>给出$n$个数$a_i$及$n$个数$b_i$ ,要求两两配对使得 $a&gt;b$的对数减去$a&lt;b$的对数等于$k$.</p>
+<p>$0\leq k\leq n\leq 2000$,保证$a,b$ 无相同元素.</p>
+<h3>题解:</h3>
+<p>先将$b$数组从小到大排序</p>
+<p>设选中了$x$对$a &gt; b$,由总对数为$n$,由$x-(n-x)=k$,可以知道$x=\frac{n+k}2$</p>
+<p>我们设$f(i,j)$为前$i$个$a$中选中了$j$组$a &gt; b$的方案数</p>
+<p>那么$f(i,j)=f(i-1,j)+f(i-1,j-1)\times(l_i-j+1)$</p>
+<p>($l_i$表示$b$中小于$a_i$的最后一个位置)</p>
+<p>但是还有剩下的$n-x$对</p>
+<p>我们可以设$g_i$表示$a&gt;b$对数$\ge i$的方案数</p>
+<p>那么$g_i = f(n,i) \times (n-i)!$(相当于剩下的随便排列组合)</p>
+<p>我们设$f_i$表示$a&gt;b$对数恰好为$i$对的方案数</p>
+<p>那么$\displaystyle g_k = \sum_{i=k}^n f_i \times {i\choose k}$
+(相当于从恰好$i$个方案中选$k$对出来)</p>
+<p>经过二项式反演可以知道:</p>
+<p>$\displaystyle f(k)=\sum_{i=k}^n(-1)^{i-k}{i\choose k}g(i)$</p>
+<p>代码:</p>
+<pre><code class="language-cpp">const int N=4011,mod=1000000009;
+int n,k,f[N][N],a[N],b[N],l[N],fac[N],inv[N],g[N];
+il int pw(int x,int p){
+    int ans=1;
+    while(p){
+        if(p&amp;1)ans=1ll*ans*x%mod;
+        p&gt;&gt;=1;x=1ll*x*x%mod;
+    }
+    return ans;
+}
+int C(int a,int b){
+    return 1ll*fac[a]*inv[b]%mod*inv[a-b]%mod;
+}
+signed main(){
+    in(n,k);
+    if((n+k)&amp;1){puts(&quot;0&quot;);return 0;};
+    k=(n+k)&gt;&gt;1;
+    for(int i=1;i&lt;=n;++i)in(a[i]);
+    for(int i=1;i&lt;=n;++i)in(b[i]);
+    fac[0]=inv[0]=1;
+    for(int i=1;i&lt;=n;++i)
+        fac[i]=1ll*fac[i-1]*i%mod;
+    inv[n]=pw(fac[n],mod-2);
+    for(int i=n-1;i&gt;=0;--i)
+        inv[i]=1ll*inv[i+1]*(i+1)%mod;
+    sort(a+1,a+n+1);
+    sort(b+1,b+n+1);
+    int p=0;
+    for(int i=1;i&lt;=n;++i){
+        while(p&lt;n&amp;&amp;b[p+1]&lt;a[i])++p;
+        l[i]=p;
+    }
+    f[0][0]=1;
+    for(int i=1;i&lt;=n;++i){
+        f[i][0]=1;
+        for(int j=1;j&lt;=i;++j)
+            f[i][j]=(f[i-1][j]+1ll*f[i-1][j-1]*MAX(0,l[i]-j+1)%mod)%mod;
+    }
+    for(int i=0;i&lt;=n;++i)
+        g[i]=1ll*f[n][i]*fac[n-i]%mod;
+    int ans=0;
+    for(int i=k;i&lt;=n;++i)
+        if((i-k)&amp;1)ans=(ans-1ll*C(i,k)*g[i]%mod+mod)%mod;
+        else ans=(ans+1ll*C(i,k)*g[i]%mod)%mod;
+
+    printf(&quot;%d\n&quot;,ans);
+}
+</code></pre>
+<h2>[HAOI2008]硬币购物</h2>
+<p><a href="https://www.luogu.com.cn/problem/P1450">地址</a></p>
+<h3>题意:</h3>
+<p>硬币购物一共有4种硬币.面值分别为$c1,c2,c3,c4$.</p>
+<p>某人去商店买东西,去了$tot$次.</p>
+<p>每次带$d_i$枚$c_i$硬币,买$s_i$的价值的东西.</p>
+<p>请问每次有多少种付款方法.</p>
+<h3>题解:</h3>
+<p>先考虑每种硬币可以用无数次</p>
+<p>设$f_i$表示金额为$i$有多少种方案</p>
+<p>那么$\displaystyle f_i = \sum_{j=1}^4 f_{i-c[j](i \ge c_j)}$</p>
+<p>我们再来考虑硬币使用次数有限制怎么办</p>
+<blockquote>
+<p>不合法的情况有:</p>
+<p>1超额</p>
+<p>1,2超额</p>
+<p>1,3超额</p>
+<p>1,4超额</p>
+<p>1,2,3超额</p>
+<p>1,2,4超额</p>
+<p>1,3,4超额</p>
+<p>1,2,3,4超额</p>
+<p>...</p>
+<p>要注意的是在多种硬币限制的情况下可能会减去多次,或加上多次</p>
+<p>比如1超额,2超额,（1,2同时超额被减去两次,这是就要加回来</p>
+<p>而$(1,2,3)$ 、$(1,2,4)$又是多算的...</p>
+</blockquote>
+<p>是不是更直观的了解了容斥？</p>
+<p>为了方便,我们可以枚举二进制下状态来更加优美实现.</p>
+<p>(当有奇数种不合法的时候减去,偶数种不合法时加上)</p>
+<p>代码:</p>
+<pre><code class="language-cpp">#define N 100011
+int n,c[5],d[5],s;
+ll f[N];
+int main(){
+    for(int i=1;i&lt;=4;++i)in(c[i]);
+    f[0]=1;
+    for(int i=1;i&lt;=4;++i)
+        for(int j=c[i];j&lt;=100000;++j)
+            f[j]+=f[j-c[i]];
+
+    in(n);
+    while(n--){
+        for(int i=1;i&lt;=4;++i)in(d[i]);
+        in(s);
+        ll ans=f[s];
+        for(int i=1;i&lt;=15;++i){
+            int t=s,sta=i,k=1;
+            for(int j=1;j&lt;=4;++j)
+            if(sta&amp;(1&lt;&lt;(j-1))){
+                k=-k;
+                t-=(d[j]+1)*c[j];
+            }
+            if(t&gt;=0)ans+=1ll*f[t]*k;
+        }
+        out(ans,ln);
+    }
+}
+</code></pre>
+<h2>[SDOI2009]Bill的挑战</h2>
+<p><a href="https://www.luogu.com.cn/problem/P2167">地址</a></p>
+<h3>题意:</h3>
+<p>给$n$个长度相同的字符串(由小写字母和<code>?</code>组成):$S_1,S_2,...,S_n$,</p>
+<p>求这$n$个串中的刚好$k$个串匹配的字符串$T$的个数$\pmod{1000003}$</p>
+<p>若$S_x$与$T$匹配,满足:</p>
+<ol>
+<li>$|S_x|=|T|$</li>
+<li>$\forall S_x[i]=?||S_x[i]=T[i]$</li>
+</ol>
+<h3>状压解法:</h3>
+<p>设$f[i][j]$表示到了第$i$位,匹配的状态为$j$</p>
+<p>代码:</p>
+<pre><code class="language-cpp">#define N 111
+#define mod 1000003
+#define M(x) ((x&gt;=mod)?(x)%=mod:x)
+int mt[N][30];
+ll f[N][1&lt;&lt;15];
+char ch[N][N];
+il void work(){
+    clr(mt,0);
+    clr(f,0);
+    int n,k,len;
+    in(n,k);
+    for(int i=1;i&lt;=n;++i)in(ch[i]);
+    len=strlen(ch[1]);
+    for(int i=0;i&lt;=len-1;++i)
+        for(char t='a';t&lt;='z';++t)
+            for(int j=1;j&lt;=n;++j)
+            if(ch[j][i]=='?'||ch[j][i]==t)
+                mt[i][t-'a']|=(1&lt;&lt;(j-1));//更新比较当前位的影响
+    f[0][(1&lt;&lt;n)-1]=1;
+    for(int i=0;i&lt;=len-1;++i)
+        for(int j=0;j&lt;(1&lt;&lt;n);++j)
+        if(f[i][j])
+            for(int t=0;t&lt;=26;++t)
+                M(f[i+1][j&amp;mt[i][t]]+=f[i][j]);
+    ll ans=0;
+    for(int i=0;i&lt;(1&lt;&lt;n);++i){
+        int t=i,tt=0;
+        while(t)tt+=(t&amp;1),t&gt;&gt;=1;
+        if(tt==k)M(ans+=f[len][i]);
+    }
+    out(ans,ln);
+}
+int main(){
+    int T;in(T);
+    while(T--)work();
+    flush();
+}
+</code></pre>
+<h3>容斥解法:</h3>
+<p>看到恰好$k$个,我们就可以想到容斥套路</p>
+<p>找出至少匹配$k$个的方案数$g(k)$,设$f(k)$为恰好$k$个的方案数</p>
+<p>然后还是按套路就可以了</p>
+<p>$$
+g(n) = \sum_{i=k}^n {n\choose i}f(i)
+\
+\Updownarrow
+\
+f(n) = \sum_{i=k}^n {n\choose i}g(i) (-1)^{i-k}
+$$</p>
+<p>问题转换为如何求至少匹配$k$个的方案数</p>
+<p>我们可以使用dfs来统计,这样比起状压思维难度可能降低了许多,只需要枚举排列组合(当然枚举二进制状态也可以)</p>
+<p>状压需要处理全部状态</p>
+<p>dfs只需要统计$k$～$n$的部分</p>
+<p>最后统计的时间可忽略不计</p>
+<p>状压:$492ms$</p>
+<p>容斥: $100ms$</p>
+<p>容斥代码:</p>
+<pre><code class="language-cpp">#define N 111
+#define mod 1000003
+char ch[N][N];
+int len,n,k,cnt,c[N][N],up,tot=0,las,a[N];
+void dfs(int x,int now){
+    if(x==n+1){
+        if(now!=up)return;
+        ll lp=1;
+        for(int j=1;j&lt;=len;++j){
+            las=-1;
+            for(int i=1;i&lt;=up;++i)
+            if(ch[a[i]][j]!='?'){
+                if(las==-1)
+                   las=ch[a[i]][j]-'a';
+                else if(las!=ch[a[i]][j]-'a')return;
+            }
+            if(las==-1)lp=(lp*26)%mod;
+        }
+        (tot+=lp)%=mod;
+        return;
+    }
+    if(now&lt;up){
+        a[++cnt]=x;
+        dfs(x+1,now+1);
+        a[cnt--]=0;
+    }
+    if(n-x&gt;=up-now)dfs(x+1,now);
+}
+ll g[N];
+il void work(){
+    clr(g,0);
+    in(n,k);
+    for(int i=1;i&lt;=n;++i)in(ch[i]+1);
+    len=strlen(ch[1]+1);
+    for(int i=k;i&lt;=n;++i)
+        up=i;
+        tot=0;
+        dfs(1,0);
+        g[i]=tot;
+    }
+
+    // 容斥部分:
+    ll ans=0;
+    for(int i=k;i&lt;=n;++i)
+        if((i-k)&amp;1)ans=(ans-1ll*c[i][k]*g[i]%mod+mod)%mod;
+        else ans=(ans+1ll*c[i][k]*g[i]%mod)%mod;
+    out(ans,ln);
+}
+int main(){
+    for(int i=0;i&lt;=20;++i){
+        c[i][0]=1;
+        for(int j=1;j&lt;=i;++j)
+            c[i][j]=c[i-1][j]+c[i-1][j-1];
+    }
+    int T;in(T);
+    while(T--)work();
+    flush();
+}
+</code></pre>
+<p>其他有关容斥题目:</p>
+<h2>Emiya 家今天的饭</h2>
+<p><a href="https://www.luogu.com.cn/problem/P5664">地址</a></p>
+<h3>题意:</h3>
+<p>给出一个矩阵,要求每行只能选一个节点,每列选的节点不能超过所有选的节点的一半,不能不选,
+给出每个节点的选择方案数,求总方案数</p>
+<h3>解法:</h3>
+<p>考虑到限制是每列选择的不能超过一半,我们可以想到不合法的最多只有一列</p>
+<p>我们可以用总方案数减去不符合的</p>
+<p>$\displaystyle s_i=\sum_{j=1}^m a_{ij}$</p>
+<p>总方案数:$\displaystyle \prod_{i=1}^n (s_i+1) - 1$</p>
+<p>$\because k=\frac {tot}2$</p>
+<p>所以我们有一个很妙的方法:</p>
+<p>设选中目标行之外的权值+1,不选+0,选中目标行权值位+2</p>
+<p>最后只要权值$&gt; n$,那么目标行一定被选了超过$\frac n2$次</p>
+<p>设$f(i,k)$表示总共选了$i$次(也就是选到第$i$行)权值为$k$的方案数</p>
+<p>$f(i,k) += f(i-1,k)\cdot(s_i-a_{ij})$(当前行不选目标列</p>
+<p>$f(i,k+1) += f(i-1,k)$(当前行完全不选</p>
+<p>$f(i,k+2) += f(i-1,k)\times a_{ij}$(当前行选中目标列</p>
+<p>$\displaystyle ans = \prod_{i=1}^n (s_i+1) - 1 - \sum_{i=n+1}^{2n} f(n,i)$</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define N 111
+typedef long long ll;
+const int mod=998244353;
+int a[N][2011],n,m;
+ll f[N][2011],s[N];
+int main(){
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int i=1;i&lt;=n;++i)
+        for(int j=1;j&lt;=m;++j)
+            scanf(&quot;%d&quot;,&amp;a[i][j]),
+            s[i]=(s[i]+a[i][j])%mod;
+
+    ll ans=1;
+    for(int i=1;i&lt;=n;++i)
+        ans=(ans*(s[i]+1))%mod;
+
+    --ans;
+    for(int j=1;j&lt;=m;++j){
+        memset(f,0,sizeof f);
+        f[0][0]=1;
+        for(int i=1;i&lt;=n;++i)
+            for(int k=0;k&lt;=n*2;++k){
+                f[i][k]=(f[i][k]+f[i-1][k]*(s[i]-a[i][j]))%mod;
+                f[i][k+1]=(f[i][k+1]+f[i-1][k])%mod;
+                f[i][k+2]=(f[i][k+2]+f[i-1][k]*a[i][j])%mod;
+            }
+        for(int i=n+1;i&lt;=n*2;++i)
+            ans=(ans-f[n][i])%mod;
+    }
+    printf(&quot;%lld\n&quot;,(ans+mod)%mod);
+}
+</code></pre>
+<h2>LG 2567 [SCOI2010]幸运数字</h2>
+<p><a href="https://www.luogu.com.cn/problem/P2567">地址</a></p>
+<h3>题意:</h3>
+<p>定义幸运号码为:由$6$或$8$组成的数字</p>
+<p>定义近似幸运号码为:幸运号码的倍数</p>
+<p>求$[l,r]$之间幸运数字的个数($1\le l,r \le 10^9$).</p>
+<h3>题解:</h3>
+<p>先预处理出所有幸运数字</p>
+<p>当前要求的是$[l,r]$中的幸运数字</p>
+<p>我们可以使用容斥,用$[1,r]-[1,l-1]$</p>
+<p>假设当前幸运数字为$x$,$[l,r]$中是$x$的倍数的有$\left \lfloor \frac rx \right \rfloor - \left \lfloor \frac lx \right \rfloor +1$</p>
+<p>$[1,r],[1,l-1]$中的幸运数字的倍数可能有交集</p>
+<p>继续容斥:</p>
+<p>选$1$个$-$选$2$个的$lcm+$选$3$个的$lcm-...$</p>
+<p>剪枝:</p>
+<ol>
+<li><p>可以发现,一个数是另一个合法倍数的倍数,那么这个数字相当于没用(因为被前面的统计过了),可以删掉</p>
+</li>
+<li><p>如果将幸运数字从大到小排序,搜索时可以更快突破边界</p>
+</li>
+<li><p>现在因为所有数都不满足是另外一个数的倍数,所以合并任意两个数的时候,$lcm$的最小情况就是乘上一个$3$,</p>
+<p>所以对于所有$&gt;r/3$的合法数字,显然不能够和任何一个数合并了,所以这一部分可以拿出来直接提前算好</p>
+</li>
+</ol>
+<p>剩下的直接暴搜</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+#define N 100011
+int tot=0,t=0;
+ll ans=0,l,r,a[N];
+bool v[N];
+inline void init(){
+    int h=0;
+    while(h&lt;=tot){
+        ll x=a[h++]*10;
+        if(x+6&lt;=r)a[++tot]=x+6;
+        if(x+8&lt;=r)a[++tot]=x+8;
+    }
+}
+const int mod=1000000007;
+inline bool chk(ll a,ll b){
+    int A=a/mod,B=b/mod;
+    if(A*B)return 1;
+    return a*b&gt;r;
+}
+void calc(int x,ll s,int k){
+    if(x&gt;tot){
+        if(s!=1){
+            if(k&amp;1)ans+=r/s-l/s;
+            else ans-=r/s-l/s;
+        }
+        return;
+    }
+    calc(x+1,s,k);
+    ll d=a[x]/__gcd(s,a[x]);
+    if(!chk(s,d))calc(x+1,s*d,k+1);
+}
+inline void work(){
+    sort(a+1,a+tot+1);
+    for(int i=1;i&lt;=tot;++i)
+        for(int j=1;j&lt;i;++j)
+        if(a[i]%a[j]==0){
+            v[i]=1;
+            break;
+        }
+
+    for(int i=1;i&lt;=tot;++i)
+    if(!v[i]){
+        if(a[i]&lt;=r/3)a[++t]=a[i];
+        else ans+=r/a[i]-l/a[i];
+    }
+    tot=t;
+    reverse(a+1,a+tot+1);
+    calc(1,1,0);
+    printf(&quot;%lld\n&quot;,ans);
+}
+int main(){
+    cin&gt;&gt;l&gt;&gt;r;
+    --l;
+    init();//找出所有&quot;幸运号码&quot;
+    work();
+}
+</code></pre>
+</div>
+    </div>
+</div>
+<div class="mdui-row-xs-3 article">
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black" id='pre_button'>
+            <i class="mdui-icon material-icons">arrow_back</i>
+            csp-s-2019-游记
+        </a>
+    </div>
+    <div class="mdui-col mdui-text-center">容斥与二项式反演</div>
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black mdui-float-right" id='nxt_button'>
+            点分治
+            <i class="mdui-icon material-icons">arrow_forward</i>
+        </a>
+    </div>
+</div>
+<div class="mdui-card" style="margin-top: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">
+            <i class="mdui-icon material-icons">comment</i>
+            评论
+        </div>
+    </div>
+<div class="mdui-card-content" id='comments'>
+    <center>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="nvl()">
+            valine
+        </button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="ngt()">
+            gitalk
+        </button>
+    </center>
+</div>
+<script>
+function nvl(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var valinejs=document.createElement('script');
+    valinejs.src="//cdn.jsdelivr.net/gh/xCss/Valine/dist/Valine.min.js";
+    valinejs.async=true;
+    valinejs.onload=function(){
+        new Valine({
+            el: '#comments',
+            placeholder: "说几句嘛qwq",
+            appId: "NLh0fhLRvD8gOWEC3vtOIRx5-gzGzoHsz",
+            appKey: "DSwqdjPFKAnO4CFMQypfkcB9",
+            path: window.location.pathname,
+        });
+    }
+    document.getElementsByTagName("head")[0].appendChild(valinejs);
+}
+</script>
+<script>
+function ngt(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var gtalkjs=document.createElement('script');
+    gtalkjs.src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js";
+    gtalkjs.async=true;
+    gtalkjs.onload=function(){
+        const gitalk=new Gitalk({
+            clientID:'054902ee1548e6fe427e',
+            clientSecret:'b31fac2b407311ca7e6673ab84727ae9562c69ba',
+            repo:'zcmimi.github.io',
+            owner:'zcmimi',
+            admin: "zcmimi",
+            id:location.pathname,
+            distractionFreeMode:False
+        });
+        gitalk.render('comments');
+    }
+    var gtalkcss=document.createElement('link');
+    gtalkcss.href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css";
+    gtalkcss.type='text/css';
+    gtalkcss.rel='stylesheet';
+    document.getElementsByTagName("head")[0].appendChild(gtalkjs);
+    document.getElementsByTagName("head")[0].appendChild(gtalkcss);
+}
+</script>
+</div>
+    </div>
+</body>
+<!--top-->
+<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-fab-fixed mdui-fab-hide" id="totop" onclick="totop()" style="z-index: 99999;">
+    <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+</button>
+<!--top end-->
+<footer class="mdui-m-t-5">
+    <div class="mdui-card">
+        <div class="mdui-card-content mdui-p-a-5">
+            <div class="mdui-container">
+                <div class="mdui-row-sm-3">
+                    <div class="mdui-col">
+                        <div class="mdui-row">
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://space.bilibili.com/110897068">
+                                        <i class="mdui-icon mqii mqii-bilibili mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://github.com/zcmimi">
+                                        <i class="mdui-icon mqii mqii-github mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://twitter.com/zc_mimi">
+                                        <i class="mdui-icon mqii mqii-twitter mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://www.zhihu.com/people/zcmimi">
+                                        <i class="mdui-icon mqii mqii-zhihu mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mdui-col mdui-text-center">
+                        <div>Copyright ©&nbsp;2019-2020&nbsp;zcmimi's blog</div>
+                        <div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+                        <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/busuanzi.js" onload="
+                            wonld.append(busuanzi);
+                            document.addEventListener('pjax:complete',busuanzi);
+                        "></script>
+
+                        <div>last build: 2020-07-30T15:42:15Z</div>
+                    </div>
+                    <div class="mdui-col mdui-text-center mdui-typo">
+                        <div>Powered by <a href="https://github.com/zcmimi/py-blog">py-blog</a></div>
+                        <div>Theme material</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mdui-dialog" id="search_dialog">
+    <div class="mdui-dialog-title">Search</div>
+    <div class="mdui-dialog-content">
+        <div class="mdui-textfield">
+            <i class="mdui-icon material-icons">search</i>
+            <input id="search_input" class="mdui-textfield-input" placeholder="搜索">
+        </div>
+        <div id="search_result" class="mdui-list"></div>
+    </div>
+</div>
+<script async src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/worker_search.js'></script>
+<script>
+document.getElementById('search_input').onchange=function(){
+    search("https://blog_search.zcmimi.workers.dev");
+}
+</script>
+<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-shadow-2" id="drawer">
+    <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons mdui-text mdui-text-color-black">home</i>
+            <a href="/" class="mdui-list-item-content">zcmimi's blog</a>
+        </li>
+        <li><center><img src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp" width="95%" height="95%" alt='avatar'></img></center></li>
+            <li class='mdui-subheader'>Catch me</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:dodgerblue'">email</i>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fwUcIBIWEhY-Dg5RHBAS" target="_blank" class="mdui-list-item-content">给我写信</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#66ccff'"></i>
+                    <a href="https://t.me/zcmimi" target="_blank" class="mdui-list-item-content">电报</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-twitter" style='color:rgba(29,161,242,1.00)'"></i>
+                    <a href="https://twitter.com/zc_mimi" target="_blank" class="mdui-list-item-content">推特</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-bilibili" style='color:#F06292'"></i>
+                    <a href="https://space.bilibili.com/110897068" target="_blank" class="mdui-list-item-content">哔哩哔哩</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-netease-cloud-music" style='color:red'"></i>
+                    <a href="https://music.163.com/#/user/home?id=507163653" target="_blank" class="mdui-list-item-content">网易云音乐</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-zhihu" style='color:#0084ff'"></i>
+                    <a href="https://www.zhihu.com/people/zcmimi" target="_blank" class="mdui-list-item-content">知乎</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <img class="mdui-list-item-icon" src="https://www.luogu.com.cn/favicon.ico" alt>
+                    <a href="https://luogu.com.cn/user/36532" target="_blank" class="mdui-list-item-content">洛谷</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-github" style='color:black'"></i>
+                    <a href="https://github.com/zcmimi" target="_blank" class="mdui-list-item-content">Github</a>
+                </li>
+            <li class='mdui-subheader'>Links</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#bbb'"></i>
+                    <a href="https://travellings.now.sh/" target="_blank" class="mdui-list-item-content">Traveling</a>
+                </li>
+            <li class='mdui-subheader'>Pages</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">bookmark_border</i>
+                    <a href="/tags" target="_blank" class="mdui-list-item-content">标签云</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">book</i>
+                    <a href="/categories" target="_blank" class="mdui-list-item-content">分类</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">link</i>
+                    <a href="/links" target="_blank" class="mdui-list-item-content">友链</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">build</i>
+                    <a href="/tools" target="_blank" class="mdui-list-item-content">工具集</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">person</i>
+                    <a href="/about" target="_blank" class="mdui-list-item-content">关于我</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">rss_feed</i>
+                    <a href="/atom.xml" target="_blank" class="mdui-list-item-content">订阅</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">list</i>
+                    <a href="/sitemap.xml" target="_blank" class="mdui-list-item-content">站点地图</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">comment</i>
+                    <a href="https://nlh0fhlrsgij.leanapp.cn" target="_blank" class="mdui-list-item-content">评论管理</a>
+                </li>
+    </ul>
+</div>
+
+
+<div id='musiclist'></div>
+<style>.aplayer,.aplayer-body,.aplayer-pic,.aplayer-button{z-index: 9999999 !important;}</style>
+<script>
+function music_on(){
+    pjax_on(1);
+    var x=document.getElementById('musiclist');
+    x.innerHTML="";
+    mdui.snackbar({message:'歌单加载中,请稍等2-10s'});
+    var hl=document.createElement('link');
+    hl.href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css";
+    hl.type='text/css';
+    hl.rel='stylesheet';
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js";
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js";
+    x.appendChild(hl);
+
+    hl=document.createElement('meting-js');
+    hl.setAttribute('id','765727960');
+    hl.setAttribute('fixed','true');
+    hl.setAttribute('server','netease');
+    hl.setAttribute('type','playlist');
+    hl.setAttribute('order','random');
+    hl.setAttribute('theme','#f7a4b9');
+    x.appendChild(hl);
+}
+</script>
+</html>

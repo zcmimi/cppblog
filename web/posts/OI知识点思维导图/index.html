@@ -1,0 +1,905 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>OI知识点思维导图 - zcmimi's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' itemprop="description" content="">
+    <meta name="keywords" content="zcmimi">
+    <meta property="og:url" content="https://blog.zcmimi.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="zcmimi's blog">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="https://blog.zcmimi.top">
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "publisher":{
+            "@type":"Organization",
+            "name":"zcmimi's blog",
+            "logo":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "url":"https://blog.zcmimi.top",
+        "image":{
+            "@type":"ImageObject",
+            "url":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://blog.zcmimi.top"
+        },
+        "description":""
+    }</script>
+<script>
+wonld=Object.create({
+    list:[],
+    append:function(e){this.list.push(e);},
+    excute:function(){
+        for(var i=0;i<this.list.length;++i)
+            this.list[i]();
+    }
+});
+window.onload=function(){wonld.excute();};
+</script>
+    <link rel="dns-prefetch" href="https://blog.zcmimi.top">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/css/mdui.min.css" type="text/css">
+    <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="/assets/theme/origin.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/icon/mqii/mqii.css" type="text/css">
+    <!--custom--><link rel="stylesheet" href="/custom.css" type="text/css">
+    <!--highlight-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+    <!--highlight end-->
+    <!-- markdown katex-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/markdown.min.css" type="text/css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css" type="text/css">
+    <script async src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <!-- markdown katex end-->
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <script async src="//cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script defer src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/bundle.min.js'></script>
+</head>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-blue">
+    <div class="mdui-progress" id='loading-progress' style="position: fixed;top:0;z-index: 999999;"><div class="mdui-progress-indeterminate"></div></div>
+    <div id="theme_css"></div>
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset mdui-color-white mdui-shadow-1">
+        <div class="mdui-toolbar mdui-color-theme">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="drawer.toggle();" mdui-tooltip="{content: '菜单'}">
+                <i class="mdui-icon material-icons">menu</i>
+            </button>
+            <a href="/" class="mdui-typo-title">zcmimi's blog</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-row" id='toolbar-menu'>
+                <a href="https://travellings.now.sh/" target="_blank" class="mdui-col mdui-text-color-black">Traveling</a>
+                <a href="/about" target="_blank" class="mdui-col mdui-text-color-black">关于我</a>
+                <a href="/categories" target="_blank" class="mdui-col mdui-text-color-black">分类</a>
+                <a href="/links" target="_blank" class="mdui-col mdui-text-color-black">友链</a>
+                <a href="/tools" target="_blank" class="mdui-col mdui-text-color-black">工具集</a>
+                <a href="/tags" target="_blank" class="mdui-col mdui-text-color-black">标签云</a>
+            </div><script>if(document.body.clientWidth<1078)document.getElementById('toolbar-menu').hidden=1;</script>
+            <button onclick="music_on();document.getElementById('music_button').hidden=1" id='music_button' class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '是否来点音乐?'}">
+                <i class="mdui-icon material-icons">queue_music</i>
+            </button>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '切换主题'}" mdui-menu="{target: '#theme_menu',align: 'right',covered: false}">
+                <i class="mdui-icon material-icons">view_quilt</i>
+            </button>
+            <ul class="mdui-menu" id="theme_menu" style="width: fit-content;">
+                <li class="mdui-menu-item" mdui-tooltip="{content: '开启/关闭 pjax'}"><a onclick="pjax_on()" id='pjax_button'>pjax_on</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '回归原本'}"><a onclick="theme('day')">日间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '晚上要保护眼睛哦'}"><a onclick="theme('night')">夜间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '满足你的少女心吧'}"><a onclick="theme('pink')">粉红</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '没什么,就是淡蓝色'}"><a onclick="theme('blue')">粉蓝</a></li>
+            </ul>
+            <button onclick="search_dialog.open();document.getElementById('search_input').focus();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}">
+                <i class="mdui-icon material-icons">search</i>
+            </button>
+            <button id='toc_button' class="mdui-btn mdui-btn-icon mdui-ripple" onclick="toc_drawer.toggle();" mdui-tooltip="{content: '目录'}" hidden>
+                <i class="mdui-icon material-icons">format_list_numbered</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-drawer-right mdui-shadow-2" id="toc_drawer" hidden>
+        <ul class="mdui-list" id="toc"></ul>
+    </div>
+
+    <div class="mdui-container">
+        <div id='page_typ' hidden>article</div>
+<div class="mdui-card article">
+    <div class="mdui-card-primary">
+        <a href="#" class="mdui-card-primary-title">OI知识点思维导图</a>
+        <div class="mdui-card-primary-subtitle"></div>
+    </div>
+    <div class="mdui-card-header">
+        <img class="mdui-card-header-avatar" src="    https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp
+" alt='avatar'>
+        <div class="mdui-card-header-title">zcmimi</div>
+        <div class="mdui-card-header-subtitle">2020-05-18 21:43</div>
+        <div class="mdui-card-menu">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '文章分类'}" mdui-menu="{target:'#categories',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">bookmark</i>
+            </button>
+            <ul class="mdui-menu" id="categories">
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/note" class="mdui-ripple">
+                            note
+                        </a>
+                    </li>
+            </ul>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '本文阅读量'}" mdui-menu="{target:'#visit_counter',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">remove_red_eye</i>
+            </button>
+            <ul class="mdui-menu" id="visit_counter">
+                <li class="mdui-menu-item mdui-ripple">
+                    <div id="busuanzi_container_page_pv">
+                        <center>本文总阅读量<span id="busuanzi_value_page_pv"></span>次</center>
+                    </div>
+                </li>
+            </ul>
+<button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '分享'}" mdui-menu="{target:'#share_menu',align:'right',covered: false}">
+    <i class="mdui-icon material-icons">share</i>
+</button>
+<ul class="mdui-menu" id="share_menu" style="width: fit-content;">
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_weibo" href="https://service.weibo.com/share/share.php?appkey=&title=OI知识点思维导图 - zcmimi's blog&url=https://blog.zcmimi.top/posts/OI知识点思维导图&pic=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&searchPic=false&style=simple" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-weibo"></i>分享到微博
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_qq" href="https://connect.qq.com/widget/shareqq/index.html?site=zcmimi's blog&title=OI知识点思维导图 - zcmimi's blog&summary=&pics=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&url=https://blog.zcmimi.top/posts/OI知识点思维导图" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-qq_filled"></i>分享到QQ
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_twitter" href="https://twitter.com/intent/tweet?text=OI知识点思维导图 - zcmimi's blog&url=https://blog.zcmimi.top/posts/OI知识点思维导图" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-twitter"></i>分享到Twitter
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_copy" onclick="copylink()" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">link</i>复制链接
+        </a>
+    </li>
+</ul>        </div>
+    </div>
+    <div class="mdui-card-content">
+        
+        <div id="md-body" class="md-body"><h2>数据结构</h2>
+<ul>
+<li><p>栈</p>
+<ul>
+<li>单调栈</li>
+</ul>
+</li>
+<li><p>队列</p>
+<ul>
+<li>单调队列</li>
+<li>优先队列</li>
+<li>双端队列</li>
+</ul>
+</li>
+<li><p>堆</p>
+<ul>
+<li>二叉堆</li>
+<li>可并堆<ul>
+<li>左偏树</li>
+<li>配对堆</li>
+<li>斐波那契堆</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>并查集</p>
+<ul>
+<li>路径压缩</li>
+<li>按秩合并</li>
+<li>可持久化并查集</li>
+</ul>
+</li>
+<li><p>线段树</p>
+<ul>
+<li>区间加</li>
+<li>区间乘</li>
+<li>主席树</li>
+<li>标记永久化</li>
+</ul>
+</li>
+<li><p>树状数组</p>
+<ul>
+<li>区间加单点查</li>
+<li>区间加区间查</li>
+</ul>
+</li>
+<li><p>st表(rmq)</p>
+</li>
+<li><p>平衡树</p>
+<ul>
+<li>treap</li>
+<li>fhqtreap</li>
+<li>splay</li>
+<li>SBT</li>
+<li>替罪羊树</li>
+</ul>
+</li>
+<li><p>kd-tree</p>
+</li>
+<li><p>link-cut tree</p>
+</li>
+<li><p>树套树</p>
+<ul>
+<li>线段树套平衡树</li>
+<li>线段树套线段树</li>
+</ul>
+</li>
+<li><p>笛卡尔树</p>
+</li>
+</ul>
+<h2>字符串</h2>
+<ul>
+<li>kmp<ul>
+<li>exkmp</li>
+</ul>
+</li>
+<li>hash</li>
+<li>trie</li>
+<li>AC自动机<ul>
+<li>fail树</li>
+</ul>
+</li>
+<li>后缀数组SA</li>
+<li>后缀树SAM</li>
+<li>manacher</li>
+<li>回文自动机</li>
+</ul>
+<h2>数论</h2>
+<ul>
+<li><p>快速幂 &amp; 慢速乘</p>
+</li>
+<li><p>质数</p>
+<ul>
+<li>暴力判断</li>
+<li>miller-rabbin</li>
+<li>筛质数<ul>
+<li>埃筛</li>
+<li>欧拉筛</li>
+</ul>
+</li>
+<li>分解质因数</li>
+</ul>
+</li>
+<li><p>gcd</p>
+<ul>
+<li>exgcd</li>
+</ul>
+</li>
+<li><p>费马小定理</p>
+</li>
+<li><p>逆元</p>
+<ul>
+<li>线性求逆元</li>
+<li>费马小定理求逆元</li>
+<li>exgcd求逆元</li>
+</ul>
+</li>
+<li><p>crt</p>
+<ul>
+<li>excrt</li>
+</ul>
+</li>
+<li><p>矩阵</p>
+<ul>
+<li>矩阵乘法</li>
+<li>矩阵快速幂</li>
+<li>矩阵求逆</li>
+</ul>
+</li>
+<li><p>行列式</p>
+</li>
+<li><p>组合数</p>
+<ul>
+<li>杨辉三角</li>
+<li>lucas<ul>
+<li>exlucas</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>bsgs</p>
+<ul>
+<li>exbsgs</li>
+</ul>
+</li>
+<li><p>欧拉函数</p>
+<ul>
+<li>线性筛欧拉函数</li>
+<li>欧拉定理</li>
+</ul>
+</li>
+<li><p>狄利克雷卷积</p>
+</li>
+<li><p>莫比乌斯函数</p>
+<ul>
+<li>莫比乌斯反演</li>
+</ul>
+</li>
+<li><p>概率和期望</p>
+</li>
+<li><p>高斯消元</p>
+</li>
+<li><p>线性基</p>
+</li>
+<li><p>数列</p>
+<ul>
+<li>斐波那契数列</li>
+<li>卡特林数</li>
+<li>斯特林数<ul>
+<li>第一类斯特林数</li>
+<li>第二类斯特林数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Polya定理</p>
+</li>
+<li><p>置换群</p>
+</li>
+<li><p>原根</p>
+</li>
+<li><p>快速傅里叶变换(FFT)</p>
+<ul>
+<li>离散傅里叶变换(DFT)</li>
+<li>离散傅里叶逆变换(IDFT)</li>
+<li>快速数论变换(NTT)</li>
+<li>快速傅里叶变换的优化版(FNTT)</li>
+<li>快速沃尔什变换(FWT)</li>
+<li>任意模数FFT(MTT)</li>
+<li>快速莫比乌斯变化(FMT)</li>
+</ul>
+</li>
+<li><p>拉格朗日</p>
+<ul>
+<li>拉格朗日插值</li>
+<li>拉格朗日乘子法</li>
+<li>拉格朗日四平方和定理</li>
+</ul>
+</li>
+<li><p>线性规划</p>
+</li>
+</ul>
+</details>
+<h2>动态规划</h2>
+<ul>
+<li>线性dp</li>
+<li>背包dp<ul>
+<li>01背包</li>
+<li>完全背包</li>
+<li>多重背包<ul>
+<li>二进制优化多重背包</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>区间dp</li>
+<li>状压dp</li>
+<li>树形dp<ul>
+<li>基环树dp</li>
+</ul>
+</li>
+<li>DAG上dp</li>
+<li>多维dp</li>
+<li>期望dp</li>
+<li>数位dp</li>
+<li>动态dp</li>
+<li>dp的优化<ul>
+<li>数据结构优化dp<ul>
+<li>线段树优化dp</li>
+<li>单调队列优化dp</li>
+</ul>
+</li>
+<li>斜率优化</li>
+<li>决策单调性</li>
+</ul>
+</li>
+</ul>
+<h2>树论</h2>
+<ul>
+<li>生成树</li>
+<li>LCA<ul>
+<li>树链剖分<ul>
+<li>树链剖分换根</li>
+</ul>
+</li>
+<li>倍增</li>
+<li>tarjan离线</li>
+</ul>
+</li>
+<li>虚树</li>
+<li>基环树</li>
+<li>树链剖分<ul>
+<li>重链剖分</li>
+<li>实链剖分</li>
+<li>长链剖分</li>
+</ul>
+</li>
+<li>dfs序<ul>
+<li>欧拉序</li>
+</ul>
+</li>
+<li>树分治<ul>
+<li>点分治<ul>
+<li>树的直径</li>
+<li>树的重心</li>
+</ul>
+</li>
+<li>动态点分治</li>
+<li>静态链分治</li>
+</ul>
+</li>
+<li>树上倍增</li>
+<li>树分块</li>
+<li>link-cut tree</li>
+<li>top tree</li>
+<li>zip tree</li>
+</ul>
+<h2>图论</h2>
+<ul>
+<li><p>最短路</p>
+<ul>
+<li>spfa<ul>
+<li>判断负环</li>
+<li>堆优化</li>
+</ul>
+</li>
+<li>dijkstra<ul>
+<li>堆优化</li>
+<li>线段树优化</li>
+</ul>
+</li>
+<li>floyed<ul>
+<li>倍增floyed</li>
+</ul>
+</li>
+<li>k短路</li>
+<li>差分约束</li>
+</ul>
+</li>
+<li><p>tarjan</p>
+<ul>
+<li>强连通分量(缩点)</li>
+<li>双连通分量</li>
+<li>割点,割边,桥</li>
+<li>2-sat</li>
+</ul>
+</li>
+<li><p>拓扑排序</p>
+</li>
+<li><p>二分图</p>
+<ul>
+<li>匈牙利</li>
+<li>网络流</li>
+<li>KM</li>
+</ul>
+</li>
+<li><p>网络流</p>
+<ul>
+<li>最大流(最小割)<ul>
+<li>dinic</li>
+<li>isap</li>
+</ul>
+</li>
+<li>最小费用最大流<ul>
+<li>spfa费用流</li>
+<li>zkw费用流</li>
+</ul>
+</li>
+<li>有上下界的网络流</li>
+<li>数据结构优化网络流</li>
+<li>分数规划</li>
+</ul>
+</li>
+<li><p>欧拉图</p>
+</li>
+<li><p>区间图与弦图</p>
+</li>
+<li><p>平面图与对偶图</p>
+</li>
+<li><p>最小树形图</p>
+</li>
+<li><p>仙人掌</p>
+<ul>
+<li>动态仙人掌</li>
+</ul>
+</li>
+</ul>
+<h2>STL</h2>
+<ul>
+<li>map<ul>
+<li>unordered_map</li>
+</ul>
+</li>
+<li>set<ul>
+<li>multiset</li>
+</ul>
+</li>
+<li>stack</li>
+<li>queue</li>
+<li>deque</li>
+<li>priority_queue</li>
+<li>vector</li>
+<li>list</li>
+<li>bitset</li>
+</ul>
+<h2>搜索</h2>
+<ul>
+<li>dfs</li>
+<li>bfs<ul>
+<li>双向bfs</li>
+</ul>
+</li>
+<li>A*</li>
+<li>IDA*</li>
+<li>DLX</li>
+<li>记忆化搜索</li>
+<li>剪枝</li>
+<li>模拟退火</li>
+<li>爬山算法</li>
+<li>随机化</li>
+</ul>
+<h2>计算几何</h2>
+<ul>
+<li>向量<ul>
+<li>点积</li>
+<li>叉积</li>
+</ul>
+</li>
+<li>凸包</li>
+<li>旋转卡壳</li>
+<li>扫描线</li>
+</ul>
+</details>
+<h2>其他算法与思想</h2>
+<ul>
+<li><p>二分</p>
+<ul>
+<li>三分</li>
+<li>整体二分</li>
+<li>01分数规划</li>
+</ul>
+</li>
+<li><p>倍增</p>
+</li>
+<li><p>贪心</p>
+</li>
+<li><p>枚举</p>
+</li>
+<li><p>暴力</p>
+</li>
+<li><p>模拟</p>
+</li>
+<li><p>分治</p>
+<ul>
+<li>cdq分治</li>
+<li>线段树分治</li>
+</ul>
+</li>
+<li><p>离散化</p>
+</li>
+<li><p>meet in the middle</p>
+</li>
+<li><p>排序</p>
+<ul>
+<li>快速排序</li>
+<li>归并排序<ul>
+<li>求逆序对</li>
+</ul>
+</li>
+<li>桶排</li>
+<li>基数排序</li>
+<li>计数排序</li>
+<li>堆排序</li>
+</ul>
+</li>
+<li><p>分块</p>
+</li>
+<li><p>随机化</p>
+</li>
+<li><p>前缀和</p>
+<ul>
+<li>二维前缀和</li>
+</ul>
+</li>
+<li><p>高精度</p>
+<ul>
+<li>压位</li>
+</ul>
+</li>
+<li><p>递推</p>
+<ul>
+<li>矩阵加速递推</li>
+</ul>
+</li>
+<li><p>位运算</p>
+</li>
+<li><p>莫队</p>
+<ul>
+<li>树上莫队</li>
+<li>带修莫队</li>
+</ul>
+</li>
+<li><p>打表</p>
+</li>
+<li><p>老司机树</p>
+</li>
+</ul>
+</div>
+    </div>
+</div>
+<div class="mdui-row-xs-3 article">
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black" id='pre_button'>
+            <i class="mdui-icon material-icons">arrow_back</i>
+            LG 2336 [SCOI2012]喵星球上的点名
+        </a>
+    </div>
+    <div class="mdui-col mdui-text-center">OI知识点思维导图</div>
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black mdui-float-right" id='nxt_button'>
+            LG 3809 【模板】后缀排序
+            <i class="mdui-icon material-icons">arrow_forward</i>
+        </a>
+    </div>
+</div>
+<div class="mdui-card" style="margin-top: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">
+            <i class="mdui-icon material-icons">comment</i>
+            评论
+        </div>
+    </div>
+<div class="mdui-card-content" id='comments'>
+    <center>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="nvl()">
+            valine
+        </button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="ngt()">
+            gitalk
+        </button>
+    </center>
+</div>
+<script>
+function nvl(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var valinejs=document.createElement('script');
+    valinejs.src="//cdn.jsdelivr.net/gh/xCss/Valine/dist/Valine.min.js";
+    valinejs.async=true;
+    valinejs.onload=function(){
+        new Valine({
+            el: '#comments',
+            placeholder: "说几句嘛qwq",
+            appId: "NLh0fhLRvD8gOWEC3vtOIRx5-gzGzoHsz",
+            appKey: "DSwqdjPFKAnO4CFMQypfkcB9",
+            path: window.location.pathname,
+        });
+    }
+    document.getElementsByTagName("head")[0].appendChild(valinejs);
+}
+</script>
+<script>
+function ngt(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var gtalkjs=document.createElement('script');
+    gtalkjs.src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js";
+    gtalkjs.async=true;
+    gtalkjs.onload=function(){
+        const gitalk=new Gitalk({
+            clientID:'054902ee1548e6fe427e',
+            clientSecret:'b31fac2b407311ca7e6673ab84727ae9562c69ba',
+            repo:'zcmimi.github.io',
+            owner:'zcmimi',
+            admin: "zcmimi",
+            id:location.pathname,
+            distractionFreeMode:False
+        });
+        gitalk.render('comments');
+    }
+    var gtalkcss=document.createElement('link');
+    gtalkcss.href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css";
+    gtalkcss.type='text/css';
+    gtalkcss.rel='stylesheet';
+    document.getElementsByTagName("head")[0].appendChild(gtalkjs);
+    document.getElementsByTagName("head")[0].appendChild(gtalkcss);
+}
+</script>
+</div>
+    </div>
+</body>
+<!--top-->
+<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-fab-fixed mdui-fab-hide" id="totop" onclick="totop()" style="z-index: 99999;">
+    <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+</button>
+<!--top end-->
+<footer class="mdui-m-t-5">
+    <div class="mdui-card">
+        <div class="mdui-card-content mdui-p-a-5">
+            <div class="mdui-container">
+                <div class="mdui-row-sm-3">
+                    <div class="mdui-col">
+                        <div class="mdui-row">
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://space.bilibili.com/110897068">
+                                        <i class="mdui-icon mqii mqii-bilibili mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://github.com/zcmimi">
+                                        <i class="mdui-icon mqii mqii-github mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://twitter.com/zc_mimi">
+                                        <i class="mdui-icon mqii mqii-twitter mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://www.zhihu.com/people/zcmimi">
+                                        <i class="mdui-icon mqii mqii-zhihu mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mdui-col mdui-text-center">
+                        <div>Copyright ©&nbsp;2019-2020&nbsp;zcmimi's blog</div>
+                        <div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+                        <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/busuanzi.js" onload="
+                            wonld.append(busuanzi);
+                            document.addEventListener('pjax:complete',busuanzi);
+                        "></script>
+
+                        <div>last build: 2020-07-30T15:42:15Z</div>
+                    </div>
+                    <div class="mdui-col mdui-text-center mdui-typo">
+                        <div>Powered by <a href="https://github.com/zcmimi/py-blog">py-blog</a></div>
+                        <div>Theme material</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mdui-dialog" id="search_dialog">
+    <div class="mdui-dialog-title">Search</div>
+    <div class="mdui-dialog-content">
+        <div class="mdui-textfield">
+            <i class="mdui-icon material-icons">search</i>
+            <input id="search_input" class="mdui-textfield-input" placeholder="搜索">
+        </div>
+        <div id="search_result" class="mdui-list"></div>
+    </div>
+</div>
+<script async src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/worker_search.js'></script>
+<script>
+document.getElementById('search_input').onchange=function(){
+    search("https://blog_search.zcmimi.workers.dev");
+}
+</script>
+<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-shadow-2" id="drawer">
+    <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons mdui-text mdui-text-color-black">home</i>
+            <a href="/" class="mdui-list-item-content">zcmimi's blog</a>
+        </li>
+        <li><center><img src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp" width="95%" height="95%" alt='avatar'></img></center></li>
+            <li class='mdui-subheader'>Catch me</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:dodgerblue'">email</i>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fwUcIBIWEhY-Dg5RHBAS" target="_blank" class="mdui-list-item-content">给我写信</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#66ccff'"></i>
+                    <a href="https://t.me/zcmimi" target="_blank" class="mdui-list-item-content">电报</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-twitter" style='color:rgba(29,161,242,1.00)'"></i>
+                    <a href="https://twitter.com/zc_mimi" target="_blank" class="mdui-list-item-content">推特</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-bilibili" style='color:#F06292'"></i>
+                    <a href="https://space.bilibili.com/110897068" target="_blank" class="mdui-list-item-content">哔哩哔哩</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-netease-cloud-music" style='color:red'"></i>
+                    <a href="https://music.163.com/#/user/home?id=507163653" target="_blank" class="mdui-list-item-content">网易云音乐</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-zhihu" style='color:#0084ff'"></i>
+                    <a href="https://www.zhihu.com/people/zcmimi" target="_blank" class="mdui-list-item-content">知乎</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <img class="mdui-list-item-icon" src="https://www.luogu.com.cn/favicon.ico" alt>
+                    <a href="https://luogu.com.cn/user/36532" target="_blank" class="mdui-list-item-content">洛谷</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-github" style='color:black'"></i>
+                    <a href="https://github.com/zcmimi" target="_blank" class="mdui-list-item-content">Github</a>
+                </li>
+            <li class='mdui-subheader'>Links</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#bbb'"></i>
+                    <a href="https://travellings.now.sh/" target="_blank" class="mdui-list-item-content">Traveling</a>
+                </li>
+            <li class='mdui-subheader'>Pages</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">bookmark_border</i>
+                    <a href="/tags" target="_blank" class="mdui-list-item-content">标签云</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">book</i>
+                    <a href="/categories" target="_blank" class="mdui-list-item-content">分类</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">link</i>
+                    <a href="/links" target="_blank" class="mdui-list-item-content">友链</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">build</i>
+                    <a href="/tools" target="_blank" class="mdui-list-item-content">工具集</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">person</i>
+                    <a href="/about" target="_blank" class="mdui-list-item-content">关于我</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">rss_feed</i>
+                    <a href="/atom.xml" target="_blank" class="mdui-list-item-content">订阅</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">list</i>
+                    <a href="/sitemap.xml" target="_blank" class="mdui-list-item-content">站点地图</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">comment</i>
+                    <a href="https://nlh0fhlrsgij.leanapp.cn" target="_blank" class="mdui-list-item-content">评论管理</a>
+                </li>
+    </ul>
+</div>
+
+
+<div id='musiclist'></div>
+<style>.aplayer,.aplayer-body,.aplayer-pic,.aplayer-button{z-index: 9999999 !important;}</style>
+<script>
+function music_on(){
+    pjax_on(1);
+    var x=document.getElementById('musiclist');
+    x.innerHTML="";
+    mdui.snackbar({message:'歌单加载中,请稍等2-10s'});
+    var hl=document.createElement('link');
+    hl.href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css";
+    hl.type='text/css';
+    hl.rel='stylesheet';
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js";
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js";
+    x.appendChild(hl);
+
+    hl=document.createElement('meting-js');
+    hl.setAttribute('id','765727960');
+    hl.setAttribute('fixed','true');
+    hl.setAttribute('server','netease');
+    hl.setAttribute('type','playlist');
+    hl.setAttribute('order','random');
+    hl.setAttribute('theme','#f7a4b9');
+    x.appendChild(hl);
+}
+</script>
+</html>

@@ -1,0 +1,802 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>网络流24题 - zcmimi's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' itemprop="description" content="">
+    <meta name="keywords" content="zcmimi">
+    <meta property="og:url" content="https://blog.zcmimi.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="zcmimi's blog">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="https://blog.zcmimi.top">
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "publisher":{
+            "@type":"Organization",
+            "name":"zcmimi's blog",
+            "logo":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "url":"https://blog.zcmimi.top",
+        "image":{
+            "@type":"ImageObject",
+            "url":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://blog.zcmimi.top"
+        },
+        "description":""
+    }</script>
+<script>
+wonld=Object.create({
+    list:[],
+    append:function(e){this.list.push(e);},
+    excute:function(){
+        for(var i=0;i<this.list.length;++i)
+            this.list[i]();
+    }
+});
+window.onload=function(){wonld.excute();};
+</script>
+    <link rel="dns-prefetch" href="https://blog.zcmimi.top">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/css/mdui.min.css" type="text/css">
+    <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="/assets/theme/origin.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/icon/mqii/mqii.css" type="text/css">
+    <!--custom--><link rel="stylesheet" href="/custom.css" type="text/css">
+    <!--highlight-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+    <!--highlight end-->
+    <!-- markdown katex-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/markdown.min.css" type="text/css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css" type="text/css">
+    <script async src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <!-- markdown katex end-->
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <script async src="//cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script defer src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/bundle.min.js'></script>
+</head>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-blue">
+    <div class="mdui-progress" id='loading-progress' style="position: fixed;top:0;z-index: 999999;"><div class="mdui-progress-indeterminate"></div></div>
+    <div id="theme_css"></div>
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset mdui-color-white mdui-shadow-1">
+        <div class="mdui-toolbar mdui-color-theme">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="drawer.toggle();" mdui-tooltip="{content: '菜单'}">
+                <i class="mdui-icon material-icons">menu</i>
+            </button>
+            <a href="/" class="mdui-typo-title">zcmimi's blog</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-row" id='toolbar-menu'>
+                <a href="https://travellings.now.sh/" target="_blank" class="mdui-col mdui-text-color-black">Traveling</a>
+                <a href="/about" target="_blank" class="mdui-col mdui-text-color-black">关于我</a>
+                <a href="/categories" target="_blank" class="mdui-col mdui-text-color-black">分类</a>
+                <a href="/links" target="_blank" class="mdui-col mdui-text-color-black">友链</a>
+                <a href="/tools" target="_blank" class="mdui-col mdui-text-color-black">工具集</a>
+                <a href="/tags" target="_blank" class="mdui-col mdui-text-color-black">标签云</a>
+            </div><script>if(document.body.clientWidth<1078)document.getElementById('toolbar-menu').hidden=1;</script>
+            <button onclick="music_on();document.getElementById('music_button').hidden=1" id='music_button' class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '是否来点音乐?'}">
+                <i class="mdui-icon material-icons">queue_music</i>
+            </button>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '切换主题'}" mdui-menu="{target: '#theme_menu',align: 'right',covered: false}">
+                <i class="mdui-icon material-icons">view_quilt</i>
+            </button>
+            <ul class="mdui-menu" id="theme_menu" style="width: fit-content;">
+                <li class="mdui-menu-item" mdui-tooltip="{content: '开启/关闭 pjax'}"><a onclick="pjax_on()" id='pjax_button'>pjax_on</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '回归原本'}"><a onclick="theme('day')">日间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '晚上要保护眼睛哦'}"><a onclick="theme('night')">夜间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '满足你的少女心吧'}"><a onclick="theme('pink')">粉红</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '没什么,就是淡蓝色'}"><a onclick="theme('blue')">粉蓝</a></li>
+            </ul>
+            <button onclick="search_dialog.open();document.getElementById('search_input').focus();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}">
+                <i class="mdui-icon material-icons">search</i>
+            </button>
+            <button id='toc_button' class="mdui-btn mdui-btn-icon mdui-ripple" onclick="toc_drawer.toggle();" mdui-tooltip="{content: '目录'}" hidden>
+                <i class="mdui-icon material-icons">format_list_numbered</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-drawer-right mdui-shadow-2" id="toc_drawer" hidden>
+        <ul class="mdui-list" id="toc"></ul>
+    </div>
+
+    <div class="mdui-container">
+        <div id='page_typ' hidden>article</div>
+<div class="mdui-card article">
+    <div class="mdui-card-primary">
+        <a href="#" class="mdui-card-primary-title">网络流24题</a>
+        <div class="mdui-card-primary-subtitle">        <a href="/tags/网络流" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">网络流</span>
+        </a>
+        <a href="/tags/建图" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">建图</span>
+        </a>
+</div>
+    </div>
+    <div class="mdui-card-header">
+        <img class="mdui-card-header-avatar" src="    https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp
+" alt='avatar'>
+        <div class="mdui-card-header-title">zcmimi</div>
+        <div class="mdui-card-header-subtitle">2019-03-06 00:03:14</div>
+        <div class="mdui-card-menu">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '文章分类'}" mdui-menu="{target:'#categories',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">bookmark</i>
+            </button>
+            <ul class="mdui-menu" id="categories">
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/刷题记录" class="mdui-ripple">
+                            刷题记录
+                        </a>
+                    </li>
+            </ul>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '本文阅读量'}" mdui-menu="{target:'#visit_counter',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">remove_red_eye</i>
+            </button>
+            <ul class="mdui-menu" id="visit_counter">
+                <li class="mdui-menu-item mdui-ripple">
+                    <div id="busuanzi_container_page_pv">
+                        <center>本文总阅读量<span id="busuanzi_value_page_pv"></span>次</center>
+                    </div>
+                </li>
+            </ul>
+<button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '分享'}" mdui-menu="{target:'#share_menu',align:'right',covered: false}">
+    <i class="mdui-icon material-icons">share</i>
+</button>
+<ul class="mdui-menu" id="share_menu" style="width: fit-content;">
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_weibo" href="https://service.weibo.com/share/share.php?appkey=&title=网络流24题 - zcmimi's blog&url=https://blog.zcmimi.top/posts/网络流24题&pic=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&searchPic=false&style=simple" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-weibo"></i>分享到微博
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_qq" href="https://connect.qq.com/widget/shareqq/index.html?site=zcmimi's blog&title=网络流24题 - zcmimi's blog&summary=&pics=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&url=https://blog.zcmimi.top/posts/网络流24题" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-qq_filled"></i>分享到QQ
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_twitter" href="https://twitter.com/intent/tweet?text=网络流24题 - zcmimi's blog&url=https://blog.zcmimi.top/posts/网络流24题" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-twitter"></i>分享到Twitter
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_copy" onclick="copylink()" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">link</i>复制链接
+        </a>
+    </li>
+</ul>        </div>
+    </div>
+    <div class="mdui-card-content">
+        
+        <div id="md-body" class="md-body"><p><a href="https://www.luogu.org/problemnew/lists?name=&amp;orderitem=difficulty&amp;tag=332&amp;content=0&amp;type=">题目地址：</a></p>
+<p>网络流24题真的好有质量~\ ($\ge $▽$\le $ ) /~！</p>
+<h1>进度： $\frac{7}{24}$</h1>
+<h2>1. <a href="https://www.luogu.org/problemnew/show/P2756">飞行员配对方案问题</a></h2>
+<p>二分图模板</p>
+<h3>匈牙利（待填坑）:</h3>
+<h3><a href="/2019/03/04/%E5%90%84%E7%B1%BB%E6%A8%A1%E6%9D%BF/#dinic%EF%BC%9A%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98">网络流：</a></h3>
+<h2>2.<a href="https://www.luogu.org/problemnew/show/P4016">负载平衡问题</a></h2>
+<p>等同于<a href="https://www.luogu.org/problemnew/show/P2512">[HAOI2008]糖果传递</a> ,懒,直接搬<a href="https://www.luogu.org/blog/five20/solution-p4016">题解</a></p>
+<p>也有费用流做法(待填坑)</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define il __inline__ __attribute__ ((always_inline))
+#define rg register
+#define ll long long
+#define Fur(i,x,y) for(rg int i=x;i&lt;=y;i++)
+using namespace std;
+namespace IO{const char* ln=&quot;\n&quot;;const int str=1&lt;&lt;20;struct IN{char buf[str],*s,*t;bool _;IN():s(buf),t(buf),_(0){}il char gc(){return s==t&amp;&amp;((t=(s=buf)+fread(buf,1,str,stdin))==s)?EOF:(*s++);}IN&amp;operator&gt;&gt;(char&amp;ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)_=1;else ch=c;return *this;}IN&amp; operator&gt;&gt;(char* ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)return _=1,*this;*ch=c;ch++;while((c=gc())!=EOF&amp;&amp;!isspace(c))*ch=c,ch++;if(c==EOF)_=1;return *this;}template&lt;typename T&gt;IN&amp;operator&gt;&gt;(T&amp;x){if(_)return *this;char c=gc();bool ff=0;while(c!=EOF&amp;&amp;(c&lt;'0'||c&gt;'9'))ff^=(c=='-'),c=gc();if(c==EOF){_=1;return *this;}x=0;while(c!=EOF&amp;&amp;'0'&lt;=c&amp;&amp;c&lt;='9')x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-48,c=gc();if(c==EOF)_=1;if(ff)x=-x;return *this;}}in;struct OUT{char buf[str],*s,*t;OUT():s(buf),t(buf+str){}~OUT(){fwrite(buf,1,s-buf,stdout);}void pt(char c){(s==t)?(fwrite(s=buf,1,str,stdout),*s++=c):(*s++=c);}OUT&amp;operator&lt;&lt;(const char*s){while(*s)pt(*s++);return *this;}OUT&amp;operator&lt;&lt;(char*s){while(*s)pt(*s++);return *this;}template&lt;typename T&gt;OUT&amp;operator&lt;&lt;(T x){if(!x)return pt('0'),*this;if(x&lt;0)pt('-'),x=-x;char a[30],t=0;while(x)a[t++]=x%10,x/=10;while(t--)pt(a[t]+'0');return *this;}}out;}using namespace IO;
+#define N 111
+int n,a[N],t;
+int main(){
+    in&gt;&gt;n;ll s=0;
+    Fur(i,1,n)in&gt;&gt;a[i],s+=a[i];
+    s/=n;
+    Fur(i,1,n)a[i]=a[i-1]-a[i]+s;
+    sort(a+1,a+n+1);
+    t=a[(n&gt;&gt;1)+1];s=0;
+    Fur(i,1,n)s+=abs(a[i]-t);
+    out&lt;&lt;s&lt;&lt;ln;
+}
+</code></pre>
+<h2>3.<a href="https://www.luogu.org/problemnew/show/P4011">孤岛营救问题</a></h2>
+<p>背包+状态压缩</p>
+<p>N很小</p>
+<p>开三维保存状态$d[x][y][s]$,走到$x,y$,拥有钥匙状态为$s$的最小花费是多少。</p>
+<p>$map[x_1][y_1][x_2][y_2]$存墙</p>
+<p><strong>坑点：</strong></p>
+<ol>
+<li>一个点可以放多个钥匙</li>
+<li>初始点可以放钥匙</li>
+</ol>
+<pre><code class="language-cpp">#include&lt;cstdio&gt;
+#include&lt;ctype.h&gt;
+#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+#pragma GCC target(&quot;sse,sse2,avx,avx2,popcnt,tune=native&quot;)
+#define il __inline__ __attribute__ ((always_inline))
+#define rg register
+#define Fur(i,x,y) for(rg int i=x;i&lt;=y;i++)
+using namespace std;
+namespace IO{const char* ln=&quot;\n&quot;;const int str=1&lt;&lt;20;struct IN{char buf[str],*s,*t;bool _;IN():s(buf),t(buf),_(0){}il char gc(){return s==t&amp;&amp;((t=(s=buf)+fread(buf,1,str,stdin))==s)?EOF:(*s++);}IN&amp;operator&gt;&gt;(char&amp;ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)_=1;else ch=c;return *this;}IN&amp; operator&gt;&gt;(char* ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)return _=1,*this;*ch=c;ch++;while((c=gc())!=EOF&amp;&amp;!isspace(c))*ch=c,ch++;if(c==EOF)_=1;return *this;}template&lt;typename T&gt;IN&amp;operator&gt;&gt;(T&amp;x){if(_)return *this;char c=gc();bool ff=0;while(c!=EOF&amp;&amp;(c&lt;'0'||c&gt;'9'))ff^=(c=='-'),c=gc();if(c==EOF){_=1;return *this;}x=0;while(c!=EOF&amp;&amp;'0'&lt;=c&amp;&amp;c&lt;='9')x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-48,c=gc();if(c==EOF)_=1;if(ff)x=-x;return *this;}}in;struct OUT{char buf[str],*s,*t;OUT():s(buf),t(buf+str){}~OUT(){fwrite(buf,1,s-buf,stdout);}void pt(char c){(s==t)?(fwrite(s=buf,1,str,stdout),*s++=c):(*s++=c);}OUT&amp;operator&lt;&lt;(const char*s){while(*s)pt(*s++);return *this;}OUT&amp;operator&lt;&lt;(char*s){while(*s)pt(*s++);return *this;}template&lt;typename T&gt;OUT&amp;operator&lt;&lt;(T x){if(!x)return pt('0'),*this;if(x&lt;0)pt('-'),x=-x;char a[30],t=0;while(x)a[t++]=x%10,x/=10;while(t--)pt(a[t]+'0');return *this;}}out;}using namespace IO;
+#define N 12
+int n,m,k,P,S;
+int d[N][N][1&lt;&lt;N],wa[N][N][N][N],a[N][N][N];
+int dx[4]={0,1,0,-1},dy[4]={1,0,-1,0},p[1000001],q[1000001],o[1000001];
+int bfs(){
+    int h=0,t=1,x,y,s,nx,ny,ns;
+    p[0]=1;q[0]=1;o[0]=1;d[1][1][1]=1;
+    Fur(i,1,a[1][1][0])d[1][1][1]|=(1&lt;&lt;a[1][1][i]);
+    while(h&lt;t){
+        x=p[h];y=q[h];s=o[h++];
+        Fur(i,0,3){
+            nx=x+dx[i];ny=y+dy[i];
+            if(nx&lt;1||ny&lt;1||nx&gt;n||ny&gt;m||!(s&amp;(1&lt;&lt;wa[x][y][nx][ny])))continue;
+            ns=s;Fur(j,1,a[nx][ny][0])ns|=(1&lt;&lt;a[nx][ny][j]);
+            if(!d[nx][ny][ns]){
+                d[nx][ny][ns]=d[x][y][s]+1;
+                if(nx==n&amp;&amp;ny==m)return d[x][y][s];
+                p[t]=nx,q[t]=ny,o[t++]=ns;
+            }
+        }
+    }
+    return -1;
+}
+int main(){
+    in&gt;&gt;n&gt;&gt;m&gt;&gt;P&gt;&gt;k;
+    int x,y,xx,yy,t;
+    Fur(i,1,k){
+        in&gt;&gt;x&gt;&gt;y&gt;&gt;xx&gt;&gt;yy&gt;&gt;t;
+        if(!t)t=P+1;
+        wa[xx][yy][x][y]=wa[x][y][xx][yy]=t;
+    }
+    in&gt;&gt;S;
+    Fur(i,1,S)in&gt;&gt;x&gt;&gt;y&gt;&gt;a[x][y][++a[x][y][0]];
+    out&lt;&lt;bfs()&lt;&lt;ln;
+}
+</code></pre>
+<h2>4. <a href="https://www.luogu.org/problemnew/show/P2765">魔术球问题</a></h2>
+<p>转换的思路很巧妙。</p>
+<p>考虑一个点：</p>
+<ol>
+<li>放在一根新的柱子上</li>
+<li>放在与它加起来是完全平方数的点上</li>
+</ol>
+<p>这样一看,如果一个柱子可以以某个点开始,也可以以某个点结束,那么一个点$x$就要拆成两个点$(x,x')$</p>
+<p>对于1,我们把源点与$x$连一条边权为1的边,把$x'$与汇点连一条边权为1的边</p>
+<p>对于2,我们把能与$x$组成平方数的点与$x’​$连一条边。</p>
+<p>当连完边后最大流无法增广时说明得新建一根柱子,如果柱子数$&gt;n$那就说明无法继续添加数了。</p>
+<p>关于输出,就自己看着代码意会意会吧$Q\omega Q$</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+#pragma GCC target(&quot;sse,sse2,avx,avx2,popcnt,tune=native&quot;)
+#define il __inline__ __attribute__ ((always_inline))
+#define rg register
+#define MB template &lt;class T&gt;
+#define Fur(i,x,y) for(rg int i=x;i&lt;=y;i++)
+#define clr(x,y) memset(x,y,sizeof(x))
+#define inf 2000000000
+#define fl(i,x) for(rg int i=head[x],to;to=e[i].to,i;i=e[i].nxt)
+MB T MIN(T x,T y){return x&lt;=y?x:y;}
+using namespace std;
+namespace IO{const char* ln=&quot;\n&quot;;const int str=1&lt;&lt;20;struct IN{char buf[str],*s,*t;bool _;IN():s(buf),t(buf),_(0){}il char gc(){return s==t&amp;&amp;((t=(s=buf)+fread(buf,1,str,stdin))==s)?EOF:(*s++);}IN&amp;operator&gt;&gt;(char&amp;ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)_=1;else ch=c;return *this;}IN&amp; operator&gt;&gt;(char* ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)return _=1,*this;*ch=c;ch++;while((c=gc())!=EOF&amp;&amp;!isspace(c))*ch=c,ch++;if(c==EOF)_=1;return *this;}template&lt;typename T&gt;IN&amp;operator&gt;&gt;(T&amp;x){if(_)return *this;char c=gc();bool ff=0;while(c!=EOF&amp;&amp;(c&lt;'0'||c&gt;'9'))ff^=(c=='-'),c=gc();if(c==EOF){_=1;return *this;}x=0;while(c!=EOF&amp;&amp;'0'&lt;=c&amp;&amp;c&lt;='9')x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-48,c=gc();if(c==EOF)_=1;if(ff)x=-x;return *this;}}in;struct OUT{char buf[str],*s,*t;OUT():s(buf),t(buf+str){}~OUT(){fwrite(buf,1,s-buf,stdout);}void pt(char c){(s==t)?(fwrite(s=buf,1,str,stdout),*s++=c):(*s++=c);}OUT&amp;operator&lt;&lt;(const char*s){while(*s)pt(*s++);return *this;}OUT&amp;operator&lt;&lt;(char*s){while(*s)pt(*s++);return *this;}template&lt;typename T&gt;OUT&amp;operator&lt;&lt;(T x){if(!x)return pt('0'),*this;if(x&lt;0)pt('-'),x=-x;char a[30],t=0;while(x)a[t++]=x%10,x/=10;while(t--)pt(a[t]+'0');return *this;}}out;}using namespace IO;
+#define N 10010
+int n,m,st,ed,cnt;
+int head[N],d[N],q[N],top[N],nex[N];
+struct edge{int to,nxt,w;}e[100011];
+void add(int x,int y,int w){
+    e[++cnt].to=y;e[cnt].w=w;e[cnt].nxt=head[x];head[x]=cnt;
+    e[++cnt].to=x;e[cnt].w=0;e[cnt].nxt=head[y];head[y]=cnt;
+}
+bool bfs(){
+    int h=0,t=1,x;
+    clr(d,0);d[q[h]=st]=1;
+    while(h&lt;t){
+        x=q[h++];if(x==ed)return 1;
+        fl(i,x)if(e[i].w&amp;&amp;!d[to]){
+            d[to]=d[x]+1;
+            q[t++]=to;
+        }
+    }
+    return 0;
+}
+int dfs(int x,int mf){
+    if(x==ed)return mf;
+    int us=0,w;
+    fl(i,x)
+    if(e[i].w&amp;&amp;d[to]==d[x]+1){
+        w=dfs(to,MIN(mf-us,e[i].w));
+        e[i].w-=w;e[i^1].w+=w;
+        us+=w;if(to!=ed)nex[x&gt;&gt;1]=to&gt;&gt;1;
+        if(us==mf)return mf;
+    }
+    if(!us)d[x]=-1;
+    return us;
+}
+int work(){int ans=0;while(bfs())ans+=dfs(st,inf);return ans;}
+bool v[N];
+int main(){
+    in&gt;&gt;n;
+    st=N-2;ed=N-1;
+    int d=0,tot=0,t;
+    while(tot&lt;=n){
+        ++d;
+        add(st,d&lt;&lt;1,1);add(d&lt;&lt;1|1,ed,1);
+        for(rg int i=sqrt(d)+1;i*i&lt;(d&lt;&lt;1);i++)add((i*i-d)&lt;&lt;1,d&lt;&lt;1|1,1);
+        if(!work())top[++tot]=d;
+    }
+    out&lt;&lt;(--d)&lt;&lt;ln;
+    Fur(i,1,n)
+    if(!v[top[i]]){
+        v[t=top[i]]=1;
+        while(t)out&lt;&lt;t&lt;&lt;&quot; &quot;,v[t=nex[t]]=1;
+        out&lt;&lt;ln;
+    }
+}
+</code></pre>
+<h2>5. <a href="https://www.luogu.org/problemnew/show/P2761">软件补丁问题</a></h2>
+<p>最短路+状态压缩</p>
+<p>将每个补丁状态压缩,然后跑最短路。</p>
+<p>因为边太多,所以枚举就可以了</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+#pragma GCC target(&quot;sse,sse2,avx,avx2,popcnt,tune=native&quot;)
+#define il __inline__ __attribute__ ((always_inline))
+#define rg register
+#define MB template &lt;class T&gt;
+#define Fur(i,x,y) for(rg int i=x;i&lt;=y;i++)
+#define clr(x,y) memset(x,y,sizeof(x))
+#define inf 2000000000
+#define fl(i,x) for(rg int i=head[x],to;to=e[i].to,i;i=e[i].nxt)
+MB T MIN(T x,T y){return x&lt;=y?x:y;}
+using namespace std;
+namespace IO{const char* ln=&quot;\n&quot;;const int str=1&lt;&lt;20;struct IN{char buf[str],*s,*t;bool _;IN():s(buf),t(buf),_(0){}il char gc(){return s==t&amp;&amp;((t=(s=buf)+fread(buf,1,str,stdin))==s)?EOF:(*s++);}IN&amp;operator&gt;&gt;(char&amp;ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)_=1;else ch=c;return *this;}IN&amp; operator&gt;&gt;(char* ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)return _=1,*this;*ch=c;ch++;while((c=gc())!=EOF&amp;&amp;!isspace(c))*ch=c,ch++;if(c==EOF)_=1;return *this;}template&lt;typename T&gt;IN&amp;operator&gt;&gt;(T&amp;x){if(_)return *this;char c=gc();bool ff=0;while(c!=EOF&amp;&amp;(c&lt;'0'||c&gt;'9'))ff^=(c=='-'),c=gc();if(c==EOF){_=1;return *this;}x=0;while(c!=EOF&amp;&amp;'0'&lt;=c&amp;&amp;c&lt;='9')x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-48,c=gc();if(c==EOF)_=1;if(ff)x=-x;return *this;}}in;struct OUT{char buf[str],*s,*t;OUT():s(buf),t(buf+str){}~OUT(){fwrite(buf,1,s-buf,stdout);}void pt(char c){(s==t)?(fwrite(s=buf,1,str,stdout),*s++=c):(*s++=c);}OUT&amp;operator&lt;&lt;(const char*s){while(*s)pt(*s++);return *this;}OUT&amp;operator&lt;&lt;(char*s){while(*s)pt(*s++);return *this;}template&lt;typename T&gt;OUT&amp;operator&lt;&lt;(T x){if(!x)return pt('0'),*this;if(x&lt;0)pt('-'),x=-x;char a[30],t=0;while(x)a[t++]=x%10,x/=10;while(t--)pt(a[t]+'0');return *this;}}out;}using namespace IO;
+#define N 22
+int n,m;
+int d[1&lt;&lt;N],b1[101],b2[101],f1[101],f2[101],c[101];
+struct cmp{bool operator()(int x,int y){return d[x]&gt;d[y];}};
+priority_queue&lt;int,vector&lt;int&gt;,cmp&gt;q;
+bool v[1&lt;&lt;N];
+void spfa(){
+    clr(d,126);
+    d[(1&lt;&lt;n)-1]=0;q.push((1&lt;&lt;n)-1);
+    while(!q.empty()){
+        rg int x=q.top(),to;q.pop();v[x]=0;
+        Fur(i,1,m)
+        if((b1[i]&amp;x)==b1[i]&amp;&amp;!(b2[i]&amp;x)){
+            to=(x&amp;(~f1[i]))|f2[i];
+            if(d[x]+c[i]&lt;d[to]){
+                d[to]=d[x]+c[i];
+                if(!v[to])q.push(to),v[to]=1;
+            }
+        }
+    }
+    if(d[0]==2122219134)d[0]=0;
+}
+int main(){
+    in&gt;&gt;n&gt;&gt;m;
+    char s1[N],s2[N];
+    Fur(i,1,m){
+        in&gt;&gt;c[i]&gt;&gt;s1&gt;&gt;s2;
+        Fur(j,0,n-1){
+            if(s1[j]=='+')b1[i]|=(1&lt;&lt;j);
+            if(s1[j]=='-')b2[i]|=(1&lt;&lt;j);
+            if(s2[j]=='-')f1[i]|=(1&lt;&lt;j);
+            if(s2[j]=='+')f2[i]|=(1&lt;&lt;j);
+        }
+    }
+    spfa();
+    out&lt;&lt;d[0]&lt;&lt;ln;
+}
+</code></pre>
+<h2>6. <a href="https://www.luogu.org/problemnew/show/P3254">圆桌问题</a></h2>
+<p>和飞行员配对方案问题差不多嘛。</p>
+<p>也是网络流二分图,再加个输出。</p>
+<p>大概的套路就是匹配的直接都连边1,然后源点汇点什么的按题意写就可以了</p>
+<p>输出的就是有连边的,而且这条边已经用过了（e[i^1])）。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+#pragma GCC target(&quot;sse,sse2,avx,avx2,popcnt,tune=native&quot;)
+#define il __inline__ __attribute__ ((always_inline))
+#define rg register
+#define MB template &lt;class T&gt;
+#define Fur(i,x,y) for(rg int i=x;i&lt;=y;i++)
+#define clr(x,y) memset(x,y,sizeof(x))
+#define inf 2000000000
+#define fl(i,x) for(rg int i=head[x],to;to=e[i].to,i;i=e[i].nxt)
+MB T MIN(T x,T y){return x&lt;=y?x:y;}
+using namespace std;
+namespace IO{const char* ln=&quot;\n&quot;;const int str=1&lt;&lt;20;struct IN{char buf[str],*s,*t;bool _;IN():s(buf),t(buf),_(0){}il char gc(){return s==t&amp;&amp;((t=(s=buf)+fread(buf,1,str,stdin))==s)?EOF:(*s++);}IN&amp;operator&gt;&gt;(char&amp;ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)_=1;else ch=c;return *this;}IN&amp; operator&gt;&gt;(char* ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)return _=1,*this;*ch=c;ch++;while((c=gc())!=EOF&amp;&amp;!isspace(c))*ch=c,ch++;if(c==EOF)_=1;return *this;}template&lt;typename T&gt;IN&amp;operator&gt;&gt;(T&amp;x){if(_)return *this;char c=gc();bool ff=0;while(c!=EOF&amp;&amp;(c&lt;'0'||c&gt;'9'))ff^=(c=='-'),c=gc();if(c==EOF){_=1;return *this;}x=0;while(c!=EOF&amp;&amp;'0'&lt;=c&amp;&amp;c&lt;='9')x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-48,c=gc();if(c==EOF)_=1;if(ff)x=-x;return *this;}}in;struct OUT{char buf[str],*s,*t;OUT():s(buf),t(buf+str){}~OUT(){fwrite(buf,1,s-buf,stdout);}void pt(char c){(s==t)?(fwrite(s=buf,1,str,stdout),*s++=c):(*s++=c);}OUT&amp;operator&lt;&lt;(const char*s){while(*s)pt(*s++);return *this;}OUT&amp;operator&lt;&lt;(char*s){while(*s)pt(*s++);return *this;}template&lt;typename T&gt;OUT&amp;operator&lt;&lt;(T x){if(!x)return pt('0'),*this;if(x&lt;0)pt('-'),x=-x;char a[30],t=0;while(x)a[t++]=x%10,x/=10;while(t--)pt(a[t]+'0');return *this;}}out;}using namespace IO;
+#define N 1001
+int n,m,st,ed,cnt=1;
+int head[N],d[N],q[N];
+struct edge{int to,nxt,w;}e[1000011];
+void add(int x,int y,int w){
+    e[++cnt].to=y;e[cnt].w=w;e[cnt].nxt=head[x];head[x]=cnt;
+    e[++cnt].to=x;e[cnt].w=0;e[cnt].nxt=head[y];head[y]=cnt;
+}
+bool bfs(){
+    int h=0,t=1,x;
+    clr(d,0);d[q[h]=st]=1;
+    while(h&lt;t){
+        x=q[h++];if(x==ed)return 1;
+        fl(i,x)if(e[i].w&amp;&amp;!d[to]){
+            d[to]=d[x]+1;
+            q[t++]=to;
+        }
+    }
+    return 0;
+}
+int dfs(int x,int mf){
+    if(x==ed)return mf;
+    int us=0,w;
+    fl(i,x)
+    if(e[i].w&amp;&amp;d[to]==d[x]+1){
+        w=dfs(to,MIN(mf-us,e[i].w));
+        e[i].w-=w;e[i^1].w+=w;
+        us+=w;
+        if(us==mf)return mf;
+    }
+    if(!us)d[x]=-1;
+    return us;
+}
+int main(){
+    in&gt;&gt;m&gt;&gt;n;
+    st=N-2;ed=N-1;
+    int x,sum=0;
+    Fur(i,1,m){
+        in&gt;&gt;x,add(st,i,x),sum+=x;
+        Fur(j,m+1,m+n)add(i,j,1);
+    }
+    Fur(i,m+1,m+n)in&gt;&gt;x,add(i,ed,x);
+    while(bfs())sum-=dfs(st,inf);
+    if(sum)out&lt;&lt;&quot;0\n&quot;;
+    else{
+        out&lt;&lt;&quot;1\n&quot;;
+        Fur(i,1,m){
+            fl(j,i)if(to!=st&amp;&amp;to!=ed&amp;&amp;e[j^1].w)out&lt;&lt;to-m&lt;&lt;&quot; &quot;;
+            out&lt;&lt;ln;
+        }
+    }
+}
+</code></pre>
+<h2>7.<a href="https://www.luogu.org/problemnew/show/P2763">试题库问题</a></h2>
+<p>也是水题吧。</p>
+<p>用网络流可能比二分图容易写点。</p>
+<p>套路和上一道一样,稍微改一下就可以了。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+#pragma GCC target(&quot;sse,sse2,avx,avx2,popcnt,tune=native&quot;)
+#define il __inline__ __attribute__ ((always_inline))
+#define rg register
+#define MB template &lt;class T&gt;
+#define Fur(i,x,y) for(rg int i=x;i&lt;=y;i++)
+#define clr(x,y) memset(x,y,sizeof(x))
+#define inf 2000000000
+#define fl(i,x) for(rg int i=head[x],to;to=e[i].to,i;i=e[i].nxt)
+MB T MIN(T x,T y){return x&lt;=y?x:y;}
+using namespace std;
+namespace IO{const char* ln=&quot;\n&quot;;const int str=1&lt;&lt;20;struct IN{char buf[str],*s,*t;bool _;IN():s(buf),t(buf),_(0){}il char gc(){return s==t&amp;&amp;((t=(s=buf)+fread(buf,1,str,stdin))==s)?EOF:(*s++);}IN&amp;operator&gt;&gt;(char&amp;ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)_=1;else ch=c;return *this;}IN&amp; operator&gt;&gt;(char* ch){if(_)return *this;char c;while((c=gc())!=EOF&amp;&amp;isspace(c));if(c==EOF)return _=1,*this;*ch=c;ch++;while((c=gc())!=EOF&amp;&amp;!isspace(c))*ch=c,ch++;if(c==EOF)_=1;return *this;}template&lt;typename T&gt;IN&amp;operator&gt;&gt;(T&amp;x){if(_)return *this;char c=gc();bool ff=0;while(c!=EOF&amp;&amp;(c&lt;'0'||c&gt;'9'))ff^=(c=='-'),c=gc();if(c==EOF){_=1;return *this;}x=0;while(c!=EOF&amp;&amp;'0'&lt;=c&amp;&amp;c&lt;='9')x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-48,c=gc();if(c==EOF)_=1;if(ff)x=-x;return *this;}}in;struct OUT{char buf[str],*s,*t;OUT():s(buf),t(buf+str){}~OUT(){fwrite(buf,1,s-buf,stdout);}void pt(char c){(s==t)?(fwrite(s=buf,1,str,stdout),*s++=c):(*s++=c);}OUT&amp;operator&lt;&lt;(const char*s){while(*s)pt(*s++);return *this;}OUT&amp;operator&lt;&lt;(char*s){while(*s)pt(*s++);return *this;}template&lt;typename T&gt;OUT&amp;operator&lt;&lt;(T x){if(!x)return pt('0'),*this;if(x&lt;0)pt('-'),x=-x;char a[30],t=0;while(x)a[t++]=x%10,x/=10;while(t--)pt(a[t]+'0');return *this;}}out;}using namespace IO;
+#define N 2001
+int n,k,st,ed,cnt=1;
+int head[N],d[N],q[N];
+struct edge{int to,nxt,w;}e[1000011];
+void add(int x,int y,int w){
+    e[++cnt].to=y;e[cnt].w=w;e[cnt].nxt=head[x];head[x]=cnt;
+    e[++cnt].to=x;e[cnt].w=0;e[cnt].nxt=head[y];head[y]=cnt;
+}
+bool bfs(){
+    int h=0,t=1,x;
+    clr(d,0);d[q[h]=st]=1;
+    while(h&lt;t){
+        x=q[h++];if(x==ed)return 1;
+        fl(i,x)if(e[i].w&amp;&amp;!d[to]){
+            d[to]=d[x]+1;
+            q[t++]=to;
+        }
+    }
+    return 0;
+}
+int dfs(int x,int mf){
+    if(x==ed)return mf;
+    int us=0,w;
+    fl(i,x)
+    if(e[i].w&amp;&amp;d[to]==d[x]+1){
+        w=dfs(to,MIN(mf-us,e[i].w));
+        e[i].w-=w;e[i^1].w+=w;
+        us+=w;
+        if(us==mf)return mf;
+    }
+    if(!us)d[x]=-1;
+    return us;
+}
+int main(){
+    in&gt;&gt;k&gt;&gt;n;
+    st=N-2;ed=N-1;
+    int x,t,sum=0;
+    Fur(i,1,k)in&gt;&gt;x,add(st,i,x),sum+=x;
+    Fur(i,k+1,k+n){
+        add(i,ed,1);
+        in&gt;&gt;t;while(t--)in&gt;&gt;x,add(x,i,1);
+    }
+    while(bfs())sum-=dfs(st,inf);
+    if(sum)out&lt;&lt;&quot;No Solution!\n&quot;;
+    else Fur(i,1,k){
+            out&lt;&lt;i&lt;&lt;&quot;: &quot;;
+            fl(j,i)if(to!=st&amp;&amp;to!=ed&amp;&amp;e[j^1].w)out&lt;&lt;to-k&lt;&lt;&quot; &quot;;
+            out&lt;&lt;ln;
+        }
+}
+</code></pre>
+</div>
+    </div>
+</div>
+<div class="mdui-row-xs-3 article">
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black" id='pre_button'>
+            <i class="mdui-icon material-icons">arrow_back</i>
+            CF1110
+        </a>
+    </div>
+    <div class="mdui-col mdui-text-center">网络流24题</div>
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black mdui-float-right" id='nxt_button'>
+            LG 3953 逛公园
+            <i class="mdui-icon material-icons">arrow_forward</i>
+        </a>
+    </div>
+</div>
+<div class="mdui-card" style="margin-top: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">
+            <i class="mdui-icon material-icons">comment</i>
+            评论
+        </div>
+    </div>
+<div class="mdui-card-content" id='comments'>
+    <center>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="nvl()">
+            valine
+        </button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="ngt()">
+            gitalk
+        </button>
+    </center>
+</div>
+<script>
+function nvl(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var valinejs=document.createElement('script');
+    valinejs.src="//cdn.jsdelivr.net/gh/xCss/Valine/dist/Valine.min.js";
+    valinejs.async=true;
+    valinejs.onload=function(){
+        new Valine({
+            el: '#comments',
+            placeholder: "说几句嘛qwq",
+            appId: "NLh0fhLRvD8gOWEC3vtOIRx5-gzGzoHsz",
+            appKey: "DSwqdjPFKAnO4CFMQypfkcB9",
+            path: window.location.pathname,
+        });
+    }
+    document.getElementsByTagName("head")[0].appendChild(valinejs);
+}
+</script>
+<script>
+function ngt(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var gtalkjs=document.createElement('script');
+    gtalkjs.src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js";
+    gtalkjs.async=true;
+    gtalkjs.onload=function(){
+        const gitalk=new Gitalk({
+            clientID:'054902ee1548e6fe427e',
+            clientSecret:'b31fac2b407311ca7e6673ab84727ae9562c69ba',
+            repo:'zcmimi.github.io',
+            owner:'zcmimi',
+            admin: "zcmimi",
+            id:location.pathname,
+            distractionFreeMode:False
+        });
+        gitalk.render('comments');
+    }
+    var gtalkcss=document.createElement('link');
+    gtalkcss.href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css";
+    gtalkcss.type='text/css';
+    gtalkcss.rel='stylesheet';
+    document.getElementsByTagName("head")[0].appendChild(gtalkjs);
+    document.getElementsByTagName("head")[0].appendChild(gtalkcss);
+}
+</script>
+</div>
+    </div>
+</body>
+<!--top-->
+<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-fab-fixed mdui-fab-hide" id="totop" onclick="totop()" style="z-index: 99999;">
+    <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+</button>
+<!--top end-->
+<footer class="mdui-m-t-5">
+    <div class="mdui-card">
+        <div class="mdui-card-content mdui-p-a-5">
+            <div class="mdui-container">
+                <div class="mdui-row-sm-3">
+                    <div class="mdui-col">
+                        <div class="mdui-row">
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://space.bilibili.com/110897068">
+                                        <i class="mdui-icon mqii mqii-bilibili mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://github.com/zcmimi">
+                                        <i class="mdui-icon mqii mqii-github mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://twitter.com/zc_mimi">
+                                        <i class="mdui-icon mqii mqii-twitter mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://www.zhihu.com/people/zcmimi">
+                                        <i class="mdui-icon mqii mqii-zhihu mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mdui-col mdui-text-center">
+                        <div>Copyright ©&nbsp;2019-2020&nbsp;zcmimi's blog</div>
+                        <div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+                        <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/busuanzi.js" onload="
+                            wonld.append(busuanzi);
+                            document.addEventListener('pjax:complete',busuanzi);
+                        "></script>
+
+                        <div>last build: 2020-07-30T15:42:15Z</div>
+                    </div>
+                    <div class="mdui-col mdui-text-center mdui-typo">
+                        <div>Powered by <a href="https://github.com/zcmimi/py-blog">py-blog</a></div>
+                        <div>Theme material</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mdui-dialog" id="search_dialog">
+    <div class="mdui-dialog-title">Search</div>
+    <div class="mdui-dialog-content">
+        <div class="mdui-textfield">
+            <i class="mdui-icon material-icons">search</i>
+            <input id="search_input" class="mdui-textfield-input" placeholder="搜索">
+        </div>
+        <div id="search_result" class="mdui-list"></div>
+    </div>
+</div>
+<script async src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/worker_search.js'></script>
+<script>
+document.getElementById('search_input').onchange=function(){
+    search("https://blog_search.zcmimi.workers.dev");
+}
+</script>
+<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-shadow-2" id="drawer">
+    <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons mdui-text mdui-text-color-black">home</i>
+            <a href="/" class="mdui-list-item-content">zcmimi's blog</a>
+        </li>
+        <li><center><img src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp" width="95%" height="95%" alt='avatar'></img></center></li>
+            <li class='mdui-subheader'>Catch me</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:dodgerblue'">email</i>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fwUcIBIWEhY-Dg5RHBAS" target="_blank" class="mdui-list-item-content">给我写信</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#66ccff'"></i>
+                    <a href="https://t.me/zcmimi" target="_blank" class="mdui-list-item-content">电报</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-twitter" style='color:rgba(29,161,242,1.00)'"></i>
+                    <a href="https://twitter.com/zc_mimi" target="_blank" class="mdui-list-item-content">推特</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-bilibili" style='color:#F06292'"></i>
+                    <a href="https://space.bilibili.com/110897068" target="_blank" class="mdui-list-item-content">哔哩哔哩</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-netease-cloud-music" style='color:red'"></i>
+                    <a href="https://music.163.com/#/user/home?id=507163653" target="_blank" class="mdui-list-item-content">网易云音乐</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-zhihu" style='color:#0084ff'"></i>
+                    <a href="https://www.zhihu.com/people/zcmimi" target="_blank" class="mdui-list-item-content">知乎</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <img class="mdui-list-item-icon" src="https://www.luogu.com.cn/favicon.ico" alt>
+                    <a href="https://luogu.com.cn/user/36532" target="_blank" class="mdui-list-item-content">洛谷</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-github" style='color:black'"></i>
+                    <a href="https://github.com/zcmimi" target="_blank" class="mdui-list-item-content">Github</a>
+                </li>
+            <li class='mdui-subheader'>Links</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#bbb'"></i>
+                    <a href="https://travellings.now.sh/" target="_blank" class="mdui-list-item-content">Traveling</a>
+                </li>
+            <li class='mdui-subheader'>Pages</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">bookmark_border</i>
+                    <a href="/tags" target="_blank" class="mdui-list-item-content">标签云</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">book</i>
+                    <a href="/categories" target="_blank" class="mdui-list-item-content">分类</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">link</i>
+                    <a href="/links" target="_blank" class="mdui-list-item-content">友链</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">build</i>
+                    <a href="/tools" target="_blank" class="mdui-list-item-content">工具集</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">person</i>
+                    <a href="/about" target="_blank" class="mdui-list-item-content">关于我</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">rss_feed</i>
+                    <a href="/atom.xml" target="_blank" class="mdui-list-item-content">订阅</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">list</i>
+                    <a href="/sitemap.xml" target="_blank" class="mdui-list-item-content">站点地图</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">comment</i>
+                    <a href="https://nlh0fhlrsgij.leanapp.cn" target="_blank" class="mdui-list-item-content">评论管理</a>
+                </li>
+    </ul>
+</div>
+
+
+<div id='musiclist'></div>
+<style>.aplayer,.aplayer-body,.aplayer-pic,.aplayer-button{z-index: 9999999 !important;}</style>
+<script>
+function music_on(){
+    pjax_on(1);
+    var x=document.getElementById('musiclist');
+    x.innerHTML="";
+    mdui.snackbar({message:'歌单加载中,请稍等2-10s'});
+    var hl=document.createElement('link');
+    hl.href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css";
+    hl.type='text/css';
+    hl.rel='stylesheet';
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js";
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js";
+    x.appendChild(hl);
+
+    hl=document.createElement('meting-js');
+    hl.setAttribute('id','765727960');
+    hl.setAttribute('fixed','true');
+    hl.setAttribute('server','netease');
+    hl.setAttribute('type','playlist');
+    hl.setAttribute('order','random');
+    hl.setAttribute('theme','#f7a4b9');
+    x.appendChild(hl);
+}
+</script>
+</html>

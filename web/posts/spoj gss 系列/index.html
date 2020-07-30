@@ -1,0 +1,1034 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>SPOJ GSS 系列 - zcmimi's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' itemprop="description" content="">
+    <meta name="keywords" content="zcmimi">
+    <meta property="og:url" content="https://blog.zcmimi.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="zcmimi's blog">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="https://blog.zcmimi.top">
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "publisher":{
+            "@type":"Organization",
+            "name":"zcmimi's blog",
+            "logo":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "url":"https://blog.zcmimi.top",
+        "image":{
+            "@type":"ImageObject",
+            "url":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://blog.zcmimi.top"
+        },
+        "description":""
+    }</script>
+<script>
+wonld=Object.create({
+    list:[],
+    append:function(e){this.list.push(e);},
+    excute:function(){
+        for(var i=0;i<this.list.length;++i)
+            this.list[i]();
+    }
+});
+window.onload=function(){wonld.excute();};
+</script>
+    <link rel="dns-prefetch" href="https://blog.zcmimi.top">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/css/mdui.min.css" type="text/css">
+    <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="/assets/theme/origin.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/icon/mqii/mqii.css" type="text/css">
+    <!--custom--><link rel="stylesheet" href="/custom.css" type="text/css">
+    <!--highlight-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+    <!--highlight end-->
+    <!-- markdown katex-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/markdown.min.css" type="text/css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css" type="text/css">
+    <script async src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <!-- markdown katex end-->
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <script async src="//cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script defer src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/bundle.min.js'></script>
+</head>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-blue">
+    <div class="mdui-progress" id='loading-progress' style="position: fixed;top:0;z-index: 999999;"><div class="mdui-progress-indeterminate"></div></div>
+    <div id="theme_css"></div>
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset mdui-color-white mdui-shadow-1">
+        <div class="mdui-toolbar mdui-color-theme">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="drawer.toggle();" mdui-tooltip="{content: '菜单'}">
+                <i class="mdui-icon material-icons">menu</i>
+            </button>
+            <a href="/" class="mdui-typo-title">zcmimi's blog</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-row" id='toolbar-menu'>
+                <a href="https://travellings.now.sh/" target="_blank" class="mdui-col mdui-text-color-black">Traveling</a>
+                <a href="/about" target="_blank" class="mdui-col mdui-text-color-black">关于我</a>
+                <a href="/categories" target="_blank" class="mdui-col mdui-text-color-black">分类</a>
+                <a href="/links" target="_blank" class="mdui-col mdui-text-color-black">友链</a>
+                <a href="/tools" target="_blank" class="mdui-col mdui-text-color-black">工具集</a>
+                <a href="/tags" target="_blank" class="mdui-col mdui-text-color-black">标签云</a>
+            </div><script>if(document.body.clientWidth<1078)document.getElementById('toolbar-menu').hidden=1;</script>
+            <button onclick="music_on();document.getElementById('music_button').hidden=1" id='music_button' class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '是否来点音乐?'}">
+                <i class="mdui-icon material-icons">queue_music</i>
+            </button>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '切换主题'}" mdui-menu="{target: '#theme_menu',align: 'right',covered: false}">
+                <i class="mdui-icon material-icons">view_quilt</i>
+            </button>
+            <ul class="mdui-menu" id="theme_menu" style="width: fit-content;">
+                <li class="mdui-menu-item" mdui-tooltip="{content: '开启/关闭 pjax'}"><a onclick="pjax_on()" id='pjax_button'>pjax_on</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '回归原本'}"><a onclick="theme('day')">日间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '晚上要保护眼睛哦'}"><a onclick="theme('night')">夜间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '满足你的少女心吧'}"><a onclick="theme('pink')">粉红</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '没什么,就是淡蓝色'}"><a onclick="theme('blue')">粉蓝</a></li>
+            </ul>
+            <button onclick="search_dialog.open();document.getElementById('search_input').focus();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}">
+                <i class="mdui-icon material-icons">search</i>
+            </button>
+            <button id='toc_button' class="mdui-btn mdui-btn-icon mdui-ripple" onclick="toc_drawer.toggle();" mdui-tooltip="{content: '目录'}" hidden>
+                <i class="mdui-icon material-icons">format_list_numbered</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-drawer-right mdui-shadow-2" id="toc_drawer" hidden>
+        <ul class="mdui-list" id="toc"></ul>
+    </div>
+
+    <div class="mdui-container">
+        <div id='page_typ' hidden>article</div>
+<div class="mdui-card article">
+    <div class="mdui-card-primary">
+        <a href="#" class="mdui-card-primary-title">SPOJ GSS 系列</a>
+        <div class="mdui-card-primary-subtitle">        <a href="/tags/数据结构" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">数据结构</span>
+        </a>
+        <a href="/tags/线段树" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">线段树</span>
+        </a>
+        <a href="/tags/平衡树" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">平衡树</span>
+        </a>
+</div>
+    </div>
+    <div class="mdui-card-header">
+        <img class="mdui-card-header-avatar" src="    https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp
+" alt='avatar'>
+        <div class="mdui-card-header-title">zcmimi</div>
+        <div class="mdui-card-header-subtitle">2020-05-25 19:22</div>
+        <div class="mdui-card-menu">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '文章分类'}" mdui-menu="{target:'#categories',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">bookmark</i>
+            </button>
+            <ul class="mdui-menu" id="categories">
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/刷题记录" class="mdui-ripple">
+                            刷题记录
+                        </a>
+                    </li>
+            </ul>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '本文阅读量'}" mdui-menu="{target:'#visit_counter',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">remove_red_eye</i>
+            </button>
+            <ul class="mdui-menu" id="visit_counter">
+                <li class="mdui-menu-item mdui-ripple">
+                    <div id="busuanzi_container_page_pv">
+                        <center>本文总阅读量<span id="busuanzi_value_page_pv"></span>次</center>
+                    </div>
+                </li>
+            </ul>
+<button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '分享'}" mdui-menu="{target:'#share_menu',align:'right',covered: false}">
+    <i class="mdui-icon material-icons">share</i>
+</button>
+<ul class="mdui-menu" id="share_menu" style="width: fit-content;">
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_weibo" href="https://service.weibo.com/share/share.php?appkey=&title=SPOJ GSS 系列 - zcmimi's blog&url=https://blog.zcmimi.top/posts/spoj gss 系列&pic=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&searchPic=false&style=simple" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-weibo"></i>分享到微博
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_qq" href="https://connect.qq.com/widget/shareqq/index.html?site=zcmimi's blog&title=SPOJ GSS 系列 - zcmimi's blog&summary=&pics=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&url=https://blog.zcmimi.top/posts/spoj gss 系列" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-qq_filled"></i>分享到QQ
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_twitter" href="https://twitter.com/intent/tweet?text=SPOJ GSS 系列 - zcmimi's blog&url=https://blog.zcmimi.top/posts/spoj gss 系列" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-twitter"></i>分享到Twitter
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_copy" onclick="copylink()" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">link</i>复制链接
+        </a>
+    </li>
+</ul>        </div>
+    </div>
+    <div class="mdui-card-content">
+        
+        <div id="md-body" class="md-body"><p>SPOJ的GSS系列是关于区间统计技巧的集合</p>
+<p>~~非常适合锻炼码力~~</p>
+<p><a href="https://www.luogu.com.cn/problem/SP1043">LG GSS1</a> | <a href="https://www.SPOJ.com/problems/GSS1">SPOJ GSS1</a></p>
+<p><a href="https://www.luogu.com.cn/problem/SP1557">LG GSS2</a> | <a href="https://www.SPOJ.com/problems/GSS2">SPOJ GSS2</a></p>
+<p><a href="https://www.luogu.com.cn/problem/SP1716">LG GSS3</a> | <a href="https://www.SPOJ.com/problems/GSS3">SPOJ GSS3</a></p>
+<p><a href="https://www.luogu.com.cn/problem/SP2713">LG GSS4</a> | <a href="https://www.SPOJ.com/problems/GSS4">SPOJ GSS4</a></p>
+<p><a href="https://www.luogu.com.cn/problem/SP2916">LG GSS5</a> | <a href="https://www.SPOJ.com/problems/GSS5">SPOJ GSS5</a></p>
+<p><a href="https://www.luogu.com.cn/problem/SP4487">LG GSS6</a> | <a href="https://www.SPOJ.com/problems/GSS6">SPOJ GSS6</a></p>
+<p><a href="https://www.luogu.com.cn/problem/SP6779">LG GSS7</a> | <a href="https://www.SPOJ.com/problems/GSS7">SPOJ GSS7</a></p>
+<p><a href="https://www.luogu.com.cn/problem/SP19543">LG GSS8</a> | <a href="https://www.SPOJ.com/problems/GSS8">SPOJ GSS8</a></p>
+<p>GSS1,GSS3: 最大子段和:</p>
+<p>每个节点记录区间和,最大后缀和,最大前缀和,答案</p>
+<pre><code class="language-cpp">node operator+(node x,node y){
+    node c;
+    c.s=x.s+y.s;// 和
+    c.mx=max(max(x.mx,y.mx),x.r+y.l); //答案
+    c.l=max(x.l,x.s+y.l);//最大前缀
+    c.r=max(y.r,y.s+x.r);//最大后缀
+    return c;
+}
+</code></pre>
+<h2>GSS3 &amp; GSS 1</h2>
+<blockquote>
+<p>静态区间最大子段和,单点修改</p>
+</blockquote>
+<p>线段树</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+int max(int x,int y){return x&gt;y?x:y;}
+int rd(){int x=0;char c;bool f=0;for(c=getchar();c&lt;'0'||'9'&lt;c;c=getchar())f^=c=='-';for(x=c-48,c=getchar();'0'&lt;=c&amp;&amp;c&lt;='9';x=x*10+c-48,c=getchar());return f?-x:x;}
+const int N=50011;
+#define ls rt&lt;&lt;1
+#define rs rt&lt;&lt;1|1
+int n,q;
+struct node{int s,l,r,mx;}s[N&lt;&lt;2];
+node operator+(node x,node y){
+    node c;
+    c.s=x.s+y.s;
+    c.mx=max(max(x.mx,y.mx),x.r+y.l);
+    c.l=max(x.l,x.s+y.l);
+    c.r=max(y.r,y.s+x.r);
+    return c;
+}
+void build(int l,int r,int rt){
+    if(l==r){s[rt].s=s[rt].mx=s[rt].l=s[rt].r=rd();return;}
+    int m=l+r&gt;&gt;1;
+    build(l,m,ls),build(m+1,r,rs);
+    s[rt]=s[ls]+s[rs];
+}
+void upd(int p,int v,int l,int r,int rt){
+    if(l==r){s[rt]={v,v,v,v};return;}
+    int m=l+r&gt;&gt;1;
+    if(p&lt;=m)upd(p,v,l,m,ls);
+    else upd(p,v,m+1,r,rs);
+    s[rt]=s[ls]+s[rs];
+}
+node ask(int L,int R,int l,int r,int rt){
+    if(L==l&amp;&amp;r==R)return s[rt];
+    int m=l+r&gt;&gt;1;
+    if(L&gt;m)return ask(L,R,m+1,r,rs);
+    else if(R&lt;=m)return ask(L,R,l,m,ls);
+    else return ask(L,m,l,m,ls)+ask(m+1,R,m+1,r,rs);
+}
+int main(){
+    n=rd();
+    build(1,n,1);
+    q=rd();
+    while(q--){
+        int opt=rd(),x=rd(),y=rd();
+        if(opt)printf(&quot;%d\n&quot;,ask(x,y,1,n,1).mx);
+        else upd(x,y,1,n,1);
+    }
+}
+</code></pre>
+<h2>GSS5</h2>
+<blockquote>
+<p>给定一个序列。查询左端点在$[x_1, y_1]$之间,且右端点在$[x_2, y_2]$之间的最大子段和,数据保证$x_1\leq x_2,y_1\leq y_2$​ ,但是不保证端点所在的区间不重合</p>
+</blockquote>
+<p>分类讨论</p>
+<ol>
+<li><p>不重合:</p>
+<p>$[y_1,x_2]$的和+$[x_1,y_1-1]$的最大后缀和+$[x_2+1,y_2]$的最大前缀和</p>
+</li>
+<li><p>重合:</p>
+<ul>
+<li>$[x_2,y_1]$的最大子段和</li>
+<li>$[x_2,y_1]$的和+$[x_1,x_2-1]$的最大后缀和+$[y_1+1,x_2]$的最大前缀和</li>
+<li>$[x_1,x_2-1]$最大后缀和+$[x_2,y_1]$最大前缀和</li>
+<li>$[x_2,y_1]$最大后缀和+$[y_1+1,y_2]$最大前缀和</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+int max(int x,int y){return x&gt;y?x:y;}
+int rd(){int x=0;char c;bool f=0;for(c=getchar();c&lt;'0'||'9'&lt;c;c=getchar())f^=c=='-';for(x=c-48,c=getchar();'0'&lt;=c&amp;&amp;c&lt;='9';x=x*10+c-48,c=getchar());return f?-x:x;}
+const int N=10011;
+int n,q;
+#define ls rt&lt;&lt;1
+#define rs rt&lt;&lt;1|1
+struct node{int s,l,r,mx;}s[N&lt;&lt;2];
+node operator+(node x,node y){
+    node c;
+    c.s=x.s+y.s;
+    c.mx=max(max(x.mx,y.mx),x.r+y.l);
+    c.l=max(x.l,x.s+y.l);
+    c.r=max(y.r,y.s+x.r);
+    return c;
+}
+void build(int l,int r,int rt){
+    if(l==r){s[rt].s=s[rt].mx=s[rt].l=s[rt].r=rd();return;}
+    int m=l+r&gt;&gt;1;
+    build(l,m,ls),build(m+1,r,rs);
+    s[rt]=s[ls]+s[rs];
+}
+node ask(int L,int R,int l=1,int r=n,int rt=1){
+    if(L&gt;R)return s[0];
+    if(L==l&amp;&amp;r==R)return s[rt];
+    int m=l+r&gt;&gt;1;
+    if(L&gt;m)return ask(L,R,m+1,r,rs);
+    else if(R&lt;=m)return ask(L,R,l,m,ls);
+    else return ask(L,m,l,m,ls)+ask(m+1,R,m+1,r,rs);
+}
+void solve(){
+    n=rd();
+    build(1,n,1);
+    q=rd();
+    while(q--){
+        int x=rd(),y=rd(),X=rd(),Y=rd();
+        if(y&lt;X)printf(&quot;%d\n&quot;,max(ask(x,y-1).r,0)+ask(y,X).s+max(ask(X+1,Y).l,0));
+        else{
+            node a=ask(x,X-1),b=ask(X,y),c=ask(y+1,Y);
+            printf(&quot;%d\n&quot;,max(max(b.mx,max(a.r,0)+b.s+max(c.l,0)),max(a.r+b.l,b.r+c.l)));
+        }
+    }
+}
+int main(){
+    int T=rd();
+    while(T--)solve();
+}
+</code></pre>
+<h2>GSS6</h2>
+<blockquote>
+<p>给出一个由$N$个整数组成的序列$A$,你需要应用$M$&gt; 个操作：</p>
+<ul>
+<li><code>I p x</code> 在$~p~$处插入插入一个元素$~x~$</li>
+<li><code>D p</code> 删除$~p~$处的一个元素</li>
+<li><code>R p x</code> 修改$~p~$处元素的值为$~x~$</li>
+<li><code>Q l r</code> 查询一个区间$[l,r]$的最大子段和</li>
+</ul>
+</blockquote>
+<p>最大子段和搬到了平衡树上</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+int max(int x,int y){return x&gt;y?x:y;}
+int rd(){int x=0;char c;bool f=0;for(c=getchar();c&lt;'0'||'9'&lt;c;c=getchar())f^=c=='-';for(x=c-48,c=getchar();'0'&lt;=c&amp;&amp;c&lt;='9';x=x*10+c-48,c=getchar());return f?-x:x;}
+const int N=200001;
+struct node{
+    int s,l,r,mx;
+    node(){s=l=r=mx=0;}
+    node(int v){s=l=r=mx=v;}
+}s[N&lt;&lt;1];
+node operator+(node x,node y){
+    node c;
+    c.s=x.s+y.s;
+    c.mx=max(max(x.mx,y.mx),x.r+y.l);
+    c.l=max(x.l,x.s+y.l);
+    c.r=max(y.r,y.s+x.r);
+    return c;
+}
+int RT,cnt,sz[N],v[N],rnd[N],c[2][N];
+#define ls c[0][x]
+#define rs c[1][x]
+int ne(int val){
+    s[++cnt]=node(val),rnd[cnt]=rand(),v[cnt]=val,sz[cnt]=1;
+    return cnt;
+}
+void pu(int x){
+    sz[x]=sz[ls]+1+sz[rs];
+    s[x]=node(v[x]);
+    if(ls)s[x]=s[ls]+s[x];
+    if(rs)s[x]=s[x]+s[rs];
+}
+void sl(int x,int k,int &amp;a,int &amp;b){
+    if(!x){a=b=0;return;}
+    if(sz[ls]&gt;=k)b=x,sl(ls,k,a,ls);
+    else a=x,sl(rs,k-sz[ls]-1,rs,b);
+    pu(x);
+}
+int mg(int x,int y){
+    if(!x||!y)return x|y;
+    if(rnd[x]&lt;rnd[y]){
+        c[1][x]=mg(c[1][x],y);
+        pu(x);return x;
+    }
+    else{
+        c[0][y]=mg(x,c[0][y]);
+        pu(y);return y;
+    }
+}
+int main(){
+    srand(time(0));
+    for(int n=rd();n--;)RT=mg(RT,ne(rd()));
+    char opt;
+    for(int q=rd(),x,y,z,l,r;q--;){
+        while(isspace(opt=getchar()));
+        if(opt=='I')
+            sl(RT,rd()-1,x,z),
+            RT=mg(x,mg(ne(rd()),z));
+        else if(opt=='D')
+            sl(RT,rd()-1,x,z),sl(z,1,y,z),
+            RT=mg(x,z);
+        else if(opt=='R')
+            sl(RT,rd()-1,x,z),sl(z,1,y,z),
+            s[y]=node(v[y]=rd()),
+            RT=mg(x,mg(y,z));
+        else if(opt=='Q')
+            l=rd(),r=rd(),
+            sl(RT,r,x,z),sl(x,l-1,x,y),
+            printf(&quot;%d\n&quot;,s[y].mx),
+            RT=mg(x,mg(y,z));
+    }
+}
+</code></pre>
+<h2>GSS7</h2>
+<blockquote>
+<p>给定一棵树,有$N(N \le 100000)$个节点,每一个节点都有一个权值$x_i (|x_i| \le 10000)$</p>
+<p>你需要执行$Q (Q \le 100000)$次操作：</p>
+<ol>
+<li><code>1 a b</code> 查询<code>(a,b)</code>这条链上的最大子段和,<strong>可以为空</strong>（即输出$0$）</li>
+<li><code>2 a b c</code> 将<code>(a,b)</code>这条链上的所有点权变为<code>c</code> $(|c| \le 10000)$</li>
+</ol>
+</blockquote>
+<p>最大子段和搬到了树上,树链剖分</p>
+<p>树剖查询时注意合并顺序和反转左边</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+void swap(int&amp;x,int&amp;y){x^=y,y^=x,x^=y;}
+int max(int x,int y){return x&gt;y?x:y;}
+void rd(int&amp;x){x=0;char c;bool f=0;for(c=getchar();c&lt;'0'||'9'&lt;c;c=getchar())f^=c=='-';for(x=c-48,c=getchar();'0'&lt;=c&amp;&amp;c&lt;='9';x=x*10+c-48,c=getchar());if(f)x=-x;}
+const int N=100001;
+int n,cnt,head[N],a[N],c[N];
+struct edge{int to,nxt;}e[N&lt;&lt;1];
+void add(int x,int y){e[++cnt].to=y;e[cnt].nxt=head[x];head[x]=cnt;}
+int d[N],f[N],siz[N],top[N],id[N],sz;
+void dfs(int x){
+    siz[x]=1;
+    for(int i=head[x],to;to=e[i].to,i;i=e[i].nxt)
+        if(to!=f[x])
+            f[to]=x,d[to]=d[x]+1,
+            dfs(to),siz[x]+=siz[to];
+}
+void bt(int x,int tp){
+    top[x]=tp;c[id[x]=++sz]=a[x];
+    int k=0;
+    for(int i=head[x],to;to=e[i].to,i;i=e[i].nxt)
+        if(to!=f[x]&amp;&amp;siz[to]&gt;siz[k])k=to;
+    if(k)bt(k,tp);
+    for(int i=head[x],to;to=e[i].to,i;i=e[i].nxt)
+        if(!top[to])bt(to,to);
+}
+struct node{
+    int s,l,r,mx;
+    node(){s=l=r=mx=0;}
+    node(int v){s=v,l=r=mx=max(v,0);}
+    void rev(){swap(l,r);}
+}s[N&lt;&lt;2];
+node operator+(node x,node y){
+    node c;
+    c.s=x.s+y.s;
+    c.mx=max(max(x.mx,y.mx),x.r+y.l);
+    c.l=max(x.l,x.s+y.l);
+    c.r=max(y.r,y.s+x.r);
+    return c;
+}
+int laz[N&lt;&lt;2];bool tag[N&lt;&lt;2];
+#define ls rt&lt;&lt;1
+#define rs rt&lt;&lt;1|1
+void build(int l,int r,int rt){
+    if(l==r){s[rt]=node(c[l]);return;}
+    int m=l+r&gt;&gt;1;
+    build(l,m,ls),build(m+1,r,rs);
+    s[rt]=s[ls]+s[rs];
+}
+void pd(int rt,int ln,int rn){
+    if(tag[rt]){
+        laz[ls]=laz[rs]=laz[rt];
+        tag[ls]=tag[rs]=1;
+        s[ls]=node(laz[rt]*ln);
+        s[rs]=node(laz[rt]*rn);
+        tag[rt]=0;
+    }
+}
+void mdy(int L,int R,int v,int l,int r,int rt){
+    if(L&lt;=l&amp;&amp;r&lt;=R){
+        s[rt]=node(v*(r-l+1));
+        laz[rt]=v;tag[rt]=1;
+        return;
+    }
+    int m=l+r&gt;&gt;1;
+    pd(rt,m-l+1,r-m);
+    if(L&lt;=m)mdy(L,R,v,l,m,ls);
+    if(R&gt;m)mdy(L,R,v,m+1,r,rs);
+    s[rt]=s[ls]+s[rs];
+}
+node qry(int L,int R,int l,int r,int rt){
+    if(L==l&amp;&amp;r==R)return s[rt];
+    int m=l+r&gt;&gt;1;
+    pd(rt,m-l+1,r-m);
+    if(L&gt;m)return qry(L,R,m+1,r,rs);
+    else if(R&lt;=m)return qry(L,R,l,m,ls);
+    else return qry(L,m,l,m,ls)+qry(m+1,R,m+1,r,rs);
+}
+int ask(int x,int y){
+    node l,r;
+    while(top[x]^top[y])
+        if(d[top[x]]&gt;d[top[y]])
+            l=qry(id[top[x]],id[x],1,n,1)+l,x=f[top[x]];
+        else 
+            r=qry(id[top[y]],id[y],1,n,1)+r,y=f[top[y]];
+    if(d[x]&gt;d[y])
+        l=qry(id[y],id[x],1,n,1)+l;
+    else 
+        r=qry(id[x],id[y],1,n,1)+r;
+    l.rev();
+    return (l+r).mx;
+}
+void upd(int x,int y,int v){
+    while(top[x]^top[y]){
+        if(d[top[x]]&lt;d[top[y]])swap(x,y);
+        mdy(id[top[x]],id[x],v,1,n,1),x=f[top[x]];
+    }
+    if(d[x]&gt;d[y])swap(x,y);
+    mdy(id[x],id[y],v,1,n,1);
+}
+int main(){
+    rd(n);
+    for(int i=1;i&lt;=n;++i)rd(a[i]);
+    int q,opt,x,y,v;
+    for(int i=1;i&lt;n;++i)
+        rd(x),rd(y),
+        add(x,y),add(y,x);
+    dfs(1),bt(1,1),build(1,n,1);
+    for(rd(q);q--;){
+        rd(opt),rd(x),rd(y);
+        if(opt==1)printf(&quot;%d\n&quot;,ask(x,y));
+        else rd(v),upd(x,y,v);
+    }
+}
+</code></pre>
+<h2>GSS2</h2>
+<blockquote>
+<p>静态区间最大子段和,<strong>相同的数只算一次</strong></p>
+</blockquote>
+<p>难度激增</p>
+<p>参考<a href="https://www.luogu.com.cn/problem/P1972">[SDOI2009]HH的项链</a>的做法</p>
+<p>GSS1的合并最大前缀和,最大子段和,最大后缀和的方法以不再适用</p>
+<p>对每个位置$i$求出上一次出现相同数的位置$pre_i$</p>
+<p>还是按照右端点排序,按顺序添加元素,添加$a_i$时,更新$[pre_i-1,i]$</p>
+<p>线段树每个节点维护4个值,$sum,hismax,sumtag,hismaxtag$。</p>
+<p>对于叶子节点:</p>
+<p>$sum$表示从这个叶结点所对应的原序列的所有元素和</p>
+<p>$hismax$表示$sum$的历史最大值（最小为0）</p>
+<p>对于非叶子节点:</p>
+<p>$sum$表示左右儿子的$sum$的最大值,</p>
+<p>$hismax$表示左右儿子的$hismax$的最大值。</p>
+<p>查询区间的$hismax$即可</p>
+<p>特别注意<code>pushdown()</code>函数的更新顺序</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+typedef long long ll;
+template&lt;class T&gt;
+void rd(T&amp;x){char c;bool f=0;for(c=getchar();c&lt;'0'||'9'&lt;c;c=getchar())f^=c=='-';for(x=c-48,c=getchar();'0'&lt;=c&amp;&amp;c&lt;='9';x=x*10+c-48,c=getchar());if(f)x=-x;}
+ll max(ll x,ll y){return x&gt;y?x:y;}
+void cmax(ll&amp;x,ll y){if(x&lt;y)x=y;}
+const int N=100001;
+int n,m,b[N&lt;&lt;1],pre[N];
+ll a[N],ans[N];
+struct node{ll s,hs,laz,hlaz;}s[N&lt;&lt;2];
+node operator+(node a,node b){return {max(a.s,b.s),max(a.hs,b.hs),0,0};}
+#define ls rt&lt;&lt;1
+#define rs rt&lt;&lt;1|1
+void pd(int rt){
+    cmax(s[ls].hs,s[ls].s+s[rt].hlaz);
+    cmax(s[rs].hs,s[rs].s+s[rt].hlaz);
+    s[ls].s+=s[rt].laz;
+    s[rs].s+=s[rt].laz;
+    cmax(s[ls].hlaz,s[ls].laz+s[rt].hlaz);
+    cmax(s[rs].hlaz,s[rs].laz+s[rt].hlaz);
+    s[ls].laz+=s[rt].laz;
+    s[rs].laz+=s[rt].laz;
+    s[rt].laz=s[rt].hlaz=0;
+}
+void upd(int L,int R,ll v,int l,int r,int rt){
+    if(L&lt;=l&amp;&amp;r&lt;=R){
+        cmax(s[rt].hs,s[rt].s+=v);
+        cmax(s[rt].hlaz,s[rt].laz+=v);
+        return;
+    }
+    int m=l+r&gt;&gt;1;pd(rt);
+    if(L&lt;=m)upd(L,R,v,l,m,ls);
+    if(R&gt;m)upd(L,R,v,m+1,r,rs);
+    s[rt]=s[ls]+s[rs];
+}
+node ask(int L,int R,int l,int r,int rt){
+    if(L&lt;=l&amp;&amp;r&lt;=R)return s[rt];
+    int m=l+r&gt;&gt;1;pd(rt);
+    if(L&gt;m)return ask(L,R,m+1,r,rs);
+    else if(R&lt;=m)return ask(L,R,l,m,ls);
+    else return ask(L,R,l,m,ls)+ask(L,R,m+1,r,rs);
+}
+struct que{
+    int l,r,id;
+    bool operator&lt;(que t){return r&lt;t.r;}
+}q[N];
+int main(){
+    rd(n);
+    for(int i=1;i&lt;=n;++i)
+        rd(a[i]),
+        pre[i]=b[a[i]+100000],
+        b[a[i]+100000]=i;
+    rd(m);
+    for(int i=1;i&lt;=m;++i)
+        rd(q[i].l),rd(q[i].r),q[i].id=i;
+    std::sort(q+1,q+m+1);
+    for(int i=1,j=1;i&lt;=n;++i){
+        upd(pre[i]+1,i,a[i],1,n,1);
+        for(;j&lt;=m&amp;&amp;q[j].r&lt;=i;++j)
+            ans[q[j].id]+=ask(q[j].l,q[j].r,1,n,1).hs;
+    }
+    for(int i=1;i&lt;=m;++i)
+        printf(&quot;%lld\n&quot;,ans[i]);
+}
+</code></pre>
+<h2>GSS4</h2>
+<blockquote>
+<p>区间开方(向下取整),区间求和</p>
+</blockquote>
+<p>可以发现$10^{18}$次方最多开方$6$次就会变成$1$</p>
+<p>那么每个数都在$6$次以内就会变成$1$,然后不变,所以最多修改$6\times10^5$次</p>
+<p>打标记记录区间是否都是$1$,如果区间被标记,就不用向下继续</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+const int N=100011;
+typedef long long ll;
+ll s[N&lt;&lt;2];
+bool b[N&lt;&lt;2];
+#define ls rt&lt;&lt;1
+#define rs rt&lt;&lt;1|1
+void pu(int rt){s[rt]=s[ls]+s[rs],b[rt]=b[ls]&amp;b[rs];}
+void build(int l,int r,int rt){
+    if(l==r){
+        scanf(&quot;%lld&quot;,s+rt);
+        b[rt]=s[rt]&lt;=1;
+        return;
+    }
+    int m=l+r&gt;&gt;1;
+    build(l,m,ls),build(m+1,r,rs);
+    pu(rt);
+}
+void upd(int L,int R,int l,int r,int rt){
+    if(b[rt])return;
+    if(l==r){
+        s[rt]=sqrt(s[rt]),
+        b[rt]=s[rt]&lt;=1;
+        return;
+    }
+    int m=l+r&gt;&gt;1;
+    if(L&lt;=m)upd(L,R,l,m,ls);
+    if(R&gt;m)upd(L,R,m+1,r,rs);
+    pu(rt);
+}
+ll ask(int L,int R,int l,int r,int rt){
+    if(L&lt;=l&amp;&amp;r&lt;=R)return s[rt];
+    int m=l+r&gt;&gt;1;
+    return ((L&lt;=m)?ask(L,R,l,m,ls):0)+((R&gt;m)?ask(L,R,m+1,r,rs):0);
+}
+int main(){
+    int n,q,opt,x,y,id=0;
+    while(~scanf(&quot;%d&quot;,&amp;n)){
+        printf(&quot;Case #%d:\n&quot;,++id);
+        build(1,n,1);
+        scanf(&quot;%d&quot;,&amp;q);
+        while(q--){
+            scanf(&quot;%d%d%d&quot;,&amp;opt,&amp;x,&amp;y);
+            if(x&gt;y)x^=y,y^=x,x^=y;
+            if(opt)printf(&quot;%lld\n&quot;,ask(x,y,1,n,1));
+            else upd(x,y,1,n,1);
+        }
+    }
+}
+</code></pre>
+<h2>GSS8</h2>
+<blockquote>
+<p>给你一个序列,$A[0], A[1]...A[N - 1]. (0 \le A[i] \lt 2^{32})$</p>
+<p>你需要支持$Q$次操作</p>
+<ol>
+<li><code>I pos val</code> 插入一个数字在第$pos$个位置之前,$0 \le val \lt 2^{32}$, 如果$pos=current_length$,那么你需要将这个数字放到序列末尾</li>
+<li><code>D pos</code> 删除第$pos$个元素</li>
+<li><code>R pos val</code> 将第$pos$个元素变为$val(0 \le val \lt 2^{32})$</li>
+<li><code>Q l r k</code> 询问$(\sum\limits_{i=l}^{r} A[i] \cdot (i - l + 1) ^ k) \mod 2^{32}$,保证$0 \le k \le 10$</li>
+</ol>
+<p>第一行一个正整数 $n$,接下来一行 $n$ 个整数,表示 $a_0,a_1...a_{n-1}$。</p>
+<p>第三行一个整数 $q$,表示操作个数。</p>
+<p>接下来 $q$ 行,每行表示一个操作。</p>
+<p>数据点保证：
+$1\le n \le 10^5,0 \le q \le 10^5$</p>
+</blockquote>
+<p>平衡树</p>
+<p>由于$0\le k \le 10$,可以用$ans_k$储存当前$k$的区间答案</p>
+<p>考虑如何合并左右儿子区间($m=\left\lfloor\frac{l+r}2\right\rfloor$):</p>
+<p>$$
+\sum^r_{i=1}a_i(i-l+1)^k=\sum^m_{i=1}a_i(i-l+1)^k+\sum^r_{i=m+1}a_i(i-l+1)^k
+\
+\begin{aligned}
+\sum^r_{i=m+1}a_i(i-l+1)^k
+&amp;=\sum^r_{i=m+1}a_i[(m-l+1)-(i-m)]^k\
+&amp;=\sum^r_{i=m+1}a_i \sum_{j=0}^k{k\choose j}(m-l+1)^{k-j}(i-m)^k\
+&amp;=\sum_{j=0}^k{k\choose j}(m-l+1)^{k-j}\sum^r_{i=m+1}a_i(i-m)^k\
+&amp;=\sum_{j=0}^k{k\choose j}(m-l+1)^{k-j} rans_j\
+\end{aligned}
+\
+\sum^r_{i=1}a_i(i-l+1)^k=lans_k+\sum_{j=0}^k{k\choose j}(m-l+1)^{k-j} rans_j
+$$</p>
+<p>这样就可以方便地合并左右儿子区间了</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define int unsigned int
+int rd(){int x=0;char c;for(c=getchar();c&lt;'0'||'9'&lt;c;c=getchar());for(x=c-48,c=getchar();'0'&lt;=c&amp;&amp;c&lt;='9';x=x*10+c-48,c=getchar());return x;}
+const int N=200001;
+int RT,cnt,sz[N],v[N],rnd[N],c[2][N],s[N][11],C[11][11],pw[11];
+#define ls c[0][x]
+#define rs c[1][x]
+void init(int x,int val){
+    v[x]=val;
+    for(int i=0;i&lt;=10;++i)s[x][i]=val;
+}
+int ne(int val){
+    init(++cnt,val),rnd[cnt]=rand(),sz[cnt]=1;
+    return cnt;
+}
+void pu(int x){
+    sz[x]=sz[ls]+1+sz[rs];
+    for(int i=pw[0]=1;i&lt;=10;++i)pw[i]=pw[i-1]*(sz[ls]+1);
+    for(int k=0;k&lt;=10;++k){
+        s[x][k]=s[ls][k]+v[x]*pw[k];
+        for(int j=0;j&lt;=k;++j)
+            s[x][k]+=C[k][j]*pw[k-j]*s[rs][j];
+    }
+}
+void sl(int x,int k,int &amp;a,int &amp;b){
+    if(!x){a=b=0;return;}
+    if(sz[ls]&gt;=k)b=x,sl(ls,k,a,ls);
+    else a=x,sl(rs,k-sz[ls]-1,rs,b);
+    pu(x);
+}
+int mg(int x,int y){
+    if(!x||!y)return x|y;
+    if(rnd[x]&lt;rnd[y]){
+        c[1][x]=mg(c[1][x],y);
+        pu(x);return x;
+    }
+    else{
+        c[0][y]=mg(x,c[0][y]);
+        pu(y);return y;
+    }
+}
+signed main(){
+    srand(time(0));
+    for(int i=C[0][0]=1;i&lt;=10;++i)
+        for(int j=C[i][0]=1;j&lt;=i;++j)
+            C[i][j]=C[i-1][j]+C[i-1][j-1];
+    for(int n=rd();n--;)RT=mg(RT,ne(rd()));
+    char opt;
+    for(int q=rd(),x,y,z,l,r;q--;){
+        while(isspace(opt=getchar()));
+        if(opt=='I')
+            sl(RT,rd(),x,z),
+            RT=mg(x,mg(ne(rd()),z));
+        else if(opt=='D')
+            sl(RT,rd(),x,z),sl(z,1,y,z),
+            RT=mg(x,z);
+        else if(opt=='R')
+            sl(RT,rd(),x,z),sl(z,1,y,z),
+            init(y,rd()),
+            RT=mg(x,mg(y,z));
+        else if(opt=='Q')
+            l=rd()+1,r=rd()+1,
+            sl(RT,r,x,z),sl(x,l-1,x,y),
+            printf(&quot;%u\n&quot;,s[y][rd()]),
+            RT=mg(x,mg(y,z));
+    }
+}
+</code></pre>
+</div>
+    </div>
+</div>
+<div class="mdui-row-xs-3 article">
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black" id='pre_button'>
+            <i class="mdui-icon material-icons">arrow_back</i>
+            OI知识点思维导图
+        </a>
+    </div>
+    <div class="mdui-col mdui-text-center">SPOJ GSS 系列</div>
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black mdui-float-right" id='nxt_button'>
+            LG 2463 [SDOI2008]Sandy的卡片
+            <i class="mdui-icon material-icons">arrow_forward</i>
+        </a>
+    </div>
+</div>
+<div class="mdui-card" style="margin-top: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">
+            <i class="mdui-icon material-icons">comment</i>
+            评论
+        </div>
+    </div>
+<div class="mdui-card-content" id='comments'>
+    <center>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="nvl()">
+            valine
+        </button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="ngt()">
+            gitalk
+        </button>
+    </center>
+</div>
+<script>
+function nvl(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var valinejs=document.createElement('script');
+    valinejs.src="//cdn.jsdelivr.net/gh/xCss/Valine/dist/Valine.min.js";
+    valinejs.async=true;
+    valinejs.onload=function(){
+        new Valine({
+            el: '#comments',
+            placeholder: "说几句嘛qwq",
+            appId: "NLh0fhLRvD8gOWEC3vtOIRx5-gzGzoHsz",
+            appKey: "DSwqdjPFKAnO4CFMQypfkcB9",
+            path: window.location.pathname,
+        });
+    }
+    document.getElementsByTagName("head")[0].appendChild(valinejs);
+}
+</script>
+<script>
+function ngt(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var gtalkjs=document.createElement('script');
+    gtalkjs.src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js";
+    gtalkjs.async=true;
+    gtalkjs.onload=function(){
+        const gitalk=new Gitalk({
+            clientID:'054902ee1548e6fe427e',
+            clientSecret:'b31fac2b407311ca7e6673ab84727ae9562c69ba',
+            repo:'zcmimi.github.io',
+            owner:'zcmimi',
+            admin: "zcmimi",
+            id:location.pathname,
+            distractionFreeMode:False
+        });
+        gitalk.render('comments');
+    }
+    var gtalkcss=document.createElement('link');
+    gtalkcss.href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css";
+    gtalkcss.type='text/css';
+    gtalkcss.rel='stylesheet';
+    document.getElementsByTagName("head")[0].appendChild(gtalkjs);
+    document.getElementsByTagName("head")[0].appendChild(gtalkcss);
+}
+</script>
+</div>
+    </div>
+</body>
+<!--top-->
+<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-fab-fixed mdui-fab-hide" id="totop" onclick="totop()" style="z-index: 99999;">
+    <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+</button>
+<!--top end-->
+<footer class="mdui-m-t-5">
+    <div class="mdui-card">
+        <div class="mdui-card-content mdui-p-a-5">
+            <div class="mdui-container">
+                <div class="mdui-row-sm-3">
+                    <div class="mdui-col">
+                        <div class="mdui-row">
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://space.bilibili.com/110897068">
+                                        <i class="mdui-icon mqii mqii-bilibili mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://github.com/zcmimi">
+                                        <i class="mdui-icon mqii mqii-github mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://twitter.com/zc_mimi">
+                                        <i class="mdui-icon mqii mqii-twitter mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://www.zhihu.com/people/zcmimi">
+                                        <i class="mdui-icon mqii mqii-zhihu mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mdui-col mdui-text-center">
+                        <div>Copyright ©&nbsp;2019-2020&nbsp;zcmimi's blog</div>
+                        <div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+                        <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/busuanzi.js" onload="
+                            wonld.append(busuanzi);
+                            document.addEventListener('pjax:complete',busuanzi);
+                        "></script>
+
+                        <div>last build: 2020-07-30T15:42:15Z</div>
+                    </div>
+                    <div class="mdui-col mdui-text-center mdui-typo">
+                        <div>Powered by <a href="https://github.com/zcmimi/py-blog">py-blog</a></div>
+                        <div>Theme material</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mdui-dialog" id="search_dialog">
+    <div class="mdui-dialog-title">Search</div>
+    <div class="mdui-dialog-content">
+        <div class="mdui-textfield">
+            <i class="mdui-icon material-icons">search</i>
+            <input id="search_input" class="mdui-textfield-input" placeholder="搜索">
+        </div>
+        <div id="search_result" class="mdui-list"></div>
+    </div>
+</div>
+<script async src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/worker_search.js'></script>
+<script>
+document.getElementById('search_input').onchange=function(){
+    search("https://blog_search.zcmimi.workers.dev");
+}
+</script>
+<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-shadow-2" id="drawer">
+    <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons mdui-text mdui-text-color-black">home</i>
+            <a href="/" class="mdui-list-item-content">zcmimi's blog</a>
+        </li>
+        <li><center><img src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp" width="95%" height="95%" alt='avatar'></img></center></li>
+            <li class='mdui-subheader'>Catch me</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:dodgerblue'">email</i>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fwUcIBIWEhY-Dg5RHBAS" target="_blank" class="mdui-list-item-content">给我写信</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#66ccff'"></i>
+                    <a href="https://t.me/zcmimi" target="_blank" class="mdui-list-item-content">电报</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-twitter" style='color:rgba(29,161,242,1.00)'"></i>
+                    <a href="https://twitter.com/zc_mimi" target="_blank" class="mdui-list-item-content">推特</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-bilibili" style='color:#F06292'"></i>
+                    <a href="https://space.bilibili.com/110897068" target="_blank" class="mdui-list-item-content">哔哩哔哩</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-netease-cloud-music" style='color:red'"></i>
+                    <a href="https://music.163.com/#/user/home?id=507163653" target="_blank" class="mdui-list-item-content">网易云音乐</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-zhihu" style='color:#0084ff'"></i>
+                    <a href="https://www.zhihu.com/people/zcmimi" target="_blank" class="mdui-list-item-content">知乎</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <img class="mdui-list-item-icon" src="https://www.luogu.com.cn/favicon.ico" alt>
+                    <a href="https://luogu.com.cn/user/36532" target="_blank" class="mdui-list-item-content">洛谷</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-github" style='color:black'"></i>
+                    <a href="https://github.com/zcmimi" target="_blank" class="mdui-list-item-content">Github</a>
+                </li>
+            <li class='mdui-subheader'>Links</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#bbb'"></i>
+                    <a href="https://travellings.now.sh/" target="_blank" class="mdui-list-item-content">Traveling</a>
+                </li>
+            <li class='mdui-subheader'>Pages</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">bookmark_border</i>
+                    <a href="/tags" target="_blank" class="mdui-list-item-content">标签云</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">book</i>
+                    <a href="/categories" target="_blank" class="mdui-list-item-content">分类</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">link</i>
+                    <a href="/links" target="_blank" class="mdui-list-item-content">友链</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">build</i>
+                    <a href="/tools" target="_blank" class="mdui-list-item-content">工具集</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">person</i>
+                    <a href="/about" target="_blank" class="mdui-list-item-content">关于我</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">rss_feed</i>
+                    <a href="/atom.xml" target="_blank" class="mdui-list-item-content">订阅</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">list</i>
+                    <a href="/sitemap.xml" target="_blank" class="mdui-list-item-content">站点地图</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">comment</i>
+                    <a href="https://nlh0fhlrsgij.leanapp.cn" target="_blank" class="mdui-list-item-content">评论管理</a>
+                </li>
+    </ul>
+</div>
+
+
+<div id='musiclist'></div>
+<style>.aplayer,.aplayer-body,.aplayer-pic,.aplayer-button{z-index: 9999999 !important;}</style>
+<script>
+function music_on(){
+    pjax_on(1);
+    var x=document.getElementById('musiclist');
+    x.innerHTML="";
+    mdui.snackbar({message:'歌单加载中,请稍等2-10s'});
+    var hl=document.createElement('link');
+    hl.href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css";
+    hl.type='text/css';
+    hl.rel='stylesheet';
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js";
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js";
+    x.appendChild(hl);
+
+    hl=document.createElement('meting-js');
+    hl.setAttribute('id','765727960');
+    hl.setAttribute('fixed','true');
+    hl.setAttribute('server','netease');
+    hl.setAttribute('type','playlist');
+    hl.setAttribute('order','random');
+    hl.setAttribute('theme','#f7a4b9');
+    x.appendChild(hl);
+}
+</script>
+</html>

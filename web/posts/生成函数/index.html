@@ -1,0 +1,760 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>生成函数 - zcmimi's blog</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' itemprop="description" content="">
+    <meta name="keywords" content="zcmimi">
+    <meta property="og:url" content="https://blog.zcmimi.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="zcmimi's blog">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <meta property="og:description" content="">
+    <link rel="canonical" href="https://blog.zcmimi.top">
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Website",
+        "publisher":{
+            "@type":"Organization",
+            "name":"zcmimi's blog",
+            "logo":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "url":"https://blog.zcmimi.top",
+        "image":{
+            "@type":"ImageObject",
+            "url":"https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://blog.zcmimi.top"
+        },
+        "description":""
+    }</script>
+<script>
+wonld=Object.create({
+    list:[],
+    append:function(e){this.list.push(e);},
+    excute:function(){
+        for(var i=0;i<this.list.length;++i)
+            this.list[i]();
+    }
+});
+window.onload=function(){wonld.excute();};
+</script>
+    <link rel="dns-prefetch" href="https://blog.zcmimi.top">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/css/mdui.min.css" type="text/css">
+    <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="/assets/theme/origin.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/icon/mqii/mqii.css" type="text/css">
+    <!--custom--><link rel="stylesheet" href="/custom.css" type="text/css">
+    <!--highlight-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+    <!--highlight end-->
+    <!-- markdown katex-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/markdown.min.css" type="text/css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css" type="text/css">
+    <script async src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <!-- markdown katex end-->
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp">
+    <script async src="//cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script defer src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/bundle.min.js'></script>
+</head>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-blue">
+    <div class="mdui-progress" id='loading-progress' style="position: fixed;top:0;z-index: 999999;"><div class="mdui-progress-indeterminate"></div></div>
+    <div id="theme_css"></div>
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset mdui-color-white mdui-shadow-1">
+        <div class="mdui-toolbar mdui-color-theme">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="drawer.toggle();" mdui-tooltip="{content: '菜单'}">
+                <i class="mdui-icon material-icons">menu</i>
+            </button>
+            <a href="/" class="mdui-typo-title">zcmimi's blog</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-row" id='toolbar-menu'>
+                <a href="https://travellings.now.sh/" target="_blank" class="mdui-col mdui-text-color-black">Traveling</a>
+                <a href="/about" target="_blank" class="mdui-col mdui-text-color-black">关于我</a>
+                <a href="/categories" target="_blank" class="mdui-col mdui-text-color-black">分类</a>
+                <a href="/links" target="_blank" class="mdui-col mdui-text-color-black">友链</a>
+                <a href="/tools" target="_blank" class="mdui-col mdui-text-color-black">工具集</a>
+                <a href="/tags" target="_blank" class="mdui-col mdui-text-color-black">标签云</a>
+            </div><script>if(document.body.clientWidth<1078)document.getElementById('toolbar-menu').hidden=1;</script>
+            <button onclick="music_on();document.getElementById('music_button').hidden=1" id='music_button' class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '是否来点音乐?'}">
+                <i class="mdui-icon material-icons">queue_music</i>
+            </button>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '切换主题'}" mdui-menu="{target: '#theme_menu',align: 'right',covered: false}">
+                <i class="mdui-icon material-icons">view_quilt</i>
+            </button>
+            <ul class="mdui-menu" id="theme_menu" style="width: fit-content;">
+                <li class="mdui-menu-item" mdui-tooltip="{content: '开启/关闭 pjax'}"><a onclick="pjax_on()" id='pjax_button'>pjax_on</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '回归原本'}"><a onclick="theme('day')">日间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '晚上要保护眼睛哦'}"><a onclick="theme('night')">夜间模式</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '满足你的少女心吧'}"><a onclick="theme('pink')">粉红</a></li>
+                <li class="mdui-menu-item" mdui-tooltip="{content: '没什么,就是淡蓝色'}"><a onclick="theme('blue')">粉蓝</a></li>
+            </ul>
+            <button onclick="search_dialog.open();document.getElementById('search_input').focus();" class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '搜索'}">
+                <i class="mdui-icon material-icons">search</i>
+            </button>
+            <button id='toc_button' class="mdui-btn mdui-btn-icon mdui-ripple" onclick="toc_drawer.toggle();" mdui-tooltip="{content: '目录'}" hidden>
+                <i class="mdui-icon material-icons">format_list_numbered</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-drawer-right mdui-shadow-2" id="toc_drawer" hidden>
+        <ul class="mdui-list" id="toc"></ul>
+    </div>
+
+    <div class="mdui-container">
+        <div id='page_typ' hidden>article</div>
+<div class="mdui-card article">
+    <div class="mdui-card-primary">
+        <a href="#" class="mdui-card-primary-title">生成函数</a>
+        <div class="mdui-card-primary-subtitle">        <a href="/tags/数论" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">数论</span>
+        </a>
+        <a href="/tags/技巧" class="mdui-chip mdui-text-color-black">
+            <span class="mdui-chip-title">技巧</span>
+        </a>
+</div>
+    </div>
+    <div class="mdui-card-header">
+        <img class="mdui-card-header-avatar" src="    https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp
+" alt='avatar'>
+        <div class="mdui-card-header-title">zcmimi</div>
+        <div class="mdui-card-header-subtitle">2020-06-25</div>
+        <div class="mdui-card-menu">
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '文章分类'}" mdui-menu="{target:'#categories',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">bookmark</i>
+            </button>
+            <ul class="mdui-menu" id="categories">
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/算法/数论" class="mdui-ripple">
+                            算法/数论
+                        </a>
+                    </li>
+                    <li class="mdui-menu-item mdui-ripple">
+                        <a href="/categories/note" class="mdui-ripple">
+                            note
+                        </a>
+                    </li>
+            </ul>
+            <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '本文阅读量'}" mdui-menu="{target:'#visit_counter',align:'right',covered: false}">
+                <i class="mdui-icon material-icons">remove_red_eye</i>
+            </button>
+            <ul class="mdui-menu" id="visit_counter">
+                <li class="mdui-menu-item mdui-ripple">
+                    <div id="busuanzi_container_page_pv">
+                        <center>本文总阅读量<span id="busuanzi_value_page_pv"></span>次</center>
+                    </div>
+                </li>
+            </ul>
+<button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-tooltip="{content: '分享'}" mdui-menu="{target:'#share_menu',align:'right',covered: false}">
+    <i class="mdui-icon material-icons">share</i>
+</button>
+<ul class="mdui-menu" id="share_menu" style="width: fit-content;">
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_weibo" href="https://service.weibo.com/share/share.php?appkey=&title=生成函数 - zcmimi's blog&url=https://blog.zcmimi.top/posts/生成函数&pic=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&searchPic=false&style=simple" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-weibo"></i>分享到微博
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_qq" href="https://connect.qq.com/widget/shareqq/index.html?site=zcmimi's blog&title=生成函数 - zcmimi's blog&summary=&pics=https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp&url=https://blog.zcmimi.top/posts/生成函数" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-qq_filled"></i>分享到QQ
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_twitter" href="https://twitter.com/intent/tweet?text=生成函数 - zcmimi's blog&url=https://blog.zcmimi.top/posts/生成函数" target="_blank" rel="noopener" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon mqii mqii-twitter"></i>分享到Twitter
+        </a>
+    </li>
+    <li class="mdui-menu-item mdui-ripple">
+        <a id="share_copy" onclick="copylink()" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">link</i>复制链接
+        </a>
+    </li>
+</ul>        </div>
+    </div>
+    <div class="mdui-card-content">
+        
+        <div id="md-body" class="md-body"><p>推荐:</p>
+<ul>
+<li>https://www.cnblogs.com/zwfymqz/p/10521686.html</li>
+<li>https://rqy.moe/Algorithms/generating-function/</li>
+</ul>
+<h2>定义</h2>
+<p>生成函数又称母函数</p>
+<p>设序列$a$为$a_0,a_1,a_2,\dots$</p>
+<p>则$g(x)=a_0+a_1x+a_2x^2+a_3x^3+\dots$为序列$a$的生成函数</p>
+<h2>普通生成函数</h2>
+<p>普通型生成函数（ordinary generating function, 简称OGF）</p>
+<p>形如$\displaystyle G(x)=\sum_{i=0}^na_ix_i$的表示一个序列的多项式函数,我们称之为普通生成函数</p>
+<h3>使用例</h3>
+<ol>
+<li><blockquote>
+<p>有1克、2克、3克、4克的砝码各一枚,能称出哪几种重量？每种重量各有几种可能方案？</p>
+</blockquote>
+<p>$1$个$1$克砝码可以看成$1+x^1$,$1$表示不取,$x^n$代表取$n$个,以下同理</p>
+<p>$1$个$2$克砝码可以看成$1+x^2$</p>
+<p>$1$个$3$克砝码可以看成$1+x^3$</p>
+<p>$1$个$4$克砝码可以看成$1+x^4$</p>
+<p>那么</p>
+<p>$\begin{aligned}
+g(x)
+&amp;=(1+x^1)(1+x^2)(1+x^3)(1+x^4)\
+&amp;=1+x+x^2+2x^3+2x^4+2x^5+2x^6+2x^7+x^8+x^9+x^{10}<br>
+\end{aligned}$</p>
+<p>可以看出重量为$3$克的方案为$2$种,$4$克的方案为$2$种,$3$克的方案为$5$种,以此类推</p>
+<p><strong>可以发现得出的多项式每一项$ax^n$代表重量为$n$克的方案有$a$种</strong></p>
+<p>手动模拟一下多项式计算的过程,与背包dp相似,也可配合下发例题代码理解</p>
+</li>
+<li><blockquote>
+<p>求用$1$分、$2$分、$3$分的邮票贴出不同数值的方案数(邮票张数无限)</p>
+</blockquote>
+<p>那么</p>
+<p>$\begin{aligned}
+g(x)
+&amp;=
+\begin{aligned}
+&amp;(1+x+x^2+x^3+\dots)\
+&amp;(1+x^2+x^4+x^6+\dots)\
+&amp;(1+x^3+x^6+x^9+\dots)\
+\end{aligned}\
+&amp;=1+x+2x^2+3x^3+4x^4+\dots<br>
+\end{aligned}$</p>
+<p>$x^4$的系数为$4$表示$4$有$4$中拆分方法:</p>
+<p>$4=1+1+1+1=1+1+1+2=1+3=2+2$</p>
+</li>
+<li><blockquote>
+<p>设有$n$个标志为$1,2,…,n$的网袋,第$i$个网袋里放有$n_i$个球。不同网袋里的球是不同的,而同一网袋里的球则是没有差别的,认为是相同的。询问从中取$r$个球的方案数。</p>
+</blockquote>
+<p>$g(x)=(1+x+x^2+\dots+x^{n_1})(1+x+x^2+\dots+x^{n_2})\dots$</p>
+<p>最后指数为$r$的项的系数就是答案</p>
+</li>
+</ol>
+<h3>例题</h3>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1028">HDU 1028</a></p>
+<blockquote>
+<p>给出$n$,求:</p>
+<p>$n=a_1+a_2+\dots+a_m(m\le n,a_i&gt;0)$的方案数</p>
+<p>eg: $n=4$时有$5$种方案</p>
+<p>$\begin{aligned}
+&amp;4=4\
+&amp;4=3+1\
+&amp;4=2+2\
+&amp;4=2+1+1\
+&amp;4=1+1+1+1\
+\end{aligned}$</p>
+</blockquote>
+<p>$
+\begin{aligned}
+g(x)=
+&amp;(1+x+x^2+x^3+\dots+x^n)\
+&amp;(1+x^2+x^4+x^6+\dots+x^n)\
+&amp;(1+x^3+x^6+x^9+\dots+x^n)\
+&amp;\cdots\
+&amp;(1+x^n)\
+\end{aligned}\
+$</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+int n,a[2][121];
+int main(){
+    for(int i=0;i&lt;=120;++i)a[1][i]=1;
+    for(int i=2;i&lt;=120;++i){
+        memset(a[i&amp;1],0,sizeof a[i&amp;1]);
+        int p=0;
+        for(int p=0;p&lt;=120;p+=i)
+            for(int j=0;j+p&lt;=120;++j)
+                a[i&amp;1][j+p]+=a[!(i&amp;1)][j];
+                // ax^j · x^p = ax^{j+k}
+                // a'[j+k]+=a[j]
+    }
+    while(~scanf(&quot;%d&quot;,&amp;n))
+        printf(&quot;%d\n&quot;,a[0][n]);
+}
+</code></pre>
+<h3>练习:</h3>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1085">HDU 1085</a></p>
+<h3>推广</h3>
+<p>当$a={1,1,1,\dots}$时,$g(x)=1+x+x^2+x^3+\dots$</p>
+<p>当$x\in(-1,1)$时：</p>
+<p>$
+\displaystyle
+g(x)=1+x+x^2+x^3+\dots+x^{n-1}
+\
+xg(x)=x+x^2+x^3+x^4+\dots+x^n
+\
+g(x)=\frac{xg(x)-g(x)}{x-1}=\frac{x^n-1}{x-1}
+\
+\because x\in(-1,1),n=\infty
+\
+\therefore x^n \rightarrow 0
+\
+\therefore g(x)=\frac1{1-x}
+$</p>
+<p>所以:</p>
+<p>$\displaystyle \frac1{1-x}=1+x+x^2+x^3+\dots$</p>
+<p>$x$替换为$kx$:</p>
+<p>$\displaystyle \frac 1{1-kx}=1+kx+k^2x^2+k^3x^3+\dots$</p>
+<p>两边分别求导得:</p>
+<p>$\displaystyle \frac1{(1-x)^2}=0+1+2x+3x^2+4x^3+\dots$</p>
+<p>再求导:</p>
+<p>$\displaystyle \frac2{(1-x)^3}=0+0+1+3x+6x^2+10x^3+\dots$</p>
+<p>推广: $\displaystyle \sum_{i=0}^\infty {i+k-1 \choose k-1}x^i=\frac1{(1-x)^k}$</p>
+<p>常见生成函数:</p>
+<p>|数列|OGF|
+|-|-|
+|$&lt;1,0,0,\dots&gt;$|$1$|
+|$&lt;1,1,1,\dots&gt;$|$\frac 1{1-x}$|
+|$&lt;1,k,k^2,k^3,\dots&gt;$|$\frac 1{1-kx}$|
+|$&lt;1,2,3,\dots&gt;$|$\frac 1{(1-x)^2}$|
+|$&lt;1,−1,1,−1,\dots&gt;$|$\frac 1{1+x}$|
+|$&lt;1,2,1,0,0,\dots&gt;$|$(1+x)^2$|
+|$&lt;1,4,6,4,1,0,0,\dots&gt;$|$(1+x)^4$|
+|$&lt;1,n,{n\choose 2},{n\choose 3},\dots&gt;$|$(1+x)^n$|
+|$&lt;1,n,{n+1\choose 2},{n+1\choose 3},\dots&gt;$|$(1-x)^{-n}$|
+|$&lt;0,1,\frac 12,\frac 13,\dots&gt;$|$ln(1-x)$|
+|$&lt;0,1,-\frac 12,\frac 13,-\frac 14,\dots&gt;$|$ln(1+x)$|
+|$&lt;1,1,\frac 12,\frac 1{3!},\frac 1{4!},\dots&gt;$|$e^x$|</p>
+<h3>板子题</h3>
+<p><a href="https://www.luogu.com.cn/problem/P2000">LG 2000 拯救世界</a></p>
+<ol>
+<li><p>金神石的块数必须是6的倍数
+$g(x)=1+x^6+x^{12}+...=\frac 1{1-x^6}$</p>
+</li>
+<li><p>木神石最多用9块
+$g(x)=1+x+x^2+...+x^9=\frac{1-x^{10}}{1-x}$</p>
+</li>
+<li><p>水神石最多用5块
+$g(x)=1+x+x^2+...+x^5=\frac{1-x^6}{1-x}$</p>
+</li>
+<li><p>火神石的块数必须是4的倍数
+$g(x)=1+x^4+x^8+...=\frac 1{1-x^4}$</p>
+</li>
+<li><p>土神石最多用7块
+$g(x)=1+x+x^2+...+x^7=\frac{1-x^8}{1-x}$</p>
+</li>
+<li><p>金神石的块数必须是2的倍数
+$g(x)=1+x^2+x^4+...=\frac 1{1-x^2}$</p>
+</li>
+<li><p>木神石最多用1块
+$g(x)=1+x=\frac{1-x^2}{1-x}$</p>
+</li>
+<li><p>水神石的块数必须是8的倍数
+$g(x)=1+x^8+x^{16}+...=\frac 1{1-x^8}$</p>
+</li>
+<li><p>火神石的块数必须是10的倍数
+$g(x)=1+x^{10}+x^{20}+...=\frac 1{1-x^{10}}$</p>
+</li>
+<li><p>土神石最多用3块
+$g(x)=1+x+x^2+x^3=\frac{1-x^4}{1-x}$</p>
+</li>
+</ol>
+<p>$\displaystyle \frac 1{1-x^6}\cdot\frac{1-x^{10}}{1-x}\cdot\frac{1-x^6}{1-x}\cdot\frac 1{1-x^4}\cdot\frac{1-x^8}{1-x}\cdot\frac 1{1-x^2}\cdot\frac{1-x^2}{1-x}\cdot\frac 1{1-x^8}\cdot\frac 1{1-x^{10}}\cdot\frac{1-x^4}{1-x}\
+=\frac1{(1-x)^5}\
+=\sum_{i=0}^\infty {i+4 \choose 4}x^i$</p>
+<p>第$n$项的系数是${n+4 \choose 4}$需要FFT或NTT</p>
+<h3>求斐波那契数列通项公式</h3>
+<p>斐波那契数列:</p>
+<p>$$f_0=1,f_1=1,f_i=f_{i-1}+f_{i-2}(i&gt;1)$$</p>
+<p>构造生成函数:</p>
+<p>$$F(x)=x+x^2+2x^3+3x^4+5x^5+\dots$$</p>
+<p>构造方程:</p>
+<p>$$
+\begin{aligned}
+&amp;\quad F(x)-xF(x)\
+&amp;=(x+x^2+2x^3+3x^4+\dots)-(x^2+x^3+2x^4+3x^5+\dots)\
+&amp;=x+x^3+x^4+2x^5+3x^6+\dots\
+&amp;=x+x^2F(x)
+\end{aligned}
+$$</p>
+<p>解得:</p>
+<p>$$F(x)=\frac x{1-x-x^2}$$</p>
+<p>配方:</p>
+<p>$$
+F(x)=\frac x{(1-\phi_1 x)(1-\phi_2 x)}
+\~\
+\displaystyle \phi_1=\frac{1+\sqrt 5}2,\phi_2=\frac{1-\sqrt 5}2
+$$</p>
+<p>裂项:</p>
+<p>$$F(x)=\frac 1{\sqrt 5}\left( \frac 1{1-\phi_1x}  - \frac 1{1-\phi_2x} \right)$$</p>
+<p>那么:</p>
+<p>$$f_n=\frac 1{\sqrt 5}\left[ \left( \frac{1+\sqrt 5}2 \right)^n - \left( \frac{1-\sqrt 5}2 \right)^n \right]$$</p>
+<h2>指数型生成函数</h2>
+<h3>定义</h3>
+<p>指数型生成函数（exponential generating function,简称EGF）</p>
+<p>形如$\displaystyle G(x)=\sum_{i=0}^n a_i \frac{x^i}{i!}$的表示序列的多项式函数,我们称之为指数型生成函数</p>
+<h3>使用例</h3>
+<blockquote>
+<p>有三种物品,分别有$3,2,3$个,问拿出$4$个进行排列(不同顺序算不同方案)的方案数是多少</p>
+</blockquote>
+<p>多重集排列数:</p>
+<blockquote>
+<p>设$S={a_1,a_2,\dots,a_n},N=\sum\limits_{i=1}^n a_i$,其中$a_i$表示第$i$个物品有$a_i$个。</p>
+<p>从中选出$N$个进行排列的方案数为$\displaystyle \frac{N!}{a_1! a_2! \dots a_n!}$</p>
+<p>解释: 任意排列之后减去同种物品之间多出来的方案</p>
+</blockquote>
+<p>构造:</p>
+<p>$\displaystyle
+G_1(x)=1+\frac x{1!}+\frac {x^2}{2!}+\frac {x^3}{3!}\~\
+G_2(x)=1+\frac x{1!}+\frac {x^2}{2!}\~\
+G_3(x)=1+\frac x{1!}+\frac {x^2}{2!}+\frac {x^3}{3!}\
+$</p>
+<p>那么</p>
+<p>$$
+\begin{aligned}
+&amp;\quad G_1(x)\cdot G_2(x) \cdot G_3(x)\
+&amp;=(1+\frac x{1!}+\frac {x^2}{2!}+\frac {x^3}{3!})(1+\frac x{1!}+\frac {x^2}{2!})(1+\frac x{1!}+\frac {x^2}{2!}+\frac {x^3}{3!})\
+&amp;=(1+3x + \frac{9}{2}x^2 + \frac{14}{3}x^3 + \frac{35}{12}x^4 + \frac{17}{12}x^5 + \frac{35}{72} x^6 + \frac{8}{72}x^7 + \frac{1}{71}x^8)
+\end{aligned}
+$$</p>
+<p>选$4$个物品的方案数就是$4!\cdot \frac{35}{12}=70$</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1521">hdu 1521 排列组合</a></p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+const int N=11;
+int n,m,a[N],fac[100000],mx=0;
+typedef double db;
+db c[2][N];
+void solve(){
+    mx=m;
+    for(int i=1;i&lt;=n;++i){
+        scanf(&quot;%d&quot;,a+i);
+        if(a[i]&gt;mx)mx=a[i];
+    }
+    fac[0]=1;
+    for(int i=1;i&lt;=mx;++i)fac[i]=fac[i-1]*i;
+    memset(c,0,sizeof c);
+    for(int i=0;i&lt;=a[1];++i)
+        c[1][i]=1.0/(db)fac[i];
+    for(int i=2;i&lt;=n;++i){
+        memset(c[i&amp;1],0,sizeof c[i&amp;1]);
+        for(int p=0;p&lt;=m;++p)
+            for(int j=0;j&lt;=a[i]&amp;&amp;j+p&lt;=m;++j)
+                c[i&amp;1][j+p]+=c[!(i&amp;1)][p]/(db)fac[j];
+    }
+    printf(&quot;%.0f\n&quot;,c[n&amp;1][m]*fac[m]);
+}
+int main(){
+    while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))solve();
+}
+</code></pre>
+<h3>推广</h3>
+<p>$\displaystyle e^x=\sum_{i=0}^{\infty}\frac{x^i}{i!}$</p>
+<p>常见的指数型生成函数:</p>
+<p>|数列|EGF|
+|-|-|
+|$&lt;1,1,1,\dots&gt;$|$e^x$|
+|$&lt;1,-1,1,-1,\dots&gt;$|$e^{-x}$|
+|$&lt;1,k,k^2,k^3,\dots&gt;$|$e^{kx}$|
+|$&lt;0,1,2,\dots&gt;$|$xe^x$|
+|$&lt;1,0,1,0,\dots&gt;$|$\frac {e^x+e^{-x}}2$|
+|$&lt;0,1,0,1,\dots&gt;$|$\frac {e^x-e^{-x}}2$|</p>
+<p>可以发现$&lt;f_n&gt;$的EGF就是$&lt;\frac{f_n}{n!}&gt;$的OGF</p>
+<p>例题:</p>
+<p><a href="http://poj.org/problem?id=3734">poj 3734 积木</a></p>
+<blockquote>
+<p>长度为$n$的序列,用红黄蓝绿染色,其中红、绿数量均为偶数,求方案数</p>
+</blockquote>
+<p>红、绿: $\frac{e^x+e^{-x}}2$</p>
+<p>黄、蓝: $e^x$</p>
+<p>$\displaystyle
+\begin{aligned}
+F(x)
+&amp;=e^x \cdot \frac{e^x+e^{-x}}2 \cdot e^x \cdot \frac{e^x+e^{-x}}2\
+&amp;=\left(e^x \cdot \frac{e^x+e^{-x}}2\right)^2\
+&amp;=\left(\frac{e^{2x}+1}2\right)^2\
+&amp;=\frac{e^{4x}+2e^{2x}+1}4\
+&amp;=\frac 14+\sum_{i=0}^{\infty} \frac{4^i+2^{i+1}}4 \cdot \frac{x^i}{n!}
+\end{aligned}
+\
+f_n=\frac{4^n+2^{n+1}}4
+$</p>
+<pre><code class="language-cpp">#include&lt;cstdio&gt;
+typedef long long ll;
+const int P=10007;
+int n;
+int pw(ll x,int b){
+    ll res=1;
+    while(b){
+        if(b&amp;1)res=res*x%P;
+        x=x*x%P;b&gt;&gt;=1;
+    }
+    return res;
+}
+int main(){
+    int T;scanf(&quot;%d&quot;,&amp;T);
+    while(T--)
+        scanf(&quot;%d&quot;,&amp;n),
+        printf(&quot;%d\n&quot;,(pw(4,n)+pw(2,n+1))%P*2502%P);
+}
+</code></pre>
+</div>
+    </div>
+</div>
+<div class="mdui-row-xs-3 article">
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black" id='pre_button'>
+            <i class="mdui-icon material-icons">arrow_back</i>
+            伯努利数与自然数幂和
+        </a>
+    </div>
+    <div class="mdui-col mdui-text-center">生成函数</div>
+    <div class="mdui-col">
+        <a href="" class="mdui-text-color-black mdui-float-right" id='nxt_button'>
+            GDOI2020游记
+            <i class="mdui-icon material-icons">arrow_forward</i>
+        </a>
+    </div>
+</div>
+<div class="mdui-card" style="margin-top: 50px;">
+    <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">
+            <i class="mdui-icon material-icons">comment</i>
+            评论
+        </div>
+    </div>
+<div class="mdui-card-content" id='comments'>
+    <center>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="nvl()">
+            valine
+        </button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="ngt()">
+            gitalk
+        </button>
+    </center>
+</div>
+<script>
+function nvl(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var valinejs=document.createElement('script');
+    valinejs.src="//cdn.jsdelivr.net/gh/xCss/Valine/dist/Valine.min.js";
+    valinejs.async=true;
+    valinejs.onload=function(){
+        new Valine({
+            el: '#comments',
+            placeholder: "说几句嘛qwq",
+            appId: "NLh0fhLRvD8gOWEC3vtOIRx5-gzGzoHsz",
+            appKey: "DSwqdjPFKAnO4CFMQypfkcB9",
+            path: window.location.pathname,
+        });
+    }
+    document.getElementsByTagName("head")[0].appendChild(valinejs);
+}
+</script>
+<script>
+function ngt(){
+    document.getElementById('comments').innerHTML=`<center><div class="mdui-spinner mdui-spinner-colorful"></div></center>`;
+    mdui.mutation();
+    var gtalkjs=document.createElement('script');
+    gtalkjs.src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js";
+    gtalkjs.async=true;
+    gtalkjs.onload=function(){
+        const gitalk=new Gitalk({
+            clientID:'054902ee1548e6fe427e',
+            clientSecret:'b31fac2b407311ca7e6673ab84727ae9562c69ba',
+            repo:'zcmimi.github.io',
+            owner:'zcmimi',
+            admin: "zcmimi",
+            id:location.pathname,
+            distractionFreeMode:False
+        });
+        gitalk.render('comments');
+    }
+    var gtalkcss=document.createElement('link');
+    gtalkcss.href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css";
+    gtalkcss.type='text/css';
+    gtalkcss.rel='stylesheet';
+    document.getElementsByTagName("head")[0].appendChild(gtalkjs);
+    document.getElementsByTagName("head")[0].appendChild(gtalkcss);
+}
+</script>
+</div>
+    </div>
+</body>
+<!--top-->
+<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-fab-fixed mdui-fab-hide" id="totop" onclick="totop()" style="z-index: 99999;">
+    <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+</button>
+<!--top end-->
+<footer class="mdui-m-t-5">
+    <div class="mdui-card">
+        <div class="mdui-card-content mdui-p-a-5">
+            <div class="mdui-container">
+                <div class="mdui-row-sm-3">
+                    <div class="mdui-col">
+                        <div class="mdui-row">
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://space.bilibili.com/110897068">
+                                        <i class="mdui-icon mqii mqii-bilibili mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://github.com/zcmimi">
+                                        <i class="mdui-icon mqii mqii-github mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://twitter.com/zc_mimi">
+                                        <i class="mdui-icon mqii mqii-twitter mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                                <div class="mdui-col-xs-2 mdui-col-sm-1 mdui-col-md-1" style="margin: 10px;">
+                                    <a href="https://www.zhihu.com/people/zcmimi">
+                                        <i class="mdui-icon mqii mqii-zhihu mdui-text-color-black"></i>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="mdui-col mdui-text-center">
+                        <div>Copyright ©&nbsp;2019-2020&nbsp;zcmimi's blog</div>
+                        <div><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div>
+                        <script async src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/busuanzi.js" onload="
+                            wonld.append(busuanzi);
+                            document.addEventListener('pjax:complete',busuanzi);
+                        "></script>
+
+                        <div>last build: 2020-07-30T15:42:15Z</div>
+                    </div>
+                    <div class="mdui-col mdui-text-center mdui-typo">
+                        <div>Powered by <a href="https://github.com/zcmimi/py-blog">py-blog</a></div>
+                        <div>Theme material</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mdui-dialog" id="search_dialog">
+    <div class="mdui-dialog-title">Search</div>
+    <div class="mdui-dialog-content">
+        <div class="mdui-textfield">
+            <i class="mdui-icon material-icons">search</i>
+            <input id="search_input" class="mdui-textfield-input" placeholder="搜索">
+        </div>
+        <div id="search_result" class="mdui-list"></div>
+    </div>
+</div>
+<script async src='https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/assets/worker_search.js'></script>
+<script>
+document.getElementById('search_input').onchange=function(){
+    search("https://blog_search.zcmimi.workers.dev");
+}
+</script>
+<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-shadow-2" id="drawer">
+    <ul class="mdui-list">
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons mdui-text mdui-text-color-black">home</i>
+            <a href="/" class="mdui-list-item-content">zcmimi's blog</a>
+        </li>
+        <li><center><img src="https://cdn.jsdelivr.net/gh/zcmimi/cdn@master/img/avatar_2.webp" width="95%" height="95%" alt='avatar'></img></center></li>
+            <li class='mdui-subheader'>Catch me</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:dodgerblue'">email</i>
+                    <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=fwUcIBIWEhY-Dg5RHBAS" target="_blank" class="mdui-list-item-content">给我写信</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#66ccff'"></i>
+                    <a href="https://t.me/zcmimi" target="_blank" class="mdui-list-item-content">电报</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-twitter" style='color:rgba(29,161,242,1.00)'"></i>
+                    <a href="https://twitter.com/zc_mimi" target="_blank" class="mdui-list-item-content">推特</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-bilibili" style='color:#F06292'"></i>
+                    <a href="https://space.bilibili.com/110897068" target="_blank" class="mdui-list-item-content">哔哩哔哩</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-netease-cloud-music" style='color:red'"></i>
+                    <a href="https://music.163.com/#/user/home?id=507163653" target="_blank" class="mdui-list-item-content">网易云音乐</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-zhihu" style='color:#0084ff'"></i>
+                    <a href="https://www.zhihu.com/people/zcmimi" target="_blank" class="mdui-list-item-content">知乎</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <img class="mdui-list-item-icon" src="https://www.luogu.com.cn/favicon.ico" alt>
+                    <a href="https://luogu.com.cn/user/36532" target="_blank" class="mdui-list-item-content">洛谷</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-github" style='color:black'"></i>
+                    <a href="https://github.com/zcmimi" target="_blank" class="mdui-list-item-content">Github</a>
+                </li>
+            <li class='mdui-subheader'>Links</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon mqii mqii-telegram" style='color:#bbb'"></i>
+                    <a href="https://travellings.now.sh/" target="_blank" class="mdui-list-item-content">Traveling</a>
+                </li>
+            <li class='mdui-subheader'>Pages</li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">bookmark_border</i>
+                    <a href="/tags" target="_blank" class="mdui-list-item-content">标签云</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">book</i>
+                    <a href="/categories" target="_blank" class="mdui-list-item-content">分类</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">link</i>
+                    <a href="/links" target="_blank" class="mdui-list-item-content">友链</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">build</i>
+                    <a href="/tools" target="_blank" class="mdui-list-item-content">工具集</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">person</i>
+                    <a href="/about" target="_blank" class="mdui-list-item-content">关于我</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">rss_feed</i>
+                    <a href="/atom.xml" target="_blank" class="mdui-list-item-content">订阅</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">list</i>
+                    <a href="/sitemap.xml" target="_blank" class="mdui-list-item-content">站点地图</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons" style='color:black'">comment</i>
+                    <a href="https://nlh0fhlrsgij.leanapp.cn" target="_blank" class="mdui-list-item-content">评论管理</a>
+                </li>
+    </ul>
+</div>
+
+
+<div id='musiclist'></div>
+<style>.aplayer,.aplayer-body,.aplayer-pic,.aplayer-button{z-index: 9999999 !important;}</style>
+<script>
+function music_on(){
+    pjax_on(1);
+    var x=document.getElementById('musiclist');
+    x.innerHTML="";
+    mdui.snackbar({message:'歌单加载中,请稍等2-10s'});
+    var hl=document.createElement('link');
+    hl.href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css";
+    hl.type='text/css';
+    hl.rel='stylesheet';
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js";
+    x.appendChild(hl);
+    hl=document.createElement('script');
+    hl.src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js";
+    x.appendChild(hl);
+
+    hl=document.createElement('meting-js');
+    hl.setAttribute('id','765727960');
+    hl.setAttribute('fixed','true');
+    hl.setAttribute('server','netease');
+    hl.setAttribute('type','playlist');
+    hl.setAttribute('order','random');
+    hl.setAttribute('theme','#f7a4b9');
+    x.appendChild(hl);
+}
+</script>
+</html>
