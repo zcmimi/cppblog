@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #include<ryml.hpp>
+#include"fastio.hpp"
 using std::map,std::vector,std::cout,std::string,std::pair;
 
 const short
@@ -12,7 +13,7 @@ const short
 
 struct mpd{
     mpd(){type=-1;}
-    mpd(const short t){type=t;}
+    mpd(const short&t){type=t;}
     mpd(const vector<mpd>&t){vc=t;type=mpd_seq;}
     mpd(const map<string,mpd>&t){mp=t;type=mpd_map;}
     mpd(const string&s){str=s;type=mpd_str;}
@@ -69,87 +70,58 @@ struct mpd{
             while(!T.empty())mp.erase(T.back()),T.pop_back();
         }
     }
-    string dump_json(){
-        if(is_null())return "null";
-        if(is_int())return std::to_string(val);
-        if(is_bool())return flag?"true":"false";
-        if(is_str()){
-            string res;
-            for(auto&i:str){
-                if(i=='"')res+="\\\"";
-                else if(i=='\t')res+="\\t";
-                else if(i=='\n')res+="\\n";
-                else if(i=='\f')res+="\\f";
-                else if(i=='/')res+="\\/";
-                else if(i=='\\')res+="\\\\";
-                else res+=i;
-            }
-            return '"'+res+'"';
-        }
-
-        if(is_seq()){
-            string res="[";
-            for(auto&i:vc)res+=i.dump_json()+",";
-            if(!vc.empty())res.pop_back();
-            res+=']';
-            return res;
-        }
-
-        if(is_map()){
-            string res="{";
-            for(auto&i:mp)res+='"'+i.first+"\":"+i.second.dump_json()+",";
-            if(!mp.empty())res.pop_back();
-            res+='}';
-            return res;
-        }
+    void dump_json(FILE*file){
+        OUT fp=OUT(file);
+        dump_json_(fp);
+        fp.flush();
     }
-    void dump_json(FILE*fp){
-        if(is_null())return fputs("null",fp),void();
-        if(is_int())return fprintf(fp,"%d",val),void();
-        if(is_bool())return fputs(flag?"true":"false",fp),void();
+    void dump_json_(OUT&fp){
+        if(is_null())return fp.out("null"),void();
+        if(is_int())return fp.out(val),void();
+        if(is_bool())return fp.out(flag?"true":"false"),void();
         if(is_str()){
-            fputc('"',fp);
+            fp.pt('"');
             for(auto&i:str){
-                if(i=='"')fputs("\\\"",fp);
-                else if(i=='\t')fputs("\\t",fp);
-                else if(i=='\n')fputs("\\n",fp);
-                else if(i=='\f')fputs("\\f",fp);
-                else if(i=='/')fputs("\\/",fp);
-                else if(i=='\\')fputs("\\\\",fp);
-                else fputc(i,fp);
+                if(i=='"')fp.out("\\\"");
+                else if(i=='\t')fp.out("\\t");
+                else if(i=='\n')fp.out("\\n");
+                else if(i=='\f')fp.out("\\f");
+                else if(i=='/')fp.out("\\/");
+                else if(i=='\\')fp.out("\\\\");
+                else fp.pt(i);
             }
-            fputc('"',fp);
+            fp.pt('"');
             return;
         }
 
         if(is_seq()){
-            fputc('[',fp);
+            fp.pt('[');
             for(auto i=vc.begin();i!=vc.end();++i){
-                if(i!=vc.begin())fputc(',',fp);
-                (*i).dump_json(fp);
+                if(i!=vc.begin())fp.pt(',');
+                (*i).dump_json_(fp);
             }
-            fputc(']',fp);
+            fp.out(']');
             return;
         }
 
         if(is_map()){
-            fputc('{',fp);
+            fp.pt('{');
             for(auto i=mp.begin();i!=mp.end();++i){
-                if(i!=mp.begin())fputc(',',fp);
-                fputc('"',fp);
+                if(i!=mp.begin())fp.pt(',');
+                fp.pt('"');
                 for(auto&i:(*i).first){
-                    if(i=='"')fputs("\\\"",fp);
-                    else if(i=='\t')fputs("\\t",fp);
-                    else if(i=='\n')fputs("\\n",fp);
-                    else if(i=='\f')fputs("\\f",fp);
-                    else if(i=='/')fputs("\\/",fp);
-                    else if(i=='\\')fputs("\\\\",fp);
-                    else fputc(i,fp);
+                    if(i=='"')fp.out("\\\"");
+                    else if(i=='\t')fp.out("\\t");
+                    else if(i=='\n')fp.out("\\n");
+                    else if(i=='\f')fp.out("\\f");
+                    else if(i=='/')fp.out("\\/");
+                    else if(i=='\\')fp.out("\\\\");
+                    else fp.pt(i);
                 }
-                fputs("\":",fp);
-                (*i).second.dump_json(fp);
+                fp.out("\":");
+                (*i).second.dump_json_(fp);
             }
-            fputc('}',fp);
+            fp.pt('}');
             return;
         }
     }

@@ -73,41 +73,6 @@ inline bool cmp_date_top(mpd&x,mpd&y){
     else if(y.has("top"))return 0;
     else return cmp_date(x,y);
 }
-void gen_index(string path,mpd T,mpd&res){
-    int num=config["page_articles"].val,tot=T.vc.size(),TOT=tot/num;
-    for(int i=1;i<=TOT;++i){
-        mpd nodes;
-        for(int j=0;j<num;++j)
-            if(T.vc.empty())break;
-            else nodes.push_back(T.vc.front());
-        string addr=(i==1)?path:path+"/page/"+to_string(i);
-
-        mpd x=MpdMap;
-        x["id"]=i;
-        x["addr"]=addr;
-        x["link"]=rt+addr;
-        x["title"]=path;
-        x["nodes"]=nodes;
-
-        res.push_back(x);
-    }
-    for(int i=0;i<TOT;++i){
-        if(i)res[i].ins("pre",res[i-1]);
-        if(i+1<TOT)res[i].ins("nxt",res[i+1]);
-    }
-}
-void gen_tags_index(){
-    for(auto&tag:tags.mp)
-        gen_index("/tags/"+tag.first,tag.second,tags_index[(string)tag.first]);  
-}
-void gen_categories_index(string path,mpd&cates){
-    if(cates.has("sub"))
-        for(auto&cate:cates["sub"].mp)
-            gen_categories_index(path+'/'+cate.first,cate.second);
-    if(cates.has("nodes"))
-        gen_index(path,cates["nodes"],cates["index"]);
-}
-
 void gen_sitemap(){
 
 }
@@ -127,9 +92,6 @@ void expt(){
     data["pages"]=pages;
     data["tags"]=tags;
     data["categories"]=categories;
-
-    // data["posts_index"]=posts_index;
-    // data["tags_index"]=tags_index;
 
     FILE *fp;fp=fopen("data.json","w");
     data.dump_json(fp);
