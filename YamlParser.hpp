@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 #include<ryml.hpp>
-#include"str.h"
 using std::map,std::vector,std::cout,std::string,std::pair;
 
 const short
@@ -15,15 +14,15 @@ struct mpd{
     mpd(){type=-1;}
     mpd(const short t){type=t;}
     mpd(const vector<mpd>&t){vc=t;type=mpd_seq;}
-    mpd(const map<STR,mpd>&t){mp=t;type=mpd_map;}
-    mpd(const STR&s){str=s;type=mpd_str;}
+    mpd(const map<string,mpd>&t){mp=t;type=mpd_map;}
+    mpd(const string&s){str=s;type=mpd_str;}
     mpd(const char*s){str=s;type=mpd_str;}
     mpd(const int&v){val=v;type=mpd_int;}
     mpd(const bool&f){flag=f;type=mpd_bool;}
-    
+
     short type;
-    STR str;
-    map<STR,mpd>mp;
+    string str;
+    map<string,mpd>mp;
     vector<mpd>vc;
     int val;
     bool flag;
@@ -35,22 +34,14 @@ struct mpd{
     bool is_int(){return type==mpd_int;}
     bool is_bool(){return type==mpd_bool;}
 
-    bool has(const STR&key){return mp.count(key);}
+    bool has(const string&key){return mp.count(key);}
     bool has(const char*key){return mp.count(key);}
 
-    mpd&operator[](const STR&key){return mp[key];}
+    mpd&operator[](const string&key){return mp[key];}
     mpd&operator[](const char*key){return mp[key];}
     mpd&operator[](const int&id){return vc[id];}
 
-    void operator=(vector<mpd>t){vc=t;type=mpd_seq;}
-    void operator=(map<STR,mpd>t){mp=t;type=mpd_map;}    
-    void operator=(const STR&s){str=s;type=mpd_str;}
-    void operator=(const bool f){flag=f;type=mpd_bool;}
-    void operator=(const int v){val=v;type=mpd_int;}    
-    void operator=(const char*s){str=s;type=mpd_str;}
-    
-    
-    bool operator==(const STR&s){return str==s;}
+    bool operator==(const string&s){return str==s;}
     bool operator==(const int&v){return val==v;}
     bool operator==(const bool&f){return flag==f;}
 
@@ -61,109 +52,121 @@ struct mpd{
         else if(str=="False"||str=="false")flag=false,type=mpd_bool;
         else{
             val=std::atoi(str.c_str());
-            if((int)log10(val)==str.len-1||(int)log10(-val)==str.len-2||(val==0&&str=="0"))type=mpd_int;
+            if((int)log10(val)==str.length()-1||(int)log10(-val)==str.length()-2||(val==0&&str=="0"))type=mpd_int;
         }
     }
 
-    void ins(const STR key,const mpd&v){mp.insert(pair<STR,mpd>(key,v));}
-    void ins(const map<STR,mpd>&x){mp.insert(x.begin(),x.end());}
+    void ins(const string&key,const mpd&v){mp.insert(pair<string,mpd>(key,v));}
+    void ins(const map<string,mpd>&x){mp.insert(x.begin(),x.end());}
     void push_back(const mpd&v){vc.push_back(v);}
-    void push_back(const vector<mpd>&x){vc.insert(vc.end(),x.begin(),x.end());}    
+    void push_back(const vector<mpd>&x){vc.insert(vc.end(),x.begin(),x.end());}
 
     void rm_em(){
         if(type==mpd_map){
-            std::list<map<STR,mpd>::iterator>T;
-            for(map<STR,mpd>::iterator it=mp.begin();it!=mp.end();it++)
+            std::list<map<string,mpd>::iterator>T;
+            for(map<string,mpd>::iterator it=mp.begin();it!=mp.end();it++)
                 if((*it).second.is_null())T.push_back(it);
             while(!T.empty())mp.erase(T.back()),T.pop_back();
         }
     }
-    bool iscn(char c){
-        // if(c&0x80)return 0;
-        // else{
-        //     bool res;
-        //     utf[0]=str[i];
-        //     utf[1]=str[i+1];
-        //     utf[2]=str[i+2];
-        //     i++;
-        //     i++;
-        //     unicode[0] = ((utf[0] & 0x0F) << 4) | ((utf[1] & 0x3C) >>2);
-        //     unicode[1] = ((utf[1] & 0x03) << 6) | (utf[2] & 0x3F);
-        //     //      printf("%x,%x\n",unicode[0],unicode[1]);
-        //     //      printf("aaaa %x,%x,%x\n\n",utf[0],utf[1],utf[2]);
-        //     if(unicode[0] >= 0x4e && unicode[0] <= 0x9f){
-        //         if (unicode[0] == 0x9f && unicode[1] >0xa5)
-        //             res = false;
-        //     else         
-        //        res = true;
-        //     }else
-        //     res = false;
-        //     return res;
-        // }
-        return 0;
-        return c<0||c>255;
-    }
-    
-    STR dump_json(){
+    string dump_json(){
         if(is_null())return "null";
-        if(is_int())return to_STR(val);
+        if(is_int())return std::to_string(val);
         if(is_bool())return flag?"true":"false";
         if(is_str()){
-            STR res;
-            for(auto i:str){
+            string res;
+            for(auto&i:str){
                 if(i=='"')res+="\\\"";
                 else if(i=='\t')res+="\\t";
                 else if(i=='\n')res+="\\n";
                 else if(i=='\f')res+="\\f";
                 else if(i=='/')res+="\\/";
                 else if(i=='\\')res+="\\\\";
-                else res+=i.c;
+                else res+=i;
             }
-            res.push_front('"');
-            res.push_back('"');
-            return res;
+            return '"'+res+'"';
         }
 
         if(is_seq()){
-            STR res;
-            for(vector<mpd>::iterator i=vc.begin();i!=vc.end();++i){
-                if(i!=vc.begin())res+=',';
-                res+=(*i).dump_json();
-            }
-            res.push_front('[');
-            res.push_back(']');
+            string res="[";
+            for(auto&i:vc)res+=i.dump_json()+",";
+            if(!vc.empty())res.pop_back();
+            res+=']';
             return res;
         }
-        
+
         if(is_map()){
-            STR res;
-            for(map<STR,mpd>::iterator i=mp.begin();i!=mp.end();++i){
-                if(i!=mp.begin())res+=',';
-                
-                res+='"';
-                res+=(*i).first.c_str();
-                res+="\":";
-                res+=(*i).second.dump_json();
-            }
-            res.push_front('{');
-            res.push_back('}');
+            string res="{";
+            for(auto&i:mp)res+='"'+i.first+"\":"+i.second.dump_json()+",";
+            if(!mp.empty())res.pop_back();
+            res+='}';
             return res;
+        }
+    }
+    void dump_json(FILE*fp){
+        if(is_null())return fputs("null",fp),void();
+        if(is_int())return fprintf(fp,"%d",val),void();
+        if(is_bool())return fputs(flag?"true":"false",fp),void();
+        if(is_str()){
+            fputc('"',fp);
+            for(auto&i:str){
+                if(i=='"')fputs("\\\"",fp);
+                else if(i=='\t')fputs("\\t",fp);
+                else if(i=='\n')fputs("\\n",fp);
+                else if(i=='\f')fputs("\\f",fp);
+                else if(i=='/')fputs("\\/",fp);
+                else if(i=='\\')fputs("\\\\",fp);
+                else fputc(i,fp);
+            }
+            fputc('"',fp);
+            return;
+        }
+
+        if(is_seq()){
+            fputc('[',fp);
+            for(auto i=vc.begin();i!=vc.end();++i){
+                if(i!=vc.begin())fputc(',',fp);
+                (*i).dump_json(fp);
+            }
+            fputc(']',fp);
+            return;
+        }
+
+        if(is_map()){
+            fputc('{',fp);
+            for(auto i=mp.begin();i!=mp.end();++i){
+                if(i!=mp.begin())fputc(',',fp);
+                fputc('"',fp);
+                for(auto&i:(*i).first){
+                    if(i=='"')fputs("\\\"",fp);
+                    else if(i=='\t')fputs("\\t",fp);
+                    else if(i=='\n')fputs("\\n",fp);
+                    else if(i=='\f')fputs("\\f",fp);
+                    else if(i=='/')fputs("\\/",fp);
+                    else if(i=='\\')fputs("\\\\",fp);
+                    else fputc(i,fp);
+                }
+                fputs("\":",fp);
+                (*i).second.dump_json(fp);
+            }
+            fputc('}',fp);
+            return;
         }
     }
 };
 const mpd MpdSeq=mpd(mpd_seq),MpdMap=mpd(mpd_map);
 
-mpd convert(STR str){
+mpd convert(const string&str){
     mpd x=str;
     x.convert();
     return x;
 }
 
-typedef pair<STR,mpd> PR;
-typedef map<STR,mpd> MP;
+typedef pair<string,mpd> PR;
+typedef map<string,mpd> MP;
 typedef vector<mpd> VC;
 
-STR get(c4::csubstr t){return STR(t.str,t.len);}
+string get(const c4::csubstr&t){return string(t.str,t.str+t.len);}
 
 VC turn_seq(ryml::NodeRef::children_view x);
 MP turn_map(ryml::NodeRef::children_view x);
@@ -172,7 +175,7 @@ mpd turn(ryml::Tree x);
 MP turn_map(ryml::NodeRef::children_view x){
     MP res;
     for(ryml::NodeRef c:x){
-        STR key=get(c.key());
+        string key=get(c.key());
         if(c.has_val())
             res.insert(PR(key, convert( get(c.val()) ) ));
         else if(c.is_map())
@@ -198,13 +201,13 @@ mpd turn(ryml::Tree x){
     mpd res;res.type=mpd_map;
     for(size_t i=x.first_child(x.root_id());i!=ryml::NONE;i=x.next_sibling(i)){
         auto t=x.get(i);
-        STR key=get(t->key());
+        string key=get(t->key());
         if(t->is_keyval())
             res.ins(key, convert( get(t->val()) ) );
         else if(t->is_map())
-            res.ins(key, turn_map(x[t->key()].children()) );
+            res.ins(key, turn_map(x[c4::to_csubstr(key.c_str())].children()) );
         else if(t->is_seq())
-            res.ins(key, turn_seq(x[t->key()].children()) );
+            res.ins(key, turn_seq(x[c4::to_csubstr(key.c_str())].children()) );
     }
     return res;
 }

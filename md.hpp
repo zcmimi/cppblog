@@ -41,6 +41,10 @@ const membuffer markdown(const char*in){
     md_html(buf_in.data,buf_in.size,process_output,(void*) &buf_out,parser_flags,renderer_flags);
     return buf_out;
 }
+STR STR_markdown(const char*in){
+    membuffer res=markdown(in);
+    return STR(res.data,res.size);
+}
 std::string str_markdown(const char*in){
     membuffer res=markdown(in);
     return std::string(res.data,res.data+res.size);

@@ -81,7 +81,9 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "*.ipp": "cpp",
+        "strstream": "cpp"
     },
     "editor.fontFamily": "'monaco','Consolas','微软雅黑','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "C_Cpp.default.cppStandard": "c++20",

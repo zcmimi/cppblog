@@ -6,14 +6,15 @@
 #include"md.hpp"
 #include"encrypt.hpp"
 #include"YamlParser.hpp"
-#include"str.hpp"
+#include"wstr.hpp"
+#include"fastio.hpp"
 
 namespace fs=std::filesystem;
-using std::vector,std::cout,std::endl,std::list,std::map,std::string;
+using std::vector,std::string,std::cout,std::endl,std::list,std::map,std::to_string;
 
 mpd config,t_config,t_setting;
 int preview_len;
-STR rt;
+string rt;
 mpd posts=MpdSeq,
     pages=MpdSeq,
     tags=MpdMap,
@@ -21,48 +22,33 @@ mpd posts=MpdSeq,
     posts_index=MpdSeq,
     tags_index=MpdMap;
 
-char* read(const STR&file){
-    FILE*fp=fopen(file.c_str(),"r");
-    fseek(fp,0,SEEK_END);
-    int len=ftell(fp);
-    char*res=(char*)malloc(len+1);
-    rewind(fp);
-    fread(res,1,len,fp);
-    res[len]='\0';
-    return res;
-}
-
-pair<STR,STR> mkdsplit(const char*s){
-    STR meta,body;
+pair<string,string> mkdsplit(const char *s){
+    string meta,body;
     int len=strlen(s),ff=-1;
     for(int i=0;i<len;++i){
         if(s[i]=='-'&&s[i+1]=='-'&&s[i+2]=='-'){++ff;i+=2;continue;}
         if(ff)body+=s[i];
         else if(~ff)meta+=s[i];
     }
-    return pair<STR,STR>(meta,body);
+    return pair<string,string>(meta,body);
 }
-STR STR_markdown(const char*in){
-    membuffer res=markdown(in);
-    return STR(res.data,res.size);
-}
-void get_md(mpd&T,STR pathstr){
-    fs::path path(string(pathstr.c_str()));
+
+void get_md(mpd&T,string pathstr){
+    fs::path path(pathstr);
 	fs::directory_iterator filelist(path);
 	for(auto&it:filelist)
     if(!it.is_directory()){
-		STR file=STR(it.path().filename().c_str()),
-            filename=STR(it.path().stem().c_str());
+		string file=it.path().filename(),filename=it.path().stem();
         if(!(filename+".md"==file))continue;
 
-        pair<STR,STR>mkd=mkdsplit(read("source/_posts/"+file));
+        pair<string,string>mkd=mkdsplit(read(pathstr+'/'+file));
         mpd x=YamlToMpd(mkd.first.c_str());
         x.rm_em();
         x.ins(t_setting["defaut_front"].mp);
         x.ins("addr","/"+filename);
         x.ins("origin_addr",filename);
-        x.ins("content",STR_markdown(mkd.second.c_str()));
-        x.ins("preview",STR_markdown(mkd.second.c_str(preview_len)));
+        x.ins("content",str_markdown(mkd.second.c_str()));
+        x.ins("preview",str_markdown(wstrpre(mkd.second,preview_len).c_str()));
         x.ins("pure_content",mkd.second);
         x.ins("date","2020-02-02");
         x.ins("title",filename);
@@ -78,7 +64,7 @@ inline bool cmp_date(mpd&x,mpd&y){return x["date"].str>y["date"].str;}
 inline bool cmp_date_top(mpd&x,mpd&y){
     if(x.has("top")){
         if(y.has("top")){
-            STR tx=x["top"].str,ty=y["top"].str;
+            string tx=x["top"].str,ty=y["top"].str;
             if(tx==ty)return cmp_date(x,y);
             else return tx>ty;
         }
@@ -87,14 +73,14 @@ inline bool cmp_date_top(mpd&x,mpd&y){
     else if(y.has("top"))return 0;
     else return cmp_date(x,y);
 }
-void gen_index(STR path,mpd T,mpd&res){
+void gen_index(string path,mpd T,mpd&res){
     int num=config["page_articles"].val,tot=T.vc.size(),TOT=tot/num;
     for(int i=1;i<=TOT;++i){
         mpd nodes;
         for(int j=0;j<num;++j)
             if(T.vc.empty())break;
             else nodes.push_back(T.vc.front());
-        STR addr=(i==1)?path:path+"/page/"+to_STR(i);
+        string addr=(i==1)?path:path+"/page/"+to_string(i);
 
         mpd x=MpdMap;
         x["id"]=i;
@@ -112,9 +98,9 @@ void gen_index(STR path,mpd T,mpd&res){
 }
 void gen_tags_index(){
     for(auto&tag:tags.mp)
-        gen_index("/tags/"+tag.first,tag.second,tags_index[(STR)tag.first]);  
+        gen_index("/tags/"+tag.first,tag.second,tags_index[(string)tag.first]);  
 }
-void gen_categories_index(STR path,mpd&cates){
+void gen_categories_index(string path,mpd&cates){
     if(cates.has("sub"))
         for(auto&cate:cates["sub"].mp)
             gen_categories_index(path+'/'+cate.first,cate.second);
@@ -145,9 +131,8 @@ void expt(){
     // data["posts_index"]=posts_index;
     // data["tags_index"]=tags_index;
 
-    STR res=data.dump_json();
     FILE *fp;fp=fopen("data.json","w");
-    fwrite(res.c_str(),1,res.len,fp);
+    data.dump_json(fp);
     fclose(fp);
 }
 void expt_pure(){
@@ -161,9 +146,8 @@ void expt_pure(){
         x["categories"]=i["categories"];
         pure_data.push_back(x);
     }
-    STR res=pure_data.dump_json();
-    FILE *fp;fp=fopen("pure_data.json","w");
-    fwrite(res.c_str(),1,res.len,fp);
+    FILE*fp;fp=fopen("pure_data.json","w");
+    pure_data.dump_json(fp);
     fclose(fp);
 }
 int main(){
@@ -173,7 +157,7 @@ int main(){
 
     config=YamlToMpd(read("config.yml"));
 
-    STR theme_path="theme/"+config["theme"].str;
+    string theme_path="theme/"+config["theme"].str;
 
     t_config=YamlToMpd(read(theme_path+"/config.yml"));
     t_setting=YamlToMpd(read(theme_path+"/setting.yml"));
@@ -190,7 +174,7 @@ int main(){
         ++id;
         x["id"]=id;
         if(config["article_address"]=="number")
-            x["addr"]="/posts/"+to_STR(id);
+            x["addr"]="/posts/"+to_string(id);
         else x["addr"]="/posts/"+x["origin_addr"].str;
 
         if(x.has("password")){

@@ -2,10 +2,11 @@
 #define STR_H
 
 #include<bits/stdc++.h>
+using std::string;
 struct str_node{
     char c;
     str_node*nxt;
-    str_node(){c=NULL,nxt=NULL;}
+    str_node(){nxt=NULL;}
     str_node(const char cc){c=cc;nxt=NULL;}
     bool operator==(const char cc)const{return c==cc;}
 };
@@ -13,6 +14,7 @@ struct STR{
     str_node*bg,*ed;
     int len;
     STR(){len=0;bg=ed=NULL;}
+    STR(const char c){bg=new str_node(c),ed=NULL,len=1;}
     STR(const char*s,int l=-1){
         if(l==-1)l=strlen(s);
         len=l;
@@ -22,33 +24,46 @@ struct STR{
         for(int i=1;i<l;++i)
             ed->c=s[i],ed=ed->nxt=new str_node();
     }
-    void push_back(const char c){
+    void push_back(const char&c){
         if(bg==NULL)bg=new str_node(c),ed=bg->nxt=new str_node(),len=1;
         else ed->c=c,ed=ed->nxt=new str_node(),++len;
     }
-    void push_back(const char*s){for(int i=0,l=strlen(s);i<l;++i)push_back(s[i]);}
-    void push_back(STR&s){
+    void push_back(const char*s){
+        int l=strlen(s);if(!l)return;
+        push_back(s[0]);
+        for(int i=1;i<l;++i)
+            ed->c=s[i],ed=ed->nxt=new str_node();
+    }
+    void push_back_(STR s){
         if(bg==NULL)bg=s.bg,ed=s.ed;
         else ed=s.bg,ed=s.ed;
     }
     void push_back(const STR&s){
-        str_node*node=s.bg;
-        while(node!=s.ed)push_back(node->c),node=node->nxt;
-    }    
-    void push_front(const char c){
+        for(str_node*node=s.bg;node!=s.ed;node=node->nxt)
+            push_back(node->c);
+    }
+    void push_front(const char&c){
         str_node*node=new str_node(c);
         if(bg==NULL)bg=node,ed=bg->nxt=new str_node(),len=1;
         else node->nxt=bg,bg=node,++len;
     }
     void push_front(const char*s){for(int i=0,l=strlen(s);i<l;++i)push_back(s[i]);}
     void op(FILE*fp)const{
+        for(str_node*node=bg;node!=ed;node=node->nxt)
+            fputc(node->c,fp);
+    }
+    string str(int l=-1){
+        if(l==-1||l>len)l=len;
+        string res;
         str_node*node=bg;
-        while(node!=ed)
-            fputc(node->c,fp),node=node->nxt;
+        while(l--)
+            res+=node->c,
+            node=node->nxt;
+        return res;
     }
     const char* c_str(int l=-1)const{
-        if(l==-1)l=len;
-        char*res=(char *)malloc(len+1),*p=res;
+        if(l==-1||l>len)l=len;
+        char*res=(char *)malloc(l+1),*p=res;
         str_node*node=bg;
         while(l--)
             *p++=node->c,
@@ -111,33 +126,20 @@ struct STR{
 
     void operator+=(const char c){push_back(c);}
     void operator+=(const char*s){push_back(s);}
-    void operator+=(const STR&s){push_back(s);}
-
-    friend STR operator+(const STR&s,const char c){
-        STR res=s;
-        res.push_back(c);
-        return res;
-    }
-    friend STR operator+(const STR&t,const char*s){
-        STR res=t;
-        res.push_back(s);
-        return res;
-    }
+    void operator+=(STR s){push_back_(s);}
+    // void operator+=(const STR&s){push_back(s);}
 };
-STR operator+(const char c,const STR&s){
-    STR res=s;
-    res.push_front(c);
-    return res;
-}
-STR operator+(const char*s,const STR&t){
-    STR res=t;
-    res.push_front(s);
-    return res;
-}
-STR operator+(STR x,const STR y){
+STR mg(STR x,STR y){
     x.push_back(y);
     return x;
 }
-STR to_STR(int val){return STR(std::to_string(val).c_str());}
+STR operator+(STR x,STR y){return mg(x,y);}
 
+STR to_STR(int val){
+    if(val==0)return STR('0');
+    STR res;
+    if(val<0)val=-val,res.push_front('-');
+    while(val)res.push_front(val%10),val/=10;
+    return res;
+}
 #endif
